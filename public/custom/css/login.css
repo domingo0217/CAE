@@ -1,0 +1,19 @@
+
+.loginCard {
+	padding-top: 10%;
+}
+
+body {
+	background-color: #fafafa;
+	height: 100vh;
+}
+
+.forgotPassword {
+	padding-left: 10%;
+}
+
+@media screen and (min-width: 992px) {
+    .hide-on-large{
+		opacity: 0;
+	}
+}
