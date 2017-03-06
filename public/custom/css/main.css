@@ -7,3 +7,37 @@ header, main, footer {
 	    padding-left: 0;
     }
 }
+
+nav .nav-wrapper {
+    position: relative;
+    height: 150%;
+}
+
+header{
+    height: 100px;
+}
+
+.comtainer{
+        padding-top: 50%;
+}
+
+
+.side-nav .collapsible-body {
+    padding: 0;
+}
+
+ul.side-nav.fixed li a {
+    font-size: 14px;
+    line-height: 44px;
+    height: 44px;
+    padding: 0 30px;
+    font-weight: normal;
+}
+
+ul.side-nav.fixed li a.bold {
+    font-size: 14px;
+    line-height: 44px;
+    height: 44px;
+    padding: 0 30px;
+    font-weight: bold;
+}

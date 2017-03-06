@@ -1,14 +1,14 @@
 .tabs .indicator{
-    background-color: #607d8b;
+    background-color: #ffab00;
 }
 .tabs .tab a.active {
-  color: #607d8b;
+  color: #ffab00;
 }
 
 .tabs .tab a:hover {
-  color: #607d8b;
+  color: #ffab00;
 }
 
 .tabs .tab a {
-  color: #607d8b;
+  color: #ffab00 ;
 }

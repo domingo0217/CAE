@@ -8,10 +8,10 @@
 	<link rel="stylesheet" type="text/css" href="custom/css/index.css">
 </head>
 <body>
-	<!-- Header -->
-	<header id="first" class="scrollspy">
+	<!-- Header1 -->
+	 <header id="first" class="scrollspy">
 		<div class="navbar-fixed">
-			<nav class="teal lighten-2">
+			<nav class="red darken-1">
 				<div class="container">
 					<div class="nav-wrapper">
 						<a class="brand-logo large center hide-on-large-only">CAE</a>
@@ -36,6 +36,9 @@
 			<li><a href="#modal-IniciaSesion" class="blue-grey-text">Control de Miembros</a></li>
 		</ul>
 	</header>
+	{{-- /Header1 --}}
+
+
 
 	<!-- Main -->
 	<main>
@@ -77,7 +80,7 @@
 				</div>
 		        <div class="col s12 center-align">
 		        	<!-- <p class="grey-text text-darken-3">Deseas unirte a nosotros? <a href="#">Haz click aqui.</a></p> -->
-					<a class="btn teal lighten-2 waves-effect waves-light z-depth-3 hoverable">&uacute;nete a nosotros</a>
+					<a class="btn orange accent-3 waves-effect waves-light z-depth-3 hoverable">&uacute;nete a nosotros</a>
 		        </div>
 		    </div>
 		</div>
@@ -120,20 +123,20 @@
 	</div>
 
 	<!-- Footer -->
-	<footer class="page-footer blue-grey scrollspy" id="footer">
+	<footer class="page-footer black scrollspy" id="footer">
 		<div class="container">
 			<div class="row">
 				<div class="col l6 s12">
                 	<h4 class="white-text">Contactos</h4>
                 	<p class="grey-text text-lighten-4">Escribenos a:</p>
-					<a href="#" class="teal-text text-lighten-4">cae@info.org.do</a>
+					<a href="#" class="yellow-text text-accent-4">cae@info.org.do</a>
               	</div>
               	<div class="col l4 offset-l2 s12">
                 	<h4 class="white-text ">Redes Sociales</h4>
 	                <ul class="center-align">
-	                	<li><a class="teal-text text-lighten-4" href="#!">Facebook</a></li>
-	                	<li><a class="teal-text text-lighten-4" href="#!">Twitter</a></li>
-	                	<li><a class="teal-text text-lighten-4" href="#!">Instagram</a></li>
+	                	<li><a class="white-text" href="#!">Facebook</a></li>
+	                	<li><a class="white-text" href="#!">Twitter</a></li>
+	                	<li><a class="white-text" href="#!">Instagram</a></li>
 	                </ul>
               	</div>
 			</div>
