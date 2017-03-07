@@ -26,3 +26,31 @@ Route::get('pagos', function(){
 Route::get('AgregarMiembro', function(){
     return view('AgregarMiembro');
 });
+
+Route::get('AgregarUsuario', function(){
+    return view('AgregarUsuarios');
+});
+
+Route::get('AgregarCapacitaciones', function(){
+    return view('AgregarCapacitaciones');
+});
+
+Route::get('AgregarRol', function(){
+    return view('AgregarRol');
+});
+
+Route::get('AgregarCargo', function(){
+    return view('AgregarCargo');
+});
+
+Route::get('AgregarDelegacion', function(){
+    return view('AgregarDelegacion');
+});
+
+Route::get('AgregarEstado', function(){
+    return view('AgregarEstado');
+});
+
+Route::get('AgregarDocumento', function(){
+    return view('AgregarDocumento');
+});
