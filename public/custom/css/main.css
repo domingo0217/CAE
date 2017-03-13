@@ -8,6 +8,12 @@ header, main, footer {
     }
 }
 
+@media only screen and (min-width: 601px){
+    .navbar-fixed {
+        height: 56px;
+    }
+}
+
 nav .nav-wrapper {
     position: relative;
     height: 150%;
@@ -26,6 +32,7 @@ header{
     padding: 0;
 }
 
+/*margenes para la barra de navegacion*/
 ul.side-nav.fixed li a {
     font-size: 14px;
     line-height: 44px;

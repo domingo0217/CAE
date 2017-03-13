@@ -16,13 +16,40 @@ Route::get('/', function (){
 });
 
 Route::get('main', function (){
-    return view('main');
+    return view('layouts.main');
 });
 
-Route::get('pagos', function(){
-    return view('pagos');
+Route::get('/members/create','MemberController@create');
+
+
+Route::post('/members', 'MemberController@store');
+
+
+
+Route::get('AgregarUsuario', function(){
+    return view('AgregarUsuarios');
 });
 
-Route::get('AgregarMiembro', function(){
-    return view('AgregarMiembro');
+Route::get('AgregarCapacitaciones', function(){
+    return view('AgregarCapacitaciones');
+});
+
+Route::get('AgregarRol', function(){
+    return view('AgregarRol');
+});
+
+Route::get('AgregarCargo', function(){
+    return view('AgregarCargo');
+});
+
+Route::get('AgregarDelegacion', function(){
+    return view('AgregarDelegacion');
+});
+
+Route::get('AgregarEstado', function(){
+    return view('AgregarEstado');
+});
+
+Route::get('AgregarDocumento', function(){
+    return view('AgregarDocumento');
 });
