@@ -12,17 +12,9 @@
 */
 
 Route::get('/', function (){
-    return view('index');
+    return view('welcome');
 });
 
-Route::get('main', function (){
-    return view('main');
-});
-
-Route::get('pagos', function(){
-    return view('pagos');
-});
-
-Route::get('AgregarMiembro', function(){
-    return view('AgregarMiembro');
+Route::get('AgregarMiembro', function (){
+    return view('CreateMember');
 });
