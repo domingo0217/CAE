@@ -10,10 +10,10 @@
 @section('content')
     <div class="section white z-depth-1">
         @if (count($errors) > 0)
-            <div class="card-panel red accent-2 z-depth-0">
+            <div class="card-panel red lighten-4 z-depth-0">
                 <ul>
                     @foreach($errors->all() as $error)
-                        <li class="white-text">{{ $error }}</li>
+                        <li class="red-text">{{ $error }}</li>
                     @endforeach
                 </ul>
             </div>
@@ -24,21 +24,21 @@
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="col s12 m6 input-field">
-                        <input type="text" name="name" value="" id="name" class="validate" required data-length="30" maxlength="30">
+                        <input type="text" name="name" id="name" class="validate" required data-length="30" maxlength="30">
                         <label data-error="incorrecto" data-success="correcto" for="name">Nombre</label>
                     </div>
                     <div class="col s12 m6 input-field">
-                        <input type="text" name="lastname" value="" id="lastname" class="validate" required data-length="30" maxlength="30">
+                        <input type="text" name="lastname" id="lastname" class="validate" required data-length="30" maxlength="30">
                         <label data-error="incorrecto" data-success="correcto" for="lastname">Apellido</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s12 m6 input-field">
-                        <input type="text" name="id" value="" id="id" class="validate" required data-length="11" maxlength="11">
+                        <input type="text" name="id" id="id" class="validate" required data-length="11" maxlength="11">
                         <label data-error="incorrecto" data-success="correcto" for="id">C&eacute;dula</label>
                     </div>
                     <div class="col s12 m6 input-field">
-                        <input type="text" name="nationality" value="" id="nationality" class="validate" required data-length="20" maxlength="20">
+                        <input type="text" name="nationality" id="nationality" class="validate" required data-length="20" maxlength="20">
                         <label data-error="incorrecto" data-success="correcto" for="nationality">Nacionalidad</label>
                     </div>
                 </div>
@@ -66,21 +66,27 @@
                 </div>
                 <div class="row">
                     <div class="col s12 m6 input-field">
-                        <input type="tel" name="telephone" value="" id="telephone" class="validate" required data-length="10" maxlength="10">
+                        <input type="tel" name="telephone" id="telephone" class="validate" required data-length="12" maxlength="12">
                         <label data-error="incorrecto" data-success="correcto" for="telephone">Telef&oacute;no</label>
                     </div>
                     <div class="col s12 m6 input-field">
-                        <input type="text" name="address" value="" id="address" class="validate" required data-length="70" maxlength="70">
+                        <input type="text" name="address" id="address" class="validate" required data-length="70" maxlength="70">
                         <label data-error="incorrecto" data-success="correcto" for="address">Direcci&oacute;n</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s12 m6 input-field">
-                        <input type="text" name="city" value="" id="city" class="validate" required data-length="30" maxlength="30">
-                        <label data-error="incorrecto" data-success="correcto" for="city">Ciudad</label>
+                        <select name="city" required>
+                            <option name="city" id="city" value="null" disabled selected>Elija una opci&oacute;n</option>
+                            <option name="city" id="city" value="soltero">Soltero</option>
+                            <option name="city" id="city" value="casado">Casado</option>
+                            <option name="city" id="city" value="divorciado">Divorciado</option>
+                            <option name="city" id="city" value="viudo">Viudo</option>                            
+                        </select>
+                        <label for="city">Estado civil</label>
                     </div>
                     <div class="col s12 m6 input-field">
-                        <input type="text" name="delegation" value="" id="delegation" class="validate" required data-length="30" maxlength="30">
+                        <input type="text" name="delegation" id="delegation" class="validate" required data-length="30" maxlength="30">
                         <label data-error="incorrecto" data-success="correcto" for="delegation">Delegaci&oacute;n</label>
                     </div>
                 </div>
