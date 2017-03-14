@@ -29,6 +29,6 @@ class DocumentMember extends Migration
      */
     public function down()
     {
-        Schena::dropIfExists('document_member');
+        Schema::dropIfExists('document_member');
     }
 }

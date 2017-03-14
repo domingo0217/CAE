@@ -17,7 +17,7 @@ class CreateTelephonesTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('member_id');
-            $table->string('telephone', 14);
+            $table->string('telephone', 10);
             $table->timestamps();
         });
     }

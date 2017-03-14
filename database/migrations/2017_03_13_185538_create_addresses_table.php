@@ -16,8 +16,9 @@ class CreateAddressesTable extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('address', 50);
+            $table->string('address', 70);
             $table->integer('city_id');
+            $table->integer('member_id');
             $table->timestamps();
         });
     }

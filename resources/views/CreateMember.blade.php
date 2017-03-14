@@ -8,95 +8,90 @@
 
 {{-- Contenido de la pagina --}}
 @section('content')
-    <div class="section white z-depth-0">
+    <div class="section white z-depth-1">
+        @if (count($errors) > 0)
+            <div class="card-panel red accent-2 z-depth-0">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li class="white-text">{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="row">
-            <form class="col s8 offset-s2" action="" method="post">
+            <form class="col s8 offset-s2" action="/member" method="post">
+
+                {{ csrf_field() }}
                 <div class="row">
                     <div class="col s12 m6 input-field">
-                        <input type="text" name="name" value="" id="name" class="validate">
-                        <label data-error="wrong" data-success="right" for="name">Nombre</label>
+                        <input type="text" name="name" value="" id="name" class="validate" required data-length="30" maxlength="30">
+                        <label data-error="incorrecto" data-success="correcto" for="name">Nombre</label>
                     </div>
                     <div class="col s12 m6 input-field">
-                        <input type="text" name="lastname" value="" id="lastname" class="validate">
-                        <label data-error="wrong" data-success="right" for="lastname">Apellido</label>
+                        <input type="text" name="lastname" value="" id="lastname" class="validate" required data-length="30" maxlength="30">
+                        <label data-error="incorrecto" data-success="correcto" for="lastname">Apellido</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s12 m6 input-field">
-                        <input type="text" name="id" value="" id="id" class="validate">
-                        <label data-error="wrong" data-success="right" for="id">C&eacute;dula</label>
+                        <input type="text" name="id" value="" id="id" class="validate" required data-length="11" maxlength="11">
+                        <label data-error="incorrecto" data-success="correcto" for="id">C&eacute;dula</label>
                     </div>
                     <div class="col s12 m6 input-field">
-                        <input type="text" name="nationality" value="" id="nationality" class="validate">
-                        <label data-error="wrong" data-success="right" for="nationality">Nacionalidad</label>
+                        <input type="text" name="nationality" value="" id="nationality" class="validate" required data-length="20" maxlength="20">
+                        <label data-error="incorrecto" data-success="correcto" for="nationality">Nacionalidad</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s12 m6 input-field">
-                        <input type="date" name="date" id="date" class="datepicker">
-                        <label for="date">Fecha de Nacimiento</label>
+                        <input type="date" name="birthdate" id="birthdate" class="datepicker" required>
+                        <label for="birthdate">Fecha de Nacimiento</label>
                     </div>
                     <div class="input-field col s12 m6">
-                        <select>
-                            <option value="" disabled selected>Elija una opci&oacute;n</option>
-                            <option value="1">Soltero</option>
-                            <option value="2">Casado</option>
-                            <option value="3">Divorciado</option>
-                            <option value="4">Viudo</option>
+                        <select name="civil_status" required>
+                            <option name="civil_status" id="civil_status" value="null" disabled selected>Elija una opci&oacute;n</option>
+                            <option name="civil_status" id="civil_status" value="soltero">Soltero</option>
+                            <option name="civil_status" id="civil_status" value="casado">Casado</option>
+                            <option name="civil_status" id="civil_status" value="divorciado">Divorciado</option>
+                            <option name="civil_status" id="civil_status" value="viudo">Viudo</option>
                         </select>
-                        <label>Estado civil</label>
+                        <label for="civil_status">Estado civil</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s12 input-field">
-                        <input type="email" name="email" id="email" value="">
-                        <label data-error="wrong" data-success="right" for="email">Correo Electr&oacute;nico</label>
+                        <input type="email" name="email" id="email" class="validate" required data-length="50" maxlength="50">
+                        <label data-error="incorrecto" data-success="correcto" for="email">Correo Electr&oacute;nico</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s12 m6 input-field">
-                        <input type="tel" name="tel" value="" id="tel" class="validate">
-                        <label data-error="wrong" data-success="right" for="tel">Telef&oacute;no</label>
+                        <input type="tel" name="telephone" value="" id="telephone" class="validate" required data-length="10" maxlength="10">
+                        <label data-error="incorrecto" data-success="correcto" for="telephone">Telef&oacute;no</label>
                     </div>
                     <div class="col s12 m6 input-field">
-                        <input type="tel" name="tel" value="" id="tel" class="validate">
-                        <label data-error="wrong" data-success="right" for="tel">Celular</label>
+                        <input type="text" name="address" value="" id="address" class="validate" required data-length="70" maxlength="70">
+                        <label data-error="incorrecto" data-success="correcto" for="address">Direcci&oacute;n</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s12 m6 input-field">
-                        <input type="text" name="address" value="" id="address" class="validate">
-                        <label data-error="wrong" data-success="right" for="address">Direcci&oacute;n</label>
+                        <input type="text" name="city" value="" id="city" class="validate" required data-length="30" maxlength="30">
+                        <label data-error="incorrecto" data-success="correcto" for="city">Ciudad</label>
                     </div>
                     <div class="col s12 m6 input-field">
-                        <input type="text" name="city" value="" id="city" class="validate">
-                        <label data-error="wrong" data-success="right" for="city">Ciudad</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 input-field">
-                        <input type="text" name="city" value="" id="city" class="validate">
-                        <label data-error="wrong" data-success="right" for="city">Delegaci&oacute;n</label>
+                        <input type="text" name="delegation" value="" id="delegation" class="validate" required data-length="30" maxlength="30">
+                        <label data-error="incorrecto" data-success="correcto" for="delegation">Delegaci&oacute;n</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m6">
-                        <select>
-                            <option value="" disabled selected>Elija una opci&oacute;n</option>
-                            <option value="1">Presidente</option>
-                            <option value="2">Director Ejecutivo</option>
-                            <option value="3">Vicepresidente</option>
-                            <option value="4">Tesorero</option>
+                        <select name="document" id="document" multiple required>
+                            <option name="document" id="document" value="null" disabled selected>Elija una opci&oacute;n</option>
+                            <option name="document" id="document" value="acta de buena conducta">Acta de buena conducta</option>
+                            <option name="document" id="document" value="acta de nacimiento">Acta de nacimiento</option>
                         </select>
-                        <label>Cargo en la instituci&oacute;n</label>
-                    </div>
-                    <div class="input-field col s12 m6">
-                        <select multiple>
-                            <option value="" disabled selected>Elija una opci&oacute;n</option>
-                            <option value="1">Acta de buena conducta</option>
-                            <option value="2">Acta de nacimiento</option>
-                        </select>
-                        <label>Documentos presentados</label>
+                        <label for="document">Documentos presentados</label>
                     </div>
 
                 </div>
