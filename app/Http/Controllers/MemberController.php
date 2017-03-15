@@ -4,6 +4,9 @@ namespace cae\Http\Controllers;
 
 use Illuminate\Http\Request;
 use cae\Member;
+use cae\Telephone;
+use cae\Address;
+use cae\City;
 use cae\Http\Requests\StoreMember;
 
 class MemberController extends Controller
@@ -25,7 +28,9 @@ class MemberController extends Controller
      */
     public function create()
     {
-        return View('CreateMember');
+        $cities = City::all();
+
+        return View('CreateMember', compact('cities'));
     }
 
     /**
@@ -38,24 +43,28 @@ class MemberController extends Controller
     {
         dd($request->all());
 
+        Member::create([
+            'name' => request('name'),
+            'lastname' => request('lastname'),
+            'id' => request('id'),
+            'nationality' => request('nationality'),
+            'civil_status' => request('civil_status'),
+            'birthdate' => request('birthdate'),
+            'email' => request('email')
+        ]);
 
-        // Member::create([
-        //     'name' => request('name'),
-        //     'lastname' => request('lastname'),
-        //     'identification_document' => request('identification_document'),
-        //     'nationality' => request('nationality'),
-        //     'birthdate' => request('birthdate'),
-        //     'civil_status' => request('civil_status'),
-        //     'email' => request('email'),
-        //     'telephone' => request('telephone'),
-        //     'name' => request('name'),
-        // ]);
-        //
-        // cae\Address::create([
-        //     'address' => request('address'),
-        //     'member_id' => request('id')
-        // ]);
+        $telephone = Telephone::create([
+            'telephone' => request('telephone')
+        ]);
 
+        $address = Address::create([
+            'address' => request('address')
+        ]);
+
+        $member = Member::find(request('id'));
+
+        $telephone = $member->telephone()->save($telephone);
+        $address = $member->address()->save($address);
 
     }
 

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Member extends Model
 {
     protected $guarded = ['id'];
+    protected $incrementing = false;
 
     public function telephone()
     {

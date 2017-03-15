@@ -77,13 +77,12 @@
                 <div class="row">
                     <div class="col s12 m6 input-field">
                         <select name="city" required>
-                            <option name="city" id="city" value="null" disabled selected>Elija una opci&oacute;n</option>
-                            <option name="city" id="city" value="soltero">Soltero</option>
-                            <option name="city" id="city" value="casado">Casado</option>
-                            <option name="city" id="city" value="divorciado">Divorciado</option>
-                            <option name="city" id="city" value="viudo">Viudo</option>                            
+                            <option name="city" id="city" value="null" disabled selected>Elija una ciudad</option>
+                            @foreach($cities as $city)
+                                <option name="city" id="city" value="{{ $city->id }}">{{ $city->city }}</option>
+                            @endforeach
                         </select>
-                        <label for="city">Estado civil</label>
+                        <label for="city">Ciudad</label>
                     </div>
                     <div class="col s12 m6 input-field">
                         <input type="text" name="delegation" id="delegation" class="validate" required data-length="30" maxlength="30">

@@ -22,8 +22,6 @@ class CreateMembersTable extends Migration
             $table->date('birthdate');
             $table->enum('civil_status', array('soltero', 'casado', 'divorciado' ,'viudo'));
             $table->string('email', 50)->unique();
-            $table->integer('telephone_id');
-            $table->integer('address_id');
             $table->primary('id');
             $table->timestamps();
         });
