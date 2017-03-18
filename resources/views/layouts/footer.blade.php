@@ -12,10 +12,12 @@
 	$('.datepicker').pickadate({
 	    selectMonths: true, // Creates a dropdown to control month
 	    selectYears: 200, // Creates a dropdown of 15 years to control year
-		format: 'dd-mm-yyyy' //date format
+		format: 'yyyy-mm-dd' //date format
 	});
 	//Initialize select
 	$('select').material_select();
 	//Initialize character counter
 	$('input#input_text, textarea#textarea1').characterCounter();
+	//Initialize tooltip
+	$('.tooltipped').tooltip({delay: 50});
 </script>

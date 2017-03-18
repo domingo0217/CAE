@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Member extends Model
 {
-    protected $guarded = ['id'];
-    protected $incrementing = false;
+    protected $guarded = [];
+    public $incrementing = false;
 
     public function telephone()
     {
@@ -21,7 +21,7 @@ class Member extends Model
 
     public function delegation()
     {
-        return $this->hasOne(Delegation::class);
+        return $this->belongsTo(Delegation::class);
     }
 
     public function document()
@@ -33,4 +33,6 @@ class Member extends Model
     {
         return $this->belongsToMany(Charge::Class);
     }
+
+
 }

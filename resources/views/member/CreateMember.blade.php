@@ -59,17 +59,17 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col s12 input-field">
-                        <input type="email" name="email" id="email" class="validate" required data-length="50" maxlength="50">
-                        <label data-error="incorrecto" data-success="correcto" for="email">Correo Electr&oacute;nico</label>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col s12 m6 input-field">
                         <input type="tel" name="telephone" id="telephone" class="validate" required data-length="12" maxlength="12">
                         <label data-error="incorrecto" data-success="correcto" for="telephone">Telef&oacute;no</label>
                     </div>
                     <div class="col s12 m6 input-field">
+                        <input type="email" name="email" id="email" class="validate" required data-length="50" maxlength="50">
+                        <label data-error="incorrecto" data-success="correcto" for="email">Correo Electr&oacute;nico</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 input-field">
                         <input type="text" name="address" id="address" class="validate" required data-length="70" maxlength="70">
                         <label data-error="incorrecto" data-success="correcto" for="address">Direcci&oacute;n</label>
                     </div>

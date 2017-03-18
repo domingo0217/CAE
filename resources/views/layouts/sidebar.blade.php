@@ -6,7 +6,7 @@
                 <a class="collapsible-header waves-effect waves-red bold">Miembros<i class="material-icons">arrow_drop_down</i></a>
                 <div class="collapsible-body">
                     <ul>
-                        <li><a href="#" class="waves-effect waves-yellow center">Agregar Miembro</a></li>
+                        <li><a href="/member/create" class="waves-effect waves-yellow center">Agregar Miembro</a></li>
                         <li><a href="#" class="waves-effect waves-yellow center">Lista de Miembros</a></li>
                     </ul>
                 </div>
@@ -32,8 +32,9 @@
                 <a class="collapsible-header waves-effect waves-red bold">Administraci&oacute;n 	<i class="material-icons">arrow_drop_down</i></a>
                 <div class="collapsible-body">
                     <ul>
+                        <li><a href="/city" class="waves-effect waves-yellow center">Ciudades</a></li>
+                        <li><a href="/delegation" class="waves-effect waves-yellow center">Delegaciones</a></li>
                         <li><a href="#" class="waves-effect waves-yellow center">Pagos</a></li>
-                        <li><a href="#" class="waves-effect waves-yellow center">Delegaciones</a></li>
                         <li><a href="#" class="waves-effect waves-yellow center">Reportes</a></li>
                     </ul>
                 </div>

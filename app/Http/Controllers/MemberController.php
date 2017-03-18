@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use cae\Member;
 use cae\Telephone;
 use cae\Address;
+use cae\Delegation;
 use cae\City;
 use cae\Http\Requests\StoreMember;
+use Illuminate\Support\Facades\DB;
 
 class MemberController extends Controller
 {
@@ -18,7 +20,15 @@ class MemberController extends Controller
      */
     public function index()
     {
-        //
+        $member = DB::table('members')
+                    ->join('telephones', 'members.id', '=', 'telephones.member_id')
+                    ->crossJoin('addresses', 'members.id', '=', 'addresses.member_id')
+                    ->crossJoin('cities', 'addresses.city_id', '=', 'cities.id')
+                    ->crossJoin('delegations', 'delegations.id', '=', 'members.delegation_id')
+                    ->select('members.name', 'members.lastname', 'members.id', 'members.nationality', 'members.civil_status', 'members.email', 'members.birthdate', 'telephones.telephone', 'addresses.address', 'cities.city')
+                    ->get();
+
+        return view('member.list', compact('member'));
     }
 
     /**
@@ -29,8 +39,9 @@ class MemberController extends Controller
     public function create()
     {
         $cities = City::all();
+        $delegations = Delegation::all();
 
-        return View('CreateMember', compact('cities'));
+        return View('member.CreateMember', compact('cities', 'delegations'));
     }
 
     /**
@@ -41,7 +52,16 @@ class MemberController extends Controller
      */
     public function store(StoreMember $request)
     {
-        dd($request->all());
+        $telephone = Telephone::create([
+            'telephone' => request('telephone'),
+            'member_id' => request('id')
+        ]);
+
+        $address = Address::create([
+            'address' => request('address'),
+            'member_id' => request('id'),
+            'city_id' => request('city')
+        ]);
 
         Member::create([
             'name' => request('name'),
@@ -53,18 +73,12 @@ class MemberController extends Controller
             'email' => request('email')
         ]);
 
-        $telephone = Telephone::create([
-            'telephone' => request('telephone')
-        ]);
-
-        $address = Address::create([
-            'address' => request('address')
-        ]);
 
         $member = Member::find(request('id'));
 
         $telephone = $member->telephone()->save($telephone);
         $address = $member->address()->save($address);
+
 
     }
 

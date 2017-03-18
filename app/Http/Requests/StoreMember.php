@@ -31,7 +31,6 @@ class StoreMember extends FormRequest
             'email' => 'bail|required|email|max:50|min:11',
             'telephone' => 'bail|required|alpha_dash|max:12|min:12',
             'address' => 'bail|required|string|max:70|min:10',
-            'city' => 'bail|required|string|max:30|min:3',
             'delegation' => 'bail|required|string|max:30|min:3',
             'civil_status' => 'bail|required|alpha|max:10|min:5',
             'birthdate' => 'bail|required|date|'

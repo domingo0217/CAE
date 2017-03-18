@@ -164,6 +164,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Skydiver\LaravelMaterializeCSS\MaterializeCSSServiceProvider::class,
 
+
         /*
          * Package Service Providers...
          */

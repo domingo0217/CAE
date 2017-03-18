@@ -16,3 +16,9 @@ Route::get('/', function (){
 });
 
 Route::resource('member', 'MemberController');
+
+Route::resource('city', 'CityController');
+
+Route::resource('delegation', 'DelegationController');
+
+Route::resource('charge', 'ChargeController');
