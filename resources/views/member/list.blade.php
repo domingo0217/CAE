@@ -4,7 +4,6 @@
     @endsection
 
     @section('content')
-        {{ dd($member) }}
         <div class="row">
             <div class="section white z-depth-1">
                 @include('layouts.status')
@@ -47,7 +46,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{ $member->links() }}
+                {{-- {{ $member->links() }} --}}
                 <ul class="pagination center">
                     <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
                     <li class="active"><a href="#!">1</a></li>
