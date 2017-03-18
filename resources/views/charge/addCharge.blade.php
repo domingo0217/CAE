@@ -17,7 +17,7 @@
                             <label data-error="incorrecto" data-success="correcto" for="charge">Cargo</label>
                         </div>
                     </div>
-                    <a href="/city" class="btn-flat waves-effect waves-red red-text text-darken-3">Atr&aacute;s</a>
+                    <a href="/charge" class="btn-flat waves-effect waves-red red-text text-darken-3">Atr&aacute;s</a>
                     <button class="btn yellow darken-3 waves-effect right" type="submit">Agregar</button>
                 </form>
             </div>

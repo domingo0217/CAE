@@ -16,7 +16,7 @@ class CreateCitiesTable extends Migration
         Schema::create('cities', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('city', 70)->unique();
+            $table->string('city', 50)->unique();
             $table->timestamps();
         });
     }

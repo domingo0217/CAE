@@ -85,8 +85,13 @@
                         <label for="city">Ciudad</label>
                     </div>
                     <div class="col s12 m6 input-field">
-                        <input type="text" name="delegation" id="delegation" class="validate" required data-length="30" maxlength="30">
-                        <label data-error="incorrecto" data-success="correcto" for="delegation">Delegaci&oacute;n</label>
+                        <select name="delegation" required>
+                            <option name="delegation" id="delegation" value="null" disabled selected>Elija una delegaci&oacute;n</option>
+                            @foreach($delegations as $delegation)
+                                <option name="delegation" id="delegation" value="{{ $delegation->id }}">{{ $delegation->delegation }}</option>
+                            @endforeach
+                        </select>
+                        <label for="delegation">Delegaci&oacute;n</label>
                     </div>
                 </div>
                 <div class="row">
@@ -97,6 +102,17 @@
                             <option name="document" id="document" value="acta de nacimiento">Acta de nacimiento</option>
                         </select>
                         <label for="document">Documentos presentados</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <select id="status" name="status" required>
+                            <option name="status" id="status" value="null" disabled selected>Elija un estado</option>
+                            <option name="status" id="status" value="aspirante">Aspirante</option>
+                            <option name="status" id="status" value="pasivo">Pasivo</option>
+                            <option name="status" id="status" value="activo">Activo</option>
+                            <option name="status" id="status" value="colaborador">Colaborador</option>
+                            <option name="status" id="status" value="honor">Honor</option>
+                        </select>
+                        <label for="status">Estado</label>
                     </div>
 
                 </div>

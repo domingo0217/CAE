@@ -16,7 +16,7 @@ class CreateDelegationsTable extends Migration
         Schema::create('delegations', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('delegation', 25);
+            $table->string('delegation', 25)->unique();
             $table->timestamps();
         });
     }

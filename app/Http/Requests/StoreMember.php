@@ -33,7 +33,8 @@ class StoreMember extends FormRequest
             'address' => 'bail|required|string|max:70|min:10',
             'delegation' => 'bail|required|string|max:30|min:3',
             'civil_status' => 'bail|required|alpha|max:10|min:5',
-            'birthdate' => 'bail|required|date|'
+            'birthdate' => 'bail|required|date|',
+            'status'=> 'bail|required|alpha|max:11|min:6'
         ];
     }
 }
