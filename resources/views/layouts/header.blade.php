@@ -18,7 +18,7 @@
            </div>
        </div>
    </nav>
-   <div class="container"><a href="#" data-activates="nav-mobile" class="button-collapse hide-on-large-only"><i class="material-icons">menu</i></a></div>
+   <div class="container"><a data-activates="nav-mobile" class="button-collapse hide-on-large-only"><i class="material-icons">menu</i></a></div>
    {{-- SideBar --}}
         @include('layouts.sidebar')
    {{-- /SideBar --}}

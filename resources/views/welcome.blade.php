@@ -6,6 +6,7 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	{!! MaterializeCSS::include_css() !!}
 	<link rel="stylesheet" type="text/css" href="custom/css/index.css">
+	<link rel="shortcut icon" type="image/png" href="img/logo.png"/>
 </head>
 <body>
 	<!-- Header1 -->
