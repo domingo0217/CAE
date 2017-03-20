@@ -16,7 +16,7 @@ class CreateChargesTable extends Migration
         Schema::create('charges', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('charge', 50);
+            $table->string('charge', 50)->unique();
             $table->timestamps();
         });
     }

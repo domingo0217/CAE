@@ -10,6 +10,6 @@ class Charge extends Model
 
     public function member()
     {
-        return $this->belongsToMany(Member::class);
+        return $this->belongsTo(Member::class);
     }
 }

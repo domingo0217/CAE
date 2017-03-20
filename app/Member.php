@@ -31,7 +31,7 @@ class Member extends Model
 
     public function charge()
     {
-        return $this->belongsToMany(Charge::Class);
+        return $this->hasOne(Charge::Class);
     }
 
 

@@ -5,9 +5,9 @@
 
     @section('content')
         <div class="row">
-            <div class="section white z-depth-1">
+            <div class="col s12 section white z-depth-1">
                 @include('layouts.status')
-                <table class="stripped responsive centered">
+                <table class="highlight responsive">
                     <thead>
                         <tr>
                             <th data-field="id">C&eacute;dula</th>
