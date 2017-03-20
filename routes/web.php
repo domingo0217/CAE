@@ -12,45 +12,19 @@
 */
 
 Route::get('/', function (){
-    return view('index');
+    return view('welcome');
 });
 
-Route::get('main', function (){
-    return view('main');
+Route::get('dashboard', function(){
+    return view('dashboard');
 });
 
-Route::get('pagos', function(){
-    return view('pagos');
-});
+Route::resource('member', 'MemberController');
 
-Route::get('AgregarMiembro', function(){
-    return view('AgregarMiembro');
-});
 
-Route::get('AgregarUsuario', function(){
-    return view('AgregarUsuarios');
-});
+Route::resource('city', 'CityController');
 
-Route::get('AgregarCapacitaciones', function(){
-    return view('AgregarCapacitaciones');
-});
+Route::resource('delegation', 'DelegationController');
 
-Route::get('AgregarRol', function(){
-    return view('AgregarRol');
-});
+Route::resource('charge', 'ChargeController');
 
-Route::get('AgregarCargo', function(){
-    return view('AgregarCargo');
-});
-
-Route::get('AgregarDelegacion', function(){
-    return view('AgregarDelegacion');
-});
-
-Route::get('AgregarEstado', function(){
-    return view('AgregarEstado');
-});
-
-Route::get('AgregarDocumento', function(){
-    return view('AgregarDocumento');
-});
