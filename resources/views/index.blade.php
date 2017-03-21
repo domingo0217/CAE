@@ -97,14 +97,20 @@
 					<div class="col s12 input-field">
 						<h4 class="center blue-grey-text">Inicia Sesi&oacute;n</h4>
 					</div>
+
+					 <form role="form" action="{{ url('/login') }}" method="post" >
+                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <div class="form-group">
+                        
+                        </div>
 					<div class="col s12 input-field">
 						<i class="material-icons prefix">account_circle</i>
-						<input type="text" name="" class="validate" id="">
+						<input type="email" name="email" value="{{ old('email') }}" class="validate" id="form-username">
 						<label for="">Nombre de Usuario</label>
 					</div>
 					<div class="col s12 input-field">
 						<i class="material-icons prefix">lock</i>
-						<input type="password" name="" class="validate" id="">
+						<input type="password" name="password" class="validate" id="form-password">
 						<label for="">Contraseña</label>
 					</div>
 					<br>
@@ -115,7 +121,7 @@
 					<br>
 					<div class="col s12 ">
 						<a class="modal-action modal-close btn-flat waves-effect waves-red right">Cerrar</a>
-						<a class="waves-effect waves-green btn-flat right">Entrar</a>
+						 <button type="submit" class="modal-action modal-close btn-flat waves-effect waves-red right">Entrar</button>
 					</div>
 				</form>
 			</div>

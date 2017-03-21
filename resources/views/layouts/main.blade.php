@@ -54,9 +54,19 @@
 						<a class="collapsible-header waves-effect waves-red bold">Usuarios 	<i class="material-icons">arrow_drop_down</i></a>
 						<div class="collapsible-body">
 							<ul>
-								<li><a href="#" class="waves-effect waves-yellow center">Agregar Usuario</a></li>
-								<li><a href="#" class="waves-effect waves-yellow center">Lista de Usuarios</a></li>
+								<li><a href="{{ url("/form_nuevo_usuario") }}" class="waves-effect waves-yellow center">Agregar Usuario</a></li>
+								<li><a href="{{ url("/listado_usuarios") }}" class="waves-effect waves-yellow center">Lista de Usuarios</a></li>
+								<li class="no-padding">
+
+								<li><a href="{{ url("/form_nuevo_rol") }}" class="waves-effect waves-yellow center"> Agregar Roles</a></li>
+								<li><a href="{{ url("/listado_roles") }}" class="waves-effect waves-yellow center"> Listado de Roles</a></li>
+
+								<li><a href="{{ url("/form_nuevo_permiso ") }}" class="waves-effect waves-yellow center">Agregar Permisos</a></li>
+								<li><a href="{{ url("/listado_permisos") }}" class="waves-effect waves-yellow center"> Listado de Permisos</a></li>
+								
+							
 							</ul>
+							</li>
 						</div>
 					</li>
 				</ul>
@@ -76,7 +86,7 @@
 				</ul>
 			</li>
 			<li class="divider"></li>
-			<li><a href="#" class="waves-effect waves-red bold">Cerrar sesi&oacute;n</a></li>
+			<li><a href="{{URL('logout')}}" class="waves-effect waves-red bold">Cerrar sesi&oacute;n</a></li>
 			<li><a href="#" class="waves-effect waves-red bold">Ajustes</a></li>
 			<li><a href="#" class="waves-effect waves-red bold">Ayuda</a></li>
 		</ul>
