@@ -32,10 +32,10 @@
 					<input type="submit" class="btn yellow darken-3 waves-effect right" value="buscar" >
 					</span>
 
-				</div>
+				
 						
         
-
+</div>
 
 		<div class="margin" id="botones_control">
       
@@ -77,7 +77,7 @@
 			<td> {{ $usuario-> lastname }} </td>
 			<td> {{ $usuario->telefhone }}</td>
 			<td> {{ $usuario->email }} </td>
-			<td> <button type="submit" name="submit" class="btn-floating btn-flat waves-effect waves-dark white tooltipped" data-position="right" data-delay="50" data-tooltip="Eliminar">
+			<td> <button type="" name="" class="btn-floating btn-flat waves-effect waves-dark white tooltipped" data-position="right" data-delay="50" data-tooltip="Eliminar">
                                             <i class="material-icons yellow-text text-darken-3">delete</i>
                                         </button>
 	
@@ -92,6 +92,7 @@
 		</table>
 </form>
 	</div>
+
 </div>
 </div>
 </div>

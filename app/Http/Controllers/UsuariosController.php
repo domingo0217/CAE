@@ -67,7 +67,7 @@ public function crear_usuario(Request $request){
 	  
 	$validator = Validator::make( $request->all(),$reglas,$mensajes );
 	if( $validator->fails() ){ 
-	  	return view("mensajes.mensaje_error")->with("msj","...Existen errores...")
+	  	 return redirect('form_nuevo_usuario')->with("msj","...Existen errores...")
 	  	                                    ->withErrors($validator->errors());         
 	}
 
@@ -84,12 +84,9 @@ public function crear_usuario(Request $request){
     {
 
   
-      return view("mensajes.msj_usuario_creado")->with("msj","Usuario agregado correctamente") ;
+       return redirect('form_nuevo_usuario')->with('status', 'Usuario Agregado!');
     }
-    else
-    {
-        return view("mensajes.mensaje_error")->with("msj","...Hubo un error al agregar ;...") ;
-    }
+   
 
 }
 
@@ -103,11 +100,11 @@ public function crear_rol(Request $request){
    $rol->description=$request->input("rol_descripcion") ;
     if($rol->save())
     {
-        return view("mensajes.msj_rol_creado")->with("msj","Rol agregado correctamente") ;
+        return redirect('form_nuevo_rol')->with('status', 'Rol Agregado!');
     }
     else
     {
-        return view("mensajes.mensaje_error")->with("msj","...Hubo un error al agregar ;...") ;
+      return redirect('form_nuevo_rol')->with('status', 'Problema para agregar rol!');
     }
 }
 
@@ -133,11 +130,11 @@ public function asignar_permiso(Request $request){
     
     if($rol->save())
     {
-        return view("mensajes.msj_permiso_creado")->with("msj","Permiso asignado correctamente") ;
+        return redirect('form_nuevo_permiso')->with('status', 'Permiso  Agregado!');
     }
     else
     {
-        return view("mensajes.mensaje_error")->with("msj","...Hubo un error al agregar ;...") ;
+        return redirect('form_nuevo_permiso')->with('status', 'Problema para agregar permiso');
     }
 
 

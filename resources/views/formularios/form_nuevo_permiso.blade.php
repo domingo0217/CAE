@@ -13,9 +13,10 @@
 <div class="section white z-depth-0">
         <div class="row">
          @include('layouts.errors')
+         
     <form class="col s8 offset-s2" action="{{ url('asignar_permiso') }}" method="post">
               
-			
+			 @include('layouts.status')
 
 
 			  
