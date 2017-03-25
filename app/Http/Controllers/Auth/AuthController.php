@@ -57,7 +57,7 @@ class AuthController extends Controller
             'telefhone' => 'required|min:6|confirmed',
         ]);
     }
-
+ 
     /**
      * Create a new user instance after a valid registration.
      *
@@ -73,5 +73,16 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             
+    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function logout()
+    {
+        Session::flush();
+        Auth::logout();
+        return Redirect::to('/');
     }
 }

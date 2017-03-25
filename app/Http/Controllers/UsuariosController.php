@@ -266,5 +266,4 @@ public function borrar_rol($idrole){
     return "ok";
 }
 
-
 }

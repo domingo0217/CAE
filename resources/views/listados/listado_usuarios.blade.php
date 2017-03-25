@@ -29,10 +29,12 @@
 					<span class="input-group-btn">
 				
                     
-					<input type="submit" class="btn yellow darken-3 waves-effect right" value="buscar" >
+					
 					</span>
 
-				
+			 <button type="submit" name="submit" class="btn-floating btn-flat waves-effect waves-dark white tooltipped" data-position="right" data-delay="50" data-tooltip="Buscar">
+                                            <i class="material-icons yellow-text text-darken-3">search</i>
+                                        </button> 	
 						
         
 </div>

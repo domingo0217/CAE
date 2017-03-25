@@ -1,25 +1,13 @@
 
-
+<html>
+    <head>
+        <title>Login</title>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />  
+        <link rel="stylesheet" href="css/login.css" />
+    </head>
 
 <body>      
-    
-    
-  
-             
-               
-            
-            <div class="row">
-              <div class="col-sm-6 col-sm-offset-3 myform-cont" >
-                    <div class="myform-top">
-                        <div class="myform-top-left">
-                        
-                          <h3>Ingresa a CAE</h3>
-                            <p>Digita tu email y contraseña:</p>
-                        </div>
-                        <div class="myform-top-right">s
-                          <i class="fa fa-key"></i>
-                        </div>
-                    </div>
+         
 
             @if (count($errors) > 0)
                  <div class="col-sm-12" >
@@ -37,26 +25,33 @@
                       
                       <form role="form" action="{{ url('/login') }}" method="post" >
                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <div class="form-group">
-                            <input type="text" name="email" value="{{ old('email') }}" placeholder="Usuario..." class="form-control" id="form-username">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" name="password" placeholder="Contraseña..." class="form-control" id="form-password">
-                        </div>
-
-
                        
-                      
-
-                        <button type="submit" class="mybtn">Entrar</button>
+           <div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+            <h1 class="text-center login-title">Bienbenidos a CAE</h1>
+            <div class="account-wall">
+               
+               <link rel="shortcut icon" type="image/png" href="img/logo.png"/>
+                <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+                    alt="">
+                <form class="form-signin" action="{{ url('/login') }}" method="POST">
+                <input type="text" class="form-control" name="email" placeholder="Email" required autofocus>
+                <input type="password" class="form-control" name="password" placeholder="Password" required>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">
+                    Entrar</button>
+                   
+               
+            </div>
+       
+        </div>
+    </div>
+</div>
+    
                       </form>
 
                     </div>
-              </div>
            
-            </div>
-        </div>
-      </div>
 
     <!-- Enlazamos el js de Bootstrap, y otros plugins que usemos siempre al final antes de cerrar el body -->
     <script src="{{ url('js/bootstrap.min.js') }}"></script>

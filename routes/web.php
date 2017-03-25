@@ -66,6 +66,5 @@ Route::post('crear_rol', 'UsuariosController@crear_rol');
     Route::get('form_borrado_usuario/{idusu}', 'UsuariosController@form_borrado_usuario');
     Route::get('borrar_rol/{idrol}', 'UsuariosController@borrar_rol');
 
-
 });
 

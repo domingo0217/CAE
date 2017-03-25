@@ -13,12 +13,12 @@
 <section class="content" >
  <div class="section white z-depth-0">
         <div class="row">
-         @include('layouts.errors')
+  
          
          <form class="col s8 offset-s2" action="{{ url('crear_usuario') }}"  method="post">
  
               @include('layouts.status')
-      
+             @include('layouts.errors')
 				<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
 
 <div class="row">
