@@ -94,6 +94,7 @@ public function crear_usuario(Request $request){
 
 public function crear_rol(Request $request){
 
+ 
    $rol=new Role;
    $rol->name=$request->input("rol_nombre") ;
    $rol->slug=$request->input("rol_slug") ;
@@ -104,7 +105,7 @@ public function crear_rol(Request $request){
     }
     else
     {
-      return redirect('form_nuevo_rol')->with('status', 'Problema para agregar rol!');
+     return view("formularios.form_nuevo_rol")->with("errors","..Hubo un error al agregar ; intentarlo nuevamente..");
     }
 }
 

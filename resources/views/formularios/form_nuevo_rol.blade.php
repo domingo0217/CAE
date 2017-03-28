@@ -28,14 +28,14 @@
                     <div class="col s12 m6 input-field">
                     <div class="form-group">
                         <input type="text" name="rol_nombre" value="" id="rol_nombre" data-length="20"  class="validate" required>
-                                   <label data-error="incorrecto" data-success="correcto" for="rol_nombre">Nombre</label>
+                                   <label data-error="incorrecto" data-success="correcto" for="rol_nombre">Nombre *</label>
                     </div>
                     </div>
                     <div class="row">
                     <div class="col s12 m6 input-field">
                      <div class="form-group">
                         <input type="text" name="rol_slug" value="" id="rol_slug"   data-length="20"  class="validate"required>
-                                     <label data-error="incorrecto" data-success="correcto" for="rol_slug">Slug</label>
+                                     <label data-error="incorrecto" data-success="correcto" for="rol_slug">Slug *</label>
                     </div>
                 </div>
                 </div>
@@ -43,13 +43,13 @@
                     <div class="col s12 m6 input-field">
                     <div class="form-group">
                         <input type="text" name="rol_descripcion" value="" id="rol_descripcion" data-length= "30"  class="validate" required>
-                                     <label data-error="incorrecto" data-success="correcto" for="rol_descripcion">Descripcion</label>
+                                     <label data-error="incorrecto" data-success="correcto" for="rol_descripcion">Descripcion *</label>
                     </div>
                     </div>
                
 
 			     </div>
-
+<p>Los campos marcados con asterisco son de caracter obligatorio</p>
                 <div>
                       <button class="btn yellow darken-3 waves-effect right" type="submit">Agregar</button>
                     
