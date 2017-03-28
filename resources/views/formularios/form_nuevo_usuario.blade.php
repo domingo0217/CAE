@@ -24,29 +24,29 @@
 <div class="row">
                     <div class="col s12 m6 input-field">
                     <div class="form-group">
-                        <input type="text" name="name" value="" id="name" data-length="20"  class="validate" required>
-                        <label data-error="incorrecto" data-success="correcto" for="name">Nombre</label>
+                        <input type="text" name="name" value="{{ old('name') }}" id="name" data-length="20"  class="validate" required>
+                        <label data-error="incorrecto" data-success="correcto" for="name">Nombre *</label>
                     </div>
                     </div>
                     <div class="col s12 m6 input-field">
                      <div class="form-group">
-                        <input type="text" name="lastname" value="" id="lastname" data-length="20" class="validate" required>
-                       <label data-error="incorrecto" data-success="correcto" for="lastname">Apellido</label>
+                        <input type="text" name="lastname" value="{{ old('lastname') }}" id="lastname" data-length="20" class="validate" required>
+                       <label data-error="incorrecto" data-success="correcto" for="lastname">Apellido *</label>
                     </div>
                 </div>
                 </div>
 <div class="row">
                     <div class="col s12 m6 input-field">
                     <div class="form-group">
-                        <input type="text" name="telefhone" value="" id="telefhone"  data-length="20" class="validate" required>
-                        <label data-error="incorrecto" data-success="correcto" for="telefhone">Telefono</label>
+                        <input type="text" name="telefhone" value="{{ old('telefhone') }}" id="telefhone"  data-length="20" class="validate" required>
+                        <label data-error="incorrecto" data-success="correcto" for="telefhone">Telefono *</label>
                     </div>
                     </div>
 
                     <div class="col s12 m6 input-field">
                      <div class="form-group">
-                        <input type="email" name="email" value="" id="email"  data-length="30" class="validate" required>
-                      <label data-error="incorrecto" data-success="correcto" for="email">Email</label>
+                        <input type="email" name="email" value="{{ old('email') }}" id="email"  data-length="30" class="validate" required>
+                      <label data-error="incorrecto" data-success="correcto" for="email">Email *</label>
                     </div>
                 </div>
                 </div>
@@ -54,12 +54,13 @@
                     <div class="col s12 m6 input-field">
                     <div class="form-group">
                         <input type="password" name="password" value="" id="password"  data-length="20" class="validate" required>
-                       <label data-error="incorrecto" data-success="correcto" for="email">Contrasena</label>
+                       <label data-error="incorrecto" data-success="correcto" for="email">Contrasena *</label>
                     </div>
                     
 </div>
 </div>
                     <div >
+                    <p> Los campos marcados con asterisco son de caracter obligatorio</p>
                   <button class="btn yellow darken-3 waves-effect right" type="submit">Agregar</button>
                     </div>
 

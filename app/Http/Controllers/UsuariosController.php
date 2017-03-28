@@ -59,16 +59,16 @@ public function listado_Permisos(){
 public function crear_usuario(Request $request){
     //crea un nuevo usuario en el sistema
 
-	$reglas=[  'password' => 'required|min:8',
+	$reglas=[  'password' => 'required|min:6',
 	             'email' => 'required|email|unique:users', ];
 	 
-	$mensajes=[  'password.min' => 'El password debe tener al menos 8 caracteres',
-	             'email.unique' => 'El email ya se encuentra registrado en la base de datos', ];
+	$mensajes=[  'password.min' => 'La contraseña debe tener al menos 6 caracteres',
+	             'email.unique' => 'El correo ya se encuentra registrado en la base de datos', ];
 	  
 	$validator = Validator::make( $request->all(),$reglas,$mensajes );
 	if( $validator->fails() ){ 
-	  	 return redirect('form_nuevo_usuario')->with("msj","...Existen errores...")
-	  	                                    ->withErrors($validator->errors());         
+	  	return redirect('form_nuevo_usuario')->withInput(
+    $request->except('password'))->with("msj","...Existen errores...")->withErrors($validator->errors());         
 	}
 
 	$usuario=new User;
