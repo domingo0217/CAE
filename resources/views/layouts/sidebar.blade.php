@@ -1,7 +1,7 @@
 <ul id="nav-mobile" class="side-nav fixed">
     <li><a class="bold">Hector Canario</a></li>
     <li class="divider"></li>
-    <li><a href="/dashboard" class="waves-effect waves-red bold"><i class="material-icons">widgets</i>Dashboard</a></li>
+    <li><a href="/dashboard" class="waves-effect waves-red bold"><i class="material-icons">dashboard</i>Dashboard</a></li>
     <li class="no-padding">
         <ul class="collapsible" data-collapsible="accordion">
             <li>

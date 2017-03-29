@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>CAE | @yield('title')</title>
 	{{-- Instanciando estilos y fuentes --}}
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	{{-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> --}} {{-- comentado para usar los iconos locales--}}
 	{{-- {!! MaterializeCSS::include_css() !!} --}}
 	<link rel="stylesheet" href="../materialize-css/css/materialize.css">
 	<link rel="stylesheet" type="text/css" href="../custom/css/main.css">
