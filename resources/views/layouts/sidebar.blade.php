@@ -1,5 +1,7 @@
 <ul id="nav-mobile" class="side-nav fixed">
     <li><a class="bold">Hector Canario</a></li>
+    <li class="divider"></li>
+    <li><a href="/dashboard" class="waves-effect waves-red bold"><i class="material-icons">widgets</i>Dashboard</a></li>
     <li class="no-padding">
         <ul class="collapsible" data-collapsible="accordion">
             <li>
@@ -24,10 +26,10 @@
                                 <li class="no-padding">
 
                                 <li><a href="{{ url("/form_nuevo_rol") }}" class="waves-effect waves-yellow center"> Agregar Roles</a></li>
-                                <li><a href="{{ url("/listado_roles") }}" class="waves-effect waves-yellow center"> Listado de Roles</a></li>
+                                <li><a href="{{ url("/listado_roles") }}" class="waves-effect waves-yellow center"> Lista de Roles</a></li>
 
                                 <li><a href="{{ url("/form_nuevo_permiso ") }}" class="waves-effect waves-yellow center">Agregar Permisos</a></li>
-                                <li><a href="{{ url("/listado_permisos") }}" class="waves-effect waves-yellow center"> Listado de Permisos</a></li>
+                                <li><a href="{{ url("/listado_permisos") }}" class="waves-effect waves-yellow center"> Lista de Permisos</a></li>
                     </ul>
                 </div>
             </li>
