@@ -13,7 +13,7 @@
 
                     <div class="row">
                         <div class="col s12  input-field">
-                            <input type="text" name="charge" id="charge" class="validate" required data-length="50" maxlength="50" value="">
+                            <input type="text" name="charge" id="charge" class="validate" required data-length="50" maxlength="50" minlength="3" value="{{ old('charge') }}">
                             <label data-error="incorrecto" data-success="correcto" for="charge">Cargo</label>
                         </div>
                     </div>

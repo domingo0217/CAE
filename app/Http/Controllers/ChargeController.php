@@ -4,6 +4,7 @@ namespace cae\Http\Controllers;
 
 use Illuminate\Http\Request;
 use cae\Charge;
+use Illuminate\Support\Facades\Validator;
 
 class ChargeController extends Controller
 {
@@ -37,9 +38,23 @@ class ChargeController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'charge' => 'bail|required|max:50|unique:charges'
-        ]);
+        $rules = [
+            'charge' => 'bail|required|max:50|min:3|unique:charges'
+        ];
+
+        $message = [
+            'charge.required' => 'Debe introducir un cargo.',
+            'charge.max' => 'El cargo debe tener un maximo de 50 caracteres.',
+            'charge.min' => 'El cargo debe tener un minimo de 3 caracteres.',
+            'charge.unique' => 'El cargo ya existe.'
+        ];
+        
+        $validator = Validator::make($request->all(), $rules, $message);
+
+        if($validator->fails())
+        {
+            return redirect('/charge/create')->withInput($request->all())->withErrors($validator->errors());
+        }
 
         Charge::create($request->all());
 

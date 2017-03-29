@@ -4,6 +4,7 @@ namespace cae\Http\Controllers;
 
 use Illuminate\Http\Request;
 use cae\Delegation;
+use Illuminate\Support\Facades\Validator;
 
 class DelegationController extends Controller
 {
@@ -37,9 +38,23 @@ class DelegationController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'delegation' => 'bail|required|max:50|unique:delegations'
-        ]);
+        $message = [
+            'delegation.required' => 'Debe introducir una delegación.',
+            'delegation.max' => 'La delegación debe tener un maximo de 50 caracteres.',
+            'delegation.unique' => 'Ya se ha registrado esta delegación.',
+            'delegation.min' => 'La ciudad debe tener un minimo de 3 caracteres.'
+        ];
+
+        $rules = [
+            'delegation' => 'bail|required|max:50|min:3|unique:delegations'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $message);
+
+        if($validator->fails())
+        {
+            return redirect('/delegation/create')->withInput($request->all())->withErrors($validator->errors());
+        }
 
         Delegation::create($request->all());
 

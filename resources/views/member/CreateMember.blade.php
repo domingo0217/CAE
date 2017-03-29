@@ -24,87 +24,98 @@
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="col s12 m6 input-field">
-                        <input type="text" name="name" id="name" class="validate" required data-length="30" maxlength="30">
-                        <label data-error="incorrecto" data-success="correcto" for="name">Nombre</label>
+                        <input type="text" name="name" id="name" class="validate" required value="{{ old('name')}}" data-length="30" maxlength="30">
+                        <label data-error="incorrecto" data-success="correcto" for="name">Nombre*</label>
                     </div>
                     <div class="col s12 m6 input-field">
-                        <input type="text" name="lastname" id="lastname" class="validate" required data-length="30" maxlength="30">
-                        <label data-error="incorrecto" data-success="correcto" for="lastname">Apellido</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 m6 input-field">
-                        <input type="text" name="id" id="id" class="validate" required data-length="11" maxlength="11">
-                        <label data-error="incorrecto" data-success="correcto" for="id">C&eacute;dula</label>
-                    </div>
-                    <div class="col s12 m6 input-field">
-                        <input type="text" name="nationality" id="nationality" class="validate" required data-length="20" maxlength="20">
-                        <label data-error="incorrecto" data-success="correcto" for="nationality">Nacionalidad</label>
+                        <input type="text" name="lastname" id="lastname" class="validate" required value="{{ old('lastname')}}" data-length="30" maxlength="30">
+                        <label data-error="incorrecto" data-success="correcto" for="lastname">Apellido*</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s12 m6 input-field">
-                        <input type="date" name="birthdate" id="birthdate" class="datepicker" required>
-                        <label for="birthdate">Fecha de Nacimiento</label>
+                        <input type="text" name="id" id="id" class="validate" required value="{{ old('id')}}" data-length="11" maxlength="11">
+                        <label data-error="incorrecto" data-success="correcto" for="id">C&eacute;dula*</label>
+                    </div>
+                    <div class="col s12 m6 input-field">
+                        <input type="text" name="nationality" id="nationality" class="validate" required value="{{ old('nationality')}}" data-length="20" maxlength="20">
+                        <label data-error="incorrecto" data-success="correcto" for="nationality">Nacionalidad*</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 m6 input-field">
+                        <input type="date" name="birthdate" id="birthdate" class="datepicker" required value="{{ old('birthdate')}}">
+                        <label for="birthdate">Fecha de Nacimiento*</label>
                     </div>
                     <div class="input-field col s12 m6">
-                        <select name="civil_status" required>
+                        <select name="civil_status" required value="{{ old('civil_status')}}">
                             <option name="civil_status" id="civil_status" value="null" disabled selected>Elija una opci&oacute;n</option>
                             <option name="civil_status" id="civil_status" value="soltero">Soltero</option>
                             <option name="civil_status" id="civil_status" value="casado">Casado</option>
                             <option name="civil_status" id="civil_status" value="divorciado">Divorciado</option>
                             <option name="civil_status" id="civil_status" value="viudo">Viudo</option>
                         </select>
-                        <label for="civil_status">Estado civil</label>
+                        <label for="civil_status">Estado civil*</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s12 m6 input-field">
-                        <input type="tel" name="telephone" id="telephone" class="validate" required data-length="12" maxlength="12">
-                        <label data-error="incorrecto" data-success="correcto" for="telephone">Telef&oacute;no</label>
+                        <input type="tel" name="telephone" id="telephone" class="validate" required value="{{ old('telephone')}}" data-length="12" maxlength="12">
+                        <label data-error="incorrecto" data-success="correcto" for="telephone">Telef&oacute;no*</label>
                     </div>
-                    <div class="col s12 m6 input-field">
-                        <input type="email" name="email" id="email" class="validate" required data-length="50" maxlength="50">
-                        <label data-error="incorrecto" data-success="correcto" for="email">Correo Electr&oacute;nico</label>
+                    <div class="input-field col s12 m6">
+                        <select name="gender" required value="{{ old('gender')}}">
+                            <option name="gender" id="gender" value="null" disabled selected>Elija un género</option>
+                            <option name="gender" id="gender" value="M">M</option>
+                            <option name="gender" id="gender" value="F">F</option>
+                            <option name="gender" id="gender" value="otro">otro</option>
+                        </select>
+                        <label for="gender">Género*</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s12 input-field">
-                        <input type="text" name="address" id="address" class="validate" required data-length="70" maxlength="70">
-                        <label data-error="incorrecto" data-success="correcto" for="address">Direcci&oacute;n</label>
+                        <input type="email" name="email" id="email" class="validate" required value="{{ old('email')}}" data-length="50" maxlength="50">
+                        <label data-error="incorrecto" data-success="correcto" for="email">Correo Electr&oacute;nico*</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 input-field">
+                        <input type="text" name="address" id="address" class="validate" required value="{{ old('address')}}" data-length="70" maxlength="70">
+                        <label data-error="incorrecto" data-success="correcto" for="address">Direcci&oacute;n*</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s12 m6 input-field">
-                        <select name="city" required>
+                        <select name="city" required value="{{ old('city')}}">
                             <option name="city" id="city" value="null" disabled selected>Elija una ciudad</option>
                             @foreach($cities as $city)
                                 <option name="city" id="city" value="{{ $city->id }}">{{ $city->city }}</option>
                             @endforeach
                         </select>
-                        <label for="city">Ciudad</label>
+                        <label for="city">Ciudad*</label>
                     </div>
                     <div class="col s12 m6 input-field">
-                        <select name="delegation" required>
+                        <select name="delegation" required value="{{ old('delegation')}}">
                             <option name="delegation" id="delegation" value="null" disabled selected>Elija una delegaci&oacute;n</option>
                             @foreach($delegations as $delegation)
                                 <option name="delegation" id="delegation" value="{{ $delegation->id }}">{{ $delegation->delegation }}</option>
                             @endforeach
                         </select>
-                        <label for="delegation">Delegaci&oacute;n</label>
+                        <label for="delegation">Delegaci&oacute;n*</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m6">
-                        <select name="document" id="document" multiple required>
+                        <select name="document" id="document" multiple required value="{{ old('document')}}">
                             <option name="document" id="document" value="null" disabled selected>Elija una opci&oacute;n</option>
                             <option name="document" id="document" value="acta de buena conducta">Acta de buena conducta</option>
                             <option name="document" id="document" value="acta de nacimiento">Acta de nacimiento</option>
                         </select>
-                        <label for="document">Documentos presentados</label>
+                        <label for="document">Documentos presentados*</label>
                     </div>
                     <div class="input-field col s12 m6">
-                        <select id="status" name="status" required>
+                        <select id="status" name="status" required value="{{ old('status')}}">
                             <option name="status" id="status" value="null" disabled selected>Elija un estado</option>
                             <option name="status" id="status" value="aspirante">Aspirante</option>
                             <option name="status" id="status" value="pasivo">Pasivo</option>

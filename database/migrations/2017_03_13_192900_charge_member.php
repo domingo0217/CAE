@@ -17,7 +17,7 @@ class ChargeMember extends Migration
             $table->engine = 'InnoDB';
             $table->primary('charge_id', 'member_id');
             $table->integer('charge_id');
-            $table->integer('member_id');
+            $table->bigInteger('member_id');
             $table->timestamps();
         });
     }

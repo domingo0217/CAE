@@ -15,8 +15,8 @@ class CreateTelephonesTable extends Migration
     {
         Schema::create('telephones', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
-            $table->integer('member_id');
+            $table->bigIncrements('id');
+            $table->bigInteger('member_id');
             $table->string('telephone', 12);
             $table->timestamps();
         });

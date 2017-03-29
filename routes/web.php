@@ -16,18 +16,7 @@ Route::get('/', function (){
 });
 
 
-Route::get('dashboard', function(){
-    return view('dashboard');
-});
 
-Route::resource('member', 'MemberController');
-
-
-Route::resource('city', 'CityController');
-
-Route::resource('delegation', 'DelegationController');
-
-Route::resource('charge', 'ChargeController');
 
 Route::get('login', function () {
     return redirect('login');
@@ -36,7 +25,7 @@ Route::get('login', function () {
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
-    
+
     Route::get('/home', function () {
     return redirect('dashboard');
 });
@@ -46,16 +35,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('buscar_usuario', 'UsuariosController@buscar_usuario');
     Route::post('borrar_usuario', 'UsuariosController@borrar_usuario');
     Route::post('editar_acceso', 'UsuariosController@editar_acceso');
-  
 
-Route::post('crear_rol', 'UsuariosController@crear_rol');
+
+    Route::post('crear_rol', 'UsuariosController@crear_rol');
     Route::get('/listado_roles', 'UsuariosController@listado_Roles');
     Route::post('crear_permiso', 'UsuariosController@crear_permiso');
     Route::get('/listado_permisos', 'UsuariosController@listado_Permisos');
     Route::post('asignar_permiso', 'UsuariosController@asignar_permiso');
     Route::get('quitar_permiso/{idrol}/{idper}', 'UsuariosController@quitar_permiso');
-    
-    
+
+
     Route::get('form_nuevo_usuario', 'UsuariosController@form_nuevo_usuario');
     Route::get('form_nuevo_rol', 'UsuariosController@form_nuevo_rol');
     Route::get('form_nuevo_permiso', 'UsuariosController@form_nuevo_permiso');
@@ -66,5 +55,28 @@ Route::post('crear_rol', 'UsuariosController@crear_rol');
     Route::get('form_borrado_usuario/{idusu}', 'UsuariosController@form_borrado_usuario');
     Route::get('borrar_rol/{idrol}', 'UsuariosController@borrar_rol');
 
+    Route::get('dashboard', function(){
+        return view('dashboard');
+    });
+
+    Route::resource('member', 'MemberController');
+
+    Route::resource('city', 'CityController');
+
+    Route::resource('delegation', 'DelegationController');
+
+    Route::resource('charge', 'ChargeController');
+
 });
 
+Route::resource('member', 'MemberController');
+
+Route::resource('city', 'CityController');
+
+Route::resource('delegation', 'DelegationController');
+
+Route::resource('charge', 'ChargeController');
+
+Route::get('dashboard', function(){
+    return view('dashboard');
+});

@@ -47,3 +47,10 @@ ul.side-nav.fixed li a.bold {
     padding: 0 30px;
     font-weight: bold;
 }
+
+
+/*css status messages*/
+#message{
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+}

@@ -25,6 +25,7 @@ class CreateMembersTable extends Migration
             $table->string('email', 50)->unique();
             $table->integer('delegation_id')->nullable();
             $table->integer('charge_id')->nullable();
+            $table->enum('gender', array('M', 'F', "otro"));
             $table->primary('id');
             $table->timestamps();
         });

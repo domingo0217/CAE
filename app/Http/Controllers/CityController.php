@@ -4,6 +4,7 @@ namespace cae\Http\Controllers;
 
 use Illuminate\Http\Request;
 use cae\City;
+use Illuminate\Support\Facades\Validator;
 
 class CityController extends Controller
 {
@@ -37,13 +38,27 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'city' => 'bail|required|max:70|unique:cities'
-        ]);
+        $message = [
+            'city.required' => 'Debe introducir una ciudad',
+            'city.max' => 'La ciudad debe tener un maximo de 50 caracteres.',
+            'city.unique' => 'Ya se ha registrado esta ciudad.',
+            'city.min' => 'La ciudad debe tener un minimo de 50 caracteres.'
+        ];
+
+        $rules = [
+            'city' => 'bail|required|max:50|min:3|unique:cities'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $message);
+
+        if($validator->fails())
+        {
+            return redirect('/city/create')->withInput($request->all())->withErrors($validator->errors());
+        }
 
         City::create($request->all());
 
-        return redirect('/city')->with('status', 'Pa&iacute;s Agregado!');
+        return redirect('/city')->with('status', 'Ciudad Agregada!');
     }
 
     public function destroy($id)
@@ -53,6 +68,6 @@ class CityController extends Controller
         $city = City::find($id);
         $city->delete();
 
-        return redirect()->back()->with('status', 'Pa&iacute;s Eliminado!');
+        return redirect()->back()->with('status', 'Ciudad Eliminada!');
     }
 }

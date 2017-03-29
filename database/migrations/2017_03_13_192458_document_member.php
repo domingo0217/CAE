@@ -17,7 +17,7 @@ class DocumentMember extends Migration
             $table->engine = 'InnoDB';
             $table->primary('document_id', 'member_id');
             $table->integer('document_id');
-            $table->integer('member_id');
+            $table->bigInteger('member_id');
             $table->timestamps();
         });
     }
