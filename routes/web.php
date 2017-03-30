@@ -69,6 +69,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
+Route::get('dashboard', function(){
+    return view('dashboard');
+});
+
 Route::resource('member', 'MemberController');
 
 Route::resource('city', 'CityController');
@@ -77,6 +81,8 @@ Route::resource('delegation', 'DelegationController');
 
 Route::resource('charge', 'ChargeController');
 
-Route::get('dashboard', function(){
-    return view('dashboard');
-});
+Route::post('searchMember', 'MemberController@search');
+
+Route::post('searchCity', 'CityController@search');
+
+Route::post('searchDelegation', 'DelegationController@search');

@@ -70,4 +70,46 @@ class CityController extends Controller
 
         return redirect()->back()->with('status', 'Ciudad Eliminada!');
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $city = City::where('city', 'like', '%'.$search.'%')->paginate(6);
+        return view('/city.list', compact('city'));
+    }
+
+    public function edit($id)
+    {
+        $city = City::find($id);
+        return view('city.edit', compact('city'));
+    }
+
+    public function update(Request $request)
+    {
+        $message = [
+            'city.required' => 'Debe introducir una ciudad',
+            'city.max' => 'La ciudad debe tener un maximo de 50 caracteres.',
+            'city.unique' => 'Ya se ha registrado esta ciudad.',
+            'city.min' => 'La ciudad debe tener un minimo de 3 caracteres.'
+        ];
+
+        $rules = [
+            'city' => 'bail|required|max:50|min:3|unique:cities'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $message);
+
+        if($validator->fails())
+        {
+            return redirect()->back()->withInput($request->all())->withErrors($validator->errors());
+        }
+        $id = $request->input('id');
+        $city = City::find($id);
+        $city->city = $request->input('city');
+
+        if($city->save())
+        {
+            return redirect('/city')->with('status', 'Ciudad Actualizada!');
+        }
+    }
 }

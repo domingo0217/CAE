@@ -48,7 +48,7 @@ class ChargeController extends Controller
             'charge.min' => 'El cargo debe tener un minimo de 3 caracteres.',
             'charge.unique' => 'El cargo ya existe.'
         ];
-        
+
         $validator = Validator::make($request->all(), $rules, $message);
 
         if($validator->fails())
@@ -68,5 +68,40 @@ class ChargeController extends Controller
         $charge->delete();
 
         return redirect()->back()->with('status', 'Cargo Eliminado!');
+    }
+
+    public function edit($id)
+    {
+        $charge = Charge::find($id);
+        return view('charge.edit', compact('charge'));
+    }
+
+    public function update(Request $request)
+    {
+        $message = [
+            'charge.required' => 'Debe introducir un cargo',
+            'charge.max' => 'El cargo debe tener un maximo de 50 caracteres.',
+            'charge.unique' => 'Ya se ha registrado este cargo.',
+            'charge.min' => 'El cargo debe tener un minimo de 3 caracteres.'
+        ];
+
+        $rules = [
+            'charge' => 'bail|required|max:50|min:3|unique:charges'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $message);
+
+        if($validator->fails())
+        {
+            return redirect()->back()->withInput($request->all())->withErrors($validator->errors());
+        }
+        $id = $request->input('id');
+        $charge = Charge::find($id);
+        $charge->charge = $request->input('charge');
+
+        if($charge->save())
+        {
+            return redirect('/charge')->with('status', 'Cargo Actualizado!');
+        }
     }
 }

@@ -18,27 +18,27 @@
                 </ul>
             </div>
         @endif
-        <div class="row">
+        <div class="row">            
             <form class="col s8 offset-s2" action="/member" method="post">
 
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="col s12 m6 input-field">
-                        <input type="text" name="name" id="name" class="validate" required value="{{ old('name')}}" data-length="30" maxlength="30">
+                        <input type="text" name="name" id="name" class="validate" required value="{{ old('name')}}" data-length="30" maxlength="30" minlength="3">
                         <label data-error="incorrecto" data-success="correcto" for="name">Nombre*</label>
                     </div>
                     <div class="col s12 m6 input-field">
-                        <input type="text" name="lastname" id="lastname" class="validate" required value="{{ old('lastname')}}" data-length="30" maxlength="30">
+                        <input type="text" name="lastname" id="lastname" class="validate" required value="{{ old('lastname')}}" data-length="30" maxlength="30" minlength="3">
                         <label data-error="incorrecto" data-success="correcto" for="lastname">Apellido*</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s12 m6 input-field">
-                        <input type="text" name="id" id="id" class="validate" required value="{{ old('id')}}" data-length="11" maxlength="11">
+                        <input type="text" name="id" id="id" class="validate" required value="{{ old('id')}}" data-length="11" maxlength="11" minlength="11">
                         <label data-error="incorrecto" data-success="correcto" for="id">C&eacute;dula*</label>
                     </div>
                     <div class="col s12 m6 input-field">
-                        <input type="text" name="nationality" id="nationality" class="validate" required value="{{ old('nationality')}}" data-length="20" maxlength="20">
+                        <input type="text" name="nationality" id="nationality" class="validate" required value="{{ old('nationality')}}" data-length="20" maxlength="20" minlength="4">
                         <label data-error="incorrecto" data-success="correcto" for="nationality">Nacionalidad*</label>
                     </div>
                 </div>
@@ -48,40 +48,42 @@
                         <label for="birthdate">Fecha de Nacimiento*</label>
                     </div>
                     <div class="input-field col s12 m6">
-                        <select name="civil_status" required value="{{ old('civil_status')}}">
-                            <option name="civil_status" id="civil_status" value="null" disabled selected>Elija una opci&oacute;n</option>
-                            <option name="civil_status" id="civil_status" value="soltero">Soltero</option>
-                            <option name="civil_status" id="civil_status" value="casado">Casado</option>
-                            <option name="civil_status" id="civil_status" value="divorciado">Divorciado</option>
-                            <option name="civil_status" id="civil_status" value="viudo">Viudo</option>
+                        <select name="civil_status" id="civil_status" required>
+                            <option name="civil_status" disabled>Elija una opci&oacute;n</option>
+                            <option name="civil_status" id="oldCivilStatus" hidden>pedro{{ old('civil_status')}}</option>
+                            <option name="civil_status" value="soltero">Soltero</option>
+                            <option name="civil_status" value="casado">Casado</option>
+                            <option name="civil_status" value="divorciado">Divorciado</option>
+                            <option name="civil_status" value="viudo">Viudo</option>
                         </select>
                         <label for="civil_status">Estado civil*</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s12 m6 input-field">
-                        <input type="tel" name="telephone" id="telephone" class="validate" required value="{{ old('telephone')}}" data-length="12" maxlength="12">
+                        <input type="tel" name="telephone" id="telephone" class="validate" required value="{{ old('telephone')}}" data-length="12" maxlength="12" minlength="12">
                         <label data-error="incorrecto" data-success="correcto" for="telephone">Telef&oacute;no*</label>
                     </div>
                     <div class="input-field col s12 m6">
-                        <select name="gender" required value="{{ old('gender')}}">
-                            <option name="gender" id="gender" value="null" disabled selected>Elija un género</option>
-                            <option name="gender" id="gender" value="M">M</option>
-                            <option name="gender" id="gender" value="F">F</option>
-                            <option name="gender" id="gender" value="otro">otro</option>
+                        <select name="gender" required value="{{ old('gender') }}">
+                            <option name="gender" disabled>Elija un género</option>
+                            <span><option name="gender" id="oldGender" hidden>{{ old('gender') }}</option></span>
+                            <option name="gender" value="M">M</option>
+                            <option name="gender" value="F">F</option>
+                            <option name="gender" value="otro">otro</option>
                         </select>
                         <label for="gender">Género*</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s12 input-field">
-                        <input type="email" name="email" id="email" class="validate" required value="{{ old('email')}}" data-length="50" maxlength="50">
+                        <input type="email" name="email" id="email" class="validate" required value="{{ old('email')}}" data-length="50" maxlength="50" minlength="11">
                         <label data-error="incorrecto" data-success="correcto" for="email">Correo Electr&oacute;nico*</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s12 input-field">
-                        <input type="text" name="address" id="address" class="validate" required value="{{ old('address')}}" data-length="70" maxlength="70">
+                        <input type="text" name="address" id="address" class="validate" required value="{{ old('address')}}" data-length="70" maxlength="70" minlength="15">
                         <label data-error="incorrecto" data-success="correcto" for="address">Direcci&oacute;n*</label>
                     </div>
                 </div>
@@ -127,7 +129,7 @@
                     </div>
 
                 </div>
-                <button class="btn yellow darken-3 waves-effect right" type="submit" name="submit">Agregar</button>
+                <button class="btn yellow darken-3 waves-effect right pulse" type="submit" name="submit">Agregar</button>
             </form>
         </div>
     </div>

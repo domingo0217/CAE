@@ -14,12 +14,14 @@
    <nav class="nav-top red lighten-1 z-depth-2">
        <div class="container">
            <div class="nav-wrapper">
+               <div class="">
+                   <a href="" data-activates="nav-mobile" class="button-collapse hide-on-large-only"><i class="material-icons">menu</i></a>
+               </div>
                <a href="#" class="brand-logo">@yield('title')</a>
            </div>
        </div>
+
    </nav>
-   <div class="container"><a data-activates="nav-mobile" class="button-collapse hide-on-large-only"><i class="material-icons">menu</i></a></div>
-   {{-- SideBar --}}
-        @include('layouts.sidebar')
-   {{-- /SideBar --}}
+
+
 </header>

@@ -184,4 +184,11 @@ class MemberController extends Controller
     {
         //
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $member = Member::where('name', 'like', '%'.$search.'%')->orwhere('lastname', 'like', '%'.$search.'%')->orwhere('id', 'like', '%'.$search.'%')->paginate(6);
+        return view('/member.list', compact('member'));
+    }
 }

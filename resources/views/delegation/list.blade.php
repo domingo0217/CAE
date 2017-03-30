@@ -7,6 +7,16 @@
         <div class="row">
             <div class="section white z-depth-1">
                 @include('layouts.status')
+                <div class="">
+                    <form action="searchDelegation" method="post">
+                        {{ csrf_field() }}
+                        <div class="input-field">
+                            <input id="search" type="search" name="search" required class="tooltipped" data-position="top" data-delay="50" data-tooltip="Buscar">
+                            <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                            <i class="material-icons">close</i>
+                        </div>
+                    </form>
+                </div>
                 <table class="stripped responsive centered">
                     <thead>
                         <tr>
@@ -25,6 +35,9 @@
                                 <td>{{ $delegations->id }}</td>
                                 <td>{{ $delegations->delegation }}</td>
                                 <td>
+                                    <a href="/delegation/{{ $delegations->id }}/edit" class="btn-floating btn-flat waves-effect waves-dark white tooltipped" data-position="right" data-delay="50" data-tooltip="Editar">
+                                        <i class="material-icons yellow-text text-darken-3">edit</i>
+                                    </a>
                                     <form method="post" action="/delegation/{{$delegations->id}}">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}

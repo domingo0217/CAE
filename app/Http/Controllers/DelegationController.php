@@ -70,4 +70,46 @@ class DelegationController extends Controller
 
         return redirect()->back()->with('status', 'Delegaci&oacute;n eliminada!');
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $delegation = Delegation::where('delegation', 'like', '%'.$search.'%')->paginate(6);
+        return view('/delegation.list', compact('delegation'));
+    }
+
+    public function edit($id)
+    {
+        $delegation = Delegation::find($id);
+        return view('delegation.edit', compact('delegation'));
+    }
+
+    public function update(Request $request)
+    {
+        $message = [
+            'delegation.required' => 'Debe introducir una delegación',
+            'delegation.max' => 'La delegaci debe tener un maximo de 50 caracteres.',
+            'delegation.unique' => 'Ya se ha registrado esta delegaci.',
+            'delegation.min' => 'La delegaci debe tener un minimo de 3 caracteres.'
+        ];
+
+        $rules = [
+            'delegation' => 'bail|required|max:50|min:3|unique:delegations'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $message);
+
+        if($validator->fails())
+        {
+            return redirect()->back()->withInput($request->all())->withErrors($validator->errors());
+        }
+        $id = $request->input('id');
+        $delegation = Delegation::find($id);
+        $delegation->delegation = $request->input('delegation');
+
+        if($delegation->save())
+        {
+            return redirect('/delegation')->with('status', 'Delegación Actualizada!');
+        }
+    }
 }

@@ -6,8 +6,8 @@
 	{{-- Instanciando estilos y fuentes --}}
 	{{-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> --}} {{-- comentado para usar los iconos locales--}}
 	{{-- {!! MaterializeCSS::include_css() !!} --}}
-	<link rel="stylesheet" href="../materialize-css/css/materialize.css">
-	<link rel="stylesheet" type="text/css" href="../custom/css/main.css">
+	<link rel="stylesheet" href="/materialize-css/css/materialize.css">
+	<link rel="stylesheet" type="text/css" href="/custom/css/main.css">
 	<link rel="shortcut icon" type="image/png" href="img/logo.png"/>
 </head>
 <body class="grey lighten-3">
@@ -18,6 +18,9 @@
 
 	{{-- Main --}}
 	<main class="container">
+		{{-- SideBar --}}
+			 @include('layouts.sidebar')
+		{{-- /SideBar --}}
 		@yield('content')
 	</main>
 	{{-- /Main --}}
