@@ -23,7 +23,7 @@ class CreateMembersTable extends Migration
             $table->enum('civil_status', array('soltero', 'casado', 'divorciado' ,'viudo'));
             $table->enum('status', array('aspirante', 'pasivo', 'activo', 'colaborador', 'honor'))->default('pasivo');
             $table->string('email', 50)->unique();
-            $table->integer('delegation_id')->nullable();
+            $table->integer('delegation_id')->unsigned()->index();
             $table->integer('charge_id')->nullable();
             $table->enum('gender', array('M', 'F', "otro"));
             $table->primary('id');
