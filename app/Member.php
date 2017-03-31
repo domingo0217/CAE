@@ -34,5 +34,10 @@ class Member extends Model
         return $this->hasOne(Charge::Class);
     }
 
+    public function capacitation()
+    {
+        return $this->belongsToMany(Capacitation::class);
+    }
+
 
 }

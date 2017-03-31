@@ -55,21 +55,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('form_borrado_usuario/{idusu}', 'UsuariosController@form_borrado_usuario');
     Route::get('borrar_rol/{idrol}', 'UsuariosController@borrar_rol');
 
-    Route::get('dashboard', function(){
-        return view('dashboard');
-    });
-
-    Route::resource('member', 'MemberController');
-
-    Route::resource('city', 'CityController');
-
-    Route::resource('delegation', 'DelegationController');
-
-    Route::resource('charge', 'ChargeController');
-
 });
 
-Route::get('dashboard', function(){
+Route::get('dashboard', function()
+{
     return view('dashboard');
 });
 
@@ -81,8 +70,12 @@ Route::resource('delegation', 'DelegationController');
 
 Route::resource('charge', 'ChargeController');
 
+Route::resource('capacitation', 'CapacitationController');
+
 Route::post('searchMember', 'MemberController@search');
 
 Route::post('searchCity', 'CityController@search');
 
 Route::post('searchDelegation', 'DelegationController@search');
+
+Route::post('searchCapacitation', 'CapacitationController@search');

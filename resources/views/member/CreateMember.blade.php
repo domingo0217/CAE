@@ -18,7 +18,7 @@
                 </ul>
             </div>
         @endif
-        <div class="row">            
+        <div class="row">
             <form class="col s8 offset-s2" action="/member" method="post">
 
                 {{ csrf_field() }}
@@ -50,7 +50,7 @@
                     <div class="input-field col s12 m6">
                         <select name="civil_status" id="civil_status" required>
                             <option name="civil_status" disabled>Elija una opci&oacute;n</option>
-                            <option name="civil_status" id="oldCivilStatus" hidden>pedro{{ old('civil_status')}}</option>
+                            <option name="civil_status" id="oldCivilStatus" hidden>{{ old('civil_status')}}</option>
                             <option name="civil_status" value="soltero">Soltero</option>
                             <option name="civil_status" value="casado">Casado</option>
                             <option name="civil_status" value="divorciado">Divorciado</option>
@@ -129,6 +129,7 @@
                     </div>
 
                 </div>
+                <a href="/member" class="btn-flat waves-effect waves-red red-text text-darken-3">Atr&aacute;s</a>
                 <button class="btn yellow darken-3 waves-effect right pulse" type="submit" name="submit">Agregar</button>
             </form>
         </div>

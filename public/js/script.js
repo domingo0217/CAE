@@ -10,8 +10,9 @@ $(document).ready(setTimeout(function(){
 //--------------------------------------------------------------------
 //activating the select when validation fails
 $(document).ready(function(){
-    $('#oldCivilStatus').css({'display' : 'none'});
+    // $('#oldCivilStatus').css({'display' : 'none'});
     // $('#oldCivilStatus').wrap( "<span>" );
     var civil_status = $('#oldCivilStatus').text();
     $('#civil_status').val(civil_status);
+    console.log(civil_status);
 });
