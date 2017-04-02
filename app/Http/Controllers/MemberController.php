@@ -128,11 +128,7 @@ class MemberController extends Controller
             'nationality' => request('nationality'),
             'civil_status' => request('civil_status'),
             'birthdate' => request('birthdate'),
-            'email' => request('email'),
-            'address_id' => request('address'),
-            'delegation_id' => request('delegation'),
-            'status' => request('status'),
-            'gender' => request('gender')
+            'email' => request('email')
         ]);
 
 

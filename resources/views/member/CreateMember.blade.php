@@ -70,6 +70,7 @@
                             <span><option name="gender" id="oldGender" hidden>{{ old('gender') }}</option></span>
                             <option name="gender" value="M">M</option>
                             <option name="gender" value="F">F</option>
+                            <option name="gender" value="otro">otro</option>
                         </select>
                         <label for="gender">Género*</label>
                     </div>
