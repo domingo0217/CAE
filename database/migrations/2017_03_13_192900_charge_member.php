@@ -16,8 +16,8 @@ class ChargeMember extends Migration
         Schema::create('charge_member', function(Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->primary('charge_id', 'member_id');
-            $table->integer('charge_id');
-            $table->bigInteger('member_id');
+            $table->integer('charge_id')->unsigned()->index();
+            $table->bigInteger('member_id')->unsigned()->index();
             $table->timestamps();
         });
     }

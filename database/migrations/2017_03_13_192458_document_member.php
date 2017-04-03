@@ -1,4 +1,4 @@
-<?php
+->unsigned()->index()<?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,8 +16,8 @@ class DocumentMember extends Migration
         Schema::create('document_member', function(Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->primary('document_id', 'member_id');
-            $table->integer('document_id');
-            $table->bigInteger('member_id');
+            $table->bigInteger('document_id')->unsigned()->index();
+            $table->bigInteger('member_id')->unsigned()->index();
             $table->timestamps();
         });
     }

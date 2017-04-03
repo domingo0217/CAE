@@ -16,7 +16,7 @@ class CreateMembersCapacitationTable extends Migration
         Schema::create('capacitation_member', function (Blueprint $table) {
             $table->primary('capacitation_id', 'member_id');
             $table->integer('capacitation_id')->unsigned()->index();
-            $table->integer('member_id')->unsigned()->index();           
+            $table->bigInteger('member_id')->unsigned()->index();           
             $table->timestamps();
         });
     }

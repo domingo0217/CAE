@@ -15,7 +15,8 @@ class CreateMembersTable extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->string('id', 11);
+            $table->bigInteger('id')->unsigned();
+            $table->primary('id');
             $table->string('name', 30);
             $table->string('lastname', 30);
             $table->string('nationality', 20);
@@ -24,9 +25,7 @@ class CreateMembersTable extends Migration
             $table->enum('status', array('aspirante', 'pasivo', 'activo', 'colaborador', 'honor'))->default('pasivo');
             $table->string('email', 50)->unique();
             $table->integer('delegation_id')->unsigned()->index();
-            $table->integer('charge_id')->nullable();
-            $table->enum('gender', array('M', 'F', "otro"));
-            $table->primary('id');
+            $table->enum('gender', array('M', 'F'));
             $table->timestamps();
         });
     }
