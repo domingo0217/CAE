@@ -14,8 +14,6 @@
         selectYears: 200, // Creates a dropdown of 15 years to control year
         format: 'yyyy-mm-dd' //date format
     });
-    //Initialize select
-    $('select').material_select();
     //Initialize character counter
     $('input#input_text, textarea#textarea1').characterCounter();
     //Initialize tooltip

@@ -48,11 +48,26 @@ ul.side-nav.fixed li a.bold {
     font-weight: bold;
 }
 
+/*table styles*/
+td, th{
+    padding: 2px 2px;
+}
+
+/*padding div*/
+.padding{
+    padding: 1rem 1rem;
+}
 
 /*css status messages*/
 #message{
     opacity: 1;
     transition: all 0.3s ease-in-out;
+}
+
+/*delete button style on member*/
+#delete{
+    display: inline;
+    margin-left: 1em;
 }
 
 /*material incon*/

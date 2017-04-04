@@ -10,9 +10,26 @@ $(document).ready(setTimeout(function(){
 //--------------------------------------------------------------------
 //activating the select when validation fails
 $(document).ready(function(){
-    // $('#oldCivilStatus').css({'display' : 'none'});
-    // $('#oldCivilStatus').wrap( "<span>" );
-    var civil_status = $('#oldCivilStatus').text();
+    //civil status
+    var civil_status = $('#oldCivilStatus').val();
     $('#civil_status').val(civil_status);
-    console.log(civil_status);
+
+    //gender
+    var gender = $('#oldGender').val();
+    $('#gender').val(gender);
+
+    //city
+    var city = $('#oldCity').val();
+    $('#city').val(city);
+
+    //delegation
+    var delegation = $('#oldDelegation').val();
+    $('#delegation').val(delegation);
+
+    //status
+    var status = $('#oldStatus').val();
+    $('#status').val(status);
+
+    //Initialize select
+    $('select').material_select();
 });

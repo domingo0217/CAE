@@ -108,14 +108,17 @@ class CapacitationController extends Controller
             'imparting.required' => 'Debe introducir un impartidor',
             'imparting.max' => 'El impartidor debe tener un maximo de 70 caracteres.',
             'imparting.min' => 'El impartidor debe tener un minimo de 3 caracteres.',
-            'imparted_date.required' => 'Debe introducir una fecha',
-            'imparted_date' => 'Introduzca una fecha válida'
+            'imparted_date.required' => 'Debe introducir una fecha de inicio.',
+            'imparted_date.date' => 'Introduzca una fecha válida de inicio.',
+            'finalized_date.required' => 'Debe introducir una fecha de finalización.',
+            'finalized_date.date' => 'Introduzca una fecha válida de finalización.'
         ];
 
         $rules = [
             'capacitation' => 'bail|required|max:70|min:3',
             'imparting' => 'bail|required|max:70|min:3',
-            'imparted_date' => 'bail|required|date'
+            'imparted_date' => 'bail|required|date',
+            'finalized_date' => 'bail|required|date'
         ];
 
         $validator = Validator::make($request->all(), $rules, $message);
@@ -129,6 +132,7 @@ class CapacitationController extends Controller
         $capacitation->capacitation = $request->input('capacitation');
         $capacitation->imparting = $request->input('imparting');
         $capacitation->imparted_date = $request->input('imparted_date');
+        $capacitation->finalized_date = $request->input('finalized_date');
 
         if($capacitation->save())
         {

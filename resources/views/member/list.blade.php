@@ -44,14 +44,15 @@
                                 <td>{{ $members->id }}</td>
                                 <td>{{ $members->name }}</td>
                                 <td>{{ $members->lastname }}</td>
-                                {{-- <td>{{ $members->nationality }}</td> --}}
-                                {{-- <td>{{ $members->birthdate }}</td> --}}
-                                {{-- <td>{{ $members->civil_status }}</td> --}}
                                 <td>{{ $members->telephone }}</td>
-                                {{-- <td>{{ $members->email }}</td> --}}
-                                {{-- <td>{{ $members->address }}</td> --}}
-                                {{-- <td>{{ $members->city }}</td> --}}
-                                {{-- <td>{{ $members->delegation }}</td> --}}
+                                <td>
+                                    <a href="member/{{ $members->id }}" class="btn-floating btn-flat waves-effect waves-dark tooltipped" data-position="top" data-delay="50" data-tooltip="Ver">
+                                        <i class="material-icons yellow-text text-darken-3">visibility</i>
+                                    </a>
+                                    <a href="member/{{ $members->id }}/edit" class="btn-floating btn-flat waves-effect waves-dark tooltipped" data-position="top" data-delay="50" data-tooltip="Editar">
+                                        <i class="material-icons yellow-text text-darken-3">edit</i>
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
