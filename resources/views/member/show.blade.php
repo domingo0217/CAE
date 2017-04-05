@@ -24,7 +24,7 @@
                     <p class="centered"><strong>Estado: </strong>{{ $member->status }}</p>
                 </div>
                 <a href="/member" class="btn-flat waves-effect waves-red red-text text-darken-3">Atr&aacute;s</a>
-                <form method="post" action="/member/{{$member->id}}" id="delete" class="right">
+                <form method="post" action="/member/{{ $member->id }}" id="delete" class="right">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
                     <button type="submit" name="submit" class="btn red waves-effect waves-dark tooltipped " data-position="right" data-delay="50" data-tooltip="Eliminar">

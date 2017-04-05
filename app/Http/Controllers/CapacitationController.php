@@ -15,7 +15,7 @@ class CapacitationController extends Controller
      */
     public function index()
     {
-        $capacitation = Capacitation::paginate(6);
+        $capacitation = Capacitation::paginate(7);
 
         return view('capacitation.list', compact('capacitation'));
     }

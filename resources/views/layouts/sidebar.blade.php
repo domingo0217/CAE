@@ -46,6 +46,7 @@
                         <li><a href="/charge" class="waves-effect waves-yellow center">Cargos</a></li>
                         <li><a href="/city" class="waves-effect waves-yellow center">Ciudades</a></li>
                         <li><a href="/delegation" class="waves-effect waves-yellow center">Delegaciones</a></li>
+                        <li><a href="/document" class="waves-effect waves-yellow center">Documentos</a></li>
                         <li><a href="#" class="waves-effect waves-yellow center">Pagos</a></li>
                         <li><a href="#" class="waves-effect waves-yellow center">Reportes</a></li>
                     </ul>

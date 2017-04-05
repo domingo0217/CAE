@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Document extends Model
 {
-    protected $fillable = ['docmuent', 'confirmed'];
+    protected $fillable = ['document'];
 
     public function member()
     {
-        return $this->belongsToMany(Member::class);
+        return $this->belongsToMany(Member::class)->withPivot('confirmed')->withTimestamps();
     }
 }

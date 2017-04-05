@@ -19,8 +19,8 @@
             </div>
         @endif
         <div class="row">
-            <form class="col s8 offset-s2" action="/member" method="post">
-
+            <form class="col s8 offset-s2" action="/member/{{ $member->id }}" method="post">
+                {{ method_field('PUT') }}
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="col s12 m6 input-field">

@@ -72,6 +72,8 @@ Route::resource('charge', 'ChargeController');
 
 Route::resource('capacitation', 'CapacitationController');
 
+Route::resource('document', 'DocumentController');
+
 Route::post('searchMember', 'MemberController@search');
 
 Route::post('searchCity', 'CityController@search');

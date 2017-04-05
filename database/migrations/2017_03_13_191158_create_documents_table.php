@@ -17,7 +17,6 @@ class CreateDocumentsTable extends Migration
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
             $table->string('document', 50);
-            $table->boolean('confirmed')->default(false);
             $table->timestamps();
         });
     }

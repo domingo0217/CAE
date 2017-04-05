@@ -18,6 +18,7 @@ class DocumentMember extends Migration
             $table->primary('document_id', 'member_id');
             $table->bigInteger('document_id')->unsigned()->index();
             $table->bigInteger('member_id')->unsigned()->index();
+            $table->boolean('confirmed')->default(false);
             $table->timestamps();
         });
     }

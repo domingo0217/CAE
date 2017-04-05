@@ -66,7 +66,7 @@
                     </div>
                     <div class="input-field col s12 m6">
                         <input type="text" name="" id="oldGender" value="{{ old('gender') }}" hidden>
-                        <select name="gender" required>
+                        <select name="gender" id="gender" required>
                             <option name="gender" disabled selected>Elija un género</option>
                             <option name="gender" value="M">M</option>
                             <option name="gender" value="F">F</option>
@@ -89,7 +89,7 @@
                 <div class="row">
                     <div class="col s12 m6 input-field">
                         <input type="text" id="oldCity" value="{{ old('city') }}" hidden>
-                        <select name="city" required>
+                        <select name="city" id="city" required>
                             <option name="city" value="null" disabled selected>Elija una ciudad</option>
                             @foreach($cities as $city)
                                 <option name="city" value="{{ $city->id }}">{{ $city->city }}</option>
@@ -99,7 +99,7 @@
                     </div>
                     <div class="col s12 m6 input-field">
                         <input type="text" id="oldDelegation" value="{{ old('delegation') }}" hidden>
-                        <select name="delegation" required>
+                        <select name="delegation" id="delegation" required>
                             <option name="delegation" value="null" disabled selected>Elija una delegaci&oacute;n</option>
                             @foreach($delegations as $delegation)
                                 <option name="delegation" value="{{ $delegation->id }}">{{ $delegation->delegation }}</option>

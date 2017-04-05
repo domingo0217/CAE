@@ -32,7 +32,7 @@ class MemberController extends Controller
         $member = DB::table('members')
                     ->leftJoin('telephones', 'members.id', '=', 'telephones.member_id')
                     ->select('members.name', 'members.lastname', 'members.id', 'telephones.telephone')
-                    ->get();
+                    ->paginate(7);
 
         return view('member.list', compact('member'));
     }
@@ -61,7 +61,7 @@ class MemberController extends Controller
         $rules = [
             'name' => 'bail|required|string|max:30|min:3',
             'lastname' => 'bail|required|string|max:30|min:3',
-            'id' => 'bail|required|alpha_num|max:11|min:11',
+            'id' => 'bail|required|alpha_num|max:11|min:11|unique:members',
             'nationality' => 'bail|required|alpha|max:20|min:4',
             'email' => 'bail|required|email|max:50|min:11',
             'telephone' => 'bail|required|alpha_dash|max:12|min:12',
@@ -82,6 +82,7 @@ class MemberController extends Controller
             'id.required' => 'Debe ingresar una cédula.',
             'id.max' => 'La cédula debe tener un maximo de 11 caracteres.',
             'id.min' => 'La cédula debe tener un mínimo de 11 caracteres.',
+            'id.unique' => 'Existe un miembro con la misma cédula.',
             'nationality.required' => 'Debe ingresar una nacionalidad.',
             'nationality.max' => 'La nacionalidad debe tener un maximo de 20 caracteres.',
             'nationality.min' => 'La nacionalidad debe tener un mínimo de 4 caracteres.',
@@ -211,15 +212,15 @@ class MemberController extends Controller
         $rules = [
             'name' => 'bail|required|string|max:30|min:3',
             'lastname' => 'bail|required|string|max:30|min:3',
-            'id' => 'bail|required|alpha_num|max:11|min:11|unique:members',
+            'id' => 'bail|required|alpha_num|max:11|min:11',
             'nationality' => 'bail|required|alpha|max:20|min:4',
             'email' => 'bail|required|email|max:50|min:11',
             'telephone' => 'bail|required|alpha_dash|max:12|min:12',
             'address' => 'bail|required|string|max:70|min:10',
             'civil_status' => 'bail|required|alpha|max:10|min:5',
             'birthdate' => 'bail|required|date|',
-            'status'=> 'bail|alpha|max:11|min:6',
-            'delegation_id' => 'bail|required',
+            'status'=> 'bail|alpha|max:11|min:5',
+            'delegation' => 'bail|required',
             'gender' => 'bail|required|max:1'
         ];
 
@@ -233,7 +234,6 @@ class MemberController extends Controller
             'id.required' => 'Debe ingresar una cédula.',
             'id.max' => 'La cédula debe tener un maximo de 11 caracteres.',
             'id.min' => 'La cédula debe tener un mínimo de 11 caracteres.',
-            'id.unique' => 'El miembro ya existe.',
             'nationality.required' => 'Debe ingresar una nacionalidad.',
             'nationality.max' => 'La nacionalidad debe tener un maximo de 20 caracteres.',
             'nationality.min' => 'La nacionalidad debe tener un mínimo de 4 caracteres.',
@@ -267,30 +267,29 @@ class MemberController extends Controller
                                       ->withErrors($validator->errors());
         }
 
-        $id = $request('id');
+        // dd($request->all());
 
         $member = Member::find($id);
-
-        $member->name = $request('name');
-        $member->lastname = $request('lastname');
-        $member->nationality = $request('nationality');
-        $member->birthdate = $request('birthdate');
-        $member->civil_status = $request('civil_status');
-        $member->email = $request('email');
-        $member->delegation_id = $request('delegation');
-        $member->status = $request('status');
-        $member->gender = $request('gender');
+        $member->name = $request->input('name');
+        $member->lastname = $request->input('lastname');
+        $member->nationality = $request->input('nationality');
+        $member->birthdate = $request->input('birthdate');
+        $member->civil_status = $request->input('civil_status');
+        $member->email = $request->input('email');
+        $member->delegation_id = $request->input('delegation');
+        $member->status = $request->input('status');
+        $member->gender = $request->input('gender');
 
         $telephone = Telephone::where('member_id', $id);
-        $telephone->telephone = $request('telephone');
+        $telephone->telephone = $request->input('telephone');
 
         $address = Address::where('member_id', $id);
-        $address->address = $request('address');
-        $address->city_id = $request('city');
+        $address->address = $request->input('address');
+        $address->city_id = $request->input('city');
 
-        if( $member->save() && $telephone->save() && $address->save())
+        if( $member->save() )
         {
-            return redirect('/member')->with('status', 'El miembro se ha guardado!');
+            return redirect('/member')->with('status', 'El miembro se ha actualizado!');
         }
     }
 
