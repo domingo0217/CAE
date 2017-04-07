@@ -37,14 +37,14 @@
                                 <td>{{ $documents->document }}</td>
                                 <td>{{ $documents->created_at }}</td>
                                 <td>
-                                    <a href="/document/{{ $documents->id }}/edit" class="btn-floating btn-flat waves-effect waves-dark white tooltipped" data-position="right" data-delay="50" data-tooltip="Editar">
+                                    <a href="/document/{{ $documents->id }}/edit" class="btn-floating btn-flat waves-effect waves-dark tooltipped" data-position="top" data-delay="50" data-tooltip="Editar">
                                         <i class="material-icons yellow-text text-darken-3">edit</i>
                                     </a>
                                     <form method="post" action="/document/{{$documents->id}}" style="Display:inline;">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
-                                        <button type="submit" name="submit" class="btn-floating btn-flat waves-effect waves-dark white tooltipped" data-position="right" data-delay="50" data-tooltip="Eliminar">
-                                            <i class="material-icons yellow-text text-darken-3">delete</i>
+                                        <button type="submit" name="submit" class="btn-floating btn-flat waves-effect waves-dark tooltipped" data-position="top" data-delay="50" data-tooltip="Eliminar">
+                                            <i class="material-icons red-text text-darken-3">delete</i>
                                         </button>
                                     </form>
                                 </td>

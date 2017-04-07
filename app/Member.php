@@ -38,6 +38,4 @@ class Member extends Model
     {
         return $this->belongsToMany(Capacitation::class);
     }
-
-
 }

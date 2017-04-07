@@ -110,14 +110,6 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m6">
-                        <select name="document" id="document" multiple required value="{{ old('document')}}">
-                            <option name="document" id="document" value="null" disabled selected>Elija una opci&oacute;n</option>
-                            <option name="document" id="document" value="acta de buena conducta">Acta de buena conducta</option>
-                            <option name="document" id="document" value="acta de nacimiento">Acta de nacimiento</option>
-                        </select>
-                        <label for="document">Documentos presentados*</label>
-                    </div>
-                    <div class="input-field col s12 m6">
                         <input type="text" id="oldStatus" value="{{ old('status') }}" hidden>
                         <select id="status" name="status" required>
                             <option name="status" value="null" disabled selected>Elija un estado</option>
@@ -129,10 +121,20 @@
                         </select>
                         <label for="status">Estado*</label>
                     </div>
-
+                </div>
+                <div class="row">
+                    @foreach($documents as $document)
+                        <div class="col s12 m6">
+                            <p>
+                                <input type="checkbox" class="filled-in" name="document[{{ $document->id }}]" id="document[{{ $document->id }}]" value="{{ $document->id or old('document[$document->id]') }}"/>
+                                <label for="document[{{ $document->id }}]">{{ $document->document }}</label>
+                            </p>
+                        </div>
+                    @endforeach
                 </div>
                 <a href="/member" class="btn-flat waves-effect waves-red red-text text-darken-3">Atr&aacute;s</a>
                 <button class="btn yellow darken-3 waves-effect right pulse" type="submit" name="submit">Agregar</button>
+                <p class="red-text">Los campos marcados con * son de caracter obligatorio.</p>
             </form>
         </div>
     </div>

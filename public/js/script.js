@@ -8,8 +8,8 @@ $(document).ready(setTimeout(function(){
 },3000));
 
 //--------------------------------------------------------------------
-//activating the select when validation fails
 $(document).ready(function(){
+    //activating the select when validation fails
     //civil status
     var civil_status = $('#oldCivilStatus').val();
     $('#civil_status').val(civil_status);
@@ -32,4 +32,15 @@ $(document).ready(function(){
 
     //Initialize select
     $('select').material_select();
+
+    //activating checkboxes when validation fails and when editing member
+    $('#document_member').each(function(){
+        var documents = $('#document_member').val();
+        // var selector = '#document['+ documents +']';
+        var documentSelected = $('#document\\['+ documents +'\\]').val();
+        if(documents == documentSelected)
+        {
+            $('#document\\['+ documents +'\\]').attr('checked', true);
+        }
+    });
 });

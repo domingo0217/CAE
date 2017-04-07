@@ -19,9 +19,10 @@
                     <p class="centered"><strong>Estado civil: </strong>{{ $member->civil_status }}</p>
                     <p class="centered"><strong>Telefóno: </strong>{{ $member->telephone }}</p>
                     <p class="centered"><strong>Correo Electrónico: </strong>{{ $member->email }}</p>
-                    <p class="centered"><strong>Dirección: </strong>{{ $member->address }}</p>
+                    <p class="centered"><strong>Dirección: </strong>{{ $member->address.'. '.$member->city.'.' }}</p>
                     <p class="centered"><strong>Delegación: </strong>{{ $member->delegation }}</p>
                     <p class="centered"><strong>Estado: </strong>{{ $member->status }}</p>
+                    <p class="centered"><strong>Documentos presentados: </strong>{{ $member->document }}</p>
                 </div>
                 <a href="/member" class="btn-flat waves-effect waves-red red-text text-darken-3">Atr&aacute;s</a>
                 <form method="post" action="/member/{{ $member->id }}" id="delete" class="right">

@@ -8,6 +8,7 @@ use cae\Telephone;
 use cae\Address;
 use cae\Delegation;
 use cae\City;
+use cae\Document;
 use cae\Http\Requests\StoreMember;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -46,8 +47,9 @@ class MemberController extends Controller
     {
         $cities = City::all();
         $delegations = Delegation::all();
+        $documents = Document::all();
 
-        return View('member.CreateMember', compact('cities', 'delegations'));
+        return View('member.CreateMember', compact('cities', 'delegations', 'documents'));
     }
 
     /**
@@ -115,6 +117,8 @@ class MemberController extends Controller
                                       ->withErrors($validator->errors());
         }
 
+        $documentId = $request->input('document');
+
         Member::create([
             'name' => request('name'),
             'lastname' => request('lastname'),
@@ -139,10 +143,17 @@ class MemberController extends Controller
             'city_id' => request('city')
         ]);
 
+
+
         $member = Member::find(request('id'));
 
-        $telephone = $member->telephone()->save($telephone);
-        $address = $member->address()->save($address);
+        foreach($documentId as $documentsId)
+        {
+            $member->document()->sync(array($documentsId => array('confirmed' => true)));
+        }
+
+        $member->telephone()->save($telephone);
+        $member->address()->save($address);
 
         return redirect('/member')->with('status', 'El miembro se ha guardado!');
     }
@@ -159,16 +170,18 @@ class MemberController extends Controller
                    ->leftJoin('telephones', 'members.id', '=', 'telephones.member_id')
                    ->leftJoin('addresses', 'members.id', '=', 'addresses.member_id')
                    ->leftJoin('cities', 'addresses.city_id', '=', 'cities.id')
-                   ->LeftJoin('delegations', 'delegations.id', '=', 'members.delegation_id')
+                   ->leftJoin('delegations', 'delegations.id', '=', 'members.delegation_id')
+                   ->leftJoin('document_member', 'document_member.member_id', '=', 'members.id')
+                   ->leftJoin('documents', 'document_member.document_id', '=', 'documents.id')
                    ->select('members.name', 'members.lastname', 'members.id', 'members.nationality', 'members.civil_status', 'members.email',
                     'members.birthdate', 'members.gender', 'members.status', 'telephones.telephone', 'addresses.address', 'cities.city',
-                    'delegations.delegation')
+                    'delegations.delegation', 'documents.document')
                     ->where('members.id', '=', ''.$id)
                    ->get();
 
         $member = $members[0];
 
-        return view('member.show', compact('member'));
+        return view('member.show', compact('member', 'document'));
     }
 
     /**
@@ -183,10 +196,12 @@ class MemberController extends Controller
                    ->leftJoin('telephones', 'members.id', '=', 'telephones.member_id')
                    ->leftJoin('addresses', 'members.id', '=', 'addresses.member_id')
                    ->leftJoin('cities', 'addresses.city_id', '=', 'cities.id')
-                   ->LeftJoin('delegations', 'delegations.id', '=', 'members.delegation_id')
+                   ->leftJoin('delegations', 'delegations.id', '=', 'members.delegation_id')
+                   ->leftJoin('document_member', 'document_member.member_id', '=', 'members.id')
+                   ->leftJoin('documents', 'document_member.document_id', '=', 'documents.id')
                    ->select('members.name', 'members.lastname', 'members.id', 'members.nationality', 'members.civil_status', 'members.email',
                     'members.birthdate', 'members.gender', 'members.status','telephones.telephone', 'addresses.address',
-                    'addresses.city_id', 'members.delegation_id')
+                    'addresses.city_id', 'members.delegation_id', 'document_member.document_id')
                     ->where('members.id', '=', ''.$id)
                    ->get();
 
@@ -194,10 +209,15 @@ class MemberController extends Controller
 
         $cities = City::all();
 
+        $document_member = Member::find($id);
+
         $delegations = Delegation::all();
 
-        return view('member.edit', compact('member', 'cities', 'delegations'));
+        $documents = Document::all();
+
         // dd($member);
+
+        return view('member.edit', compact('member', 'cities', 'delegations', 'documents', 'document_member'));
     }
 
     /**
@@ -267,7 +287,9 @@ class MemberController extends Controller
                                       ->withErrors($validator->errors());
         }
 
-        // dd($request->all());
+        $documentId = $request->input('document');
+        // dd($documentId  );
+
 
         $member = Member::find($id);
         $member->name = $request->input('name');
@@ -286,6 +308,18 @@ class MemberController extends Controller
         $address = Address::where('member_id', $id);
         $address->address = $request->input('address');
         $address->city_id = $request->input('city');
+
+        foreach($documentId as $documentsId)
+        {
+            $member->document()->sync(array($documentsId => array('confirmed' => true)));
+        }
+
+        // $e = count($documentId);
+        //
+        // for($i = 1 ; $i = $e ; $i++)
+        // {
+        //     $member->document()->sync(array($documentId[$i] => array('confirmed' => true)));
+        // }
 
         if( $member->save() )
         {

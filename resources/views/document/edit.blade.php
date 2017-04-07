@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <a href="/document" class="btn-flat waves-effect waves-red red-text text-darken-3">Atr&aacute;s</a>
-                    <button class="btn yellow darken-3 waves-effect right" type="submit">Editar</button>
+                    <button class="btn yellow darken-3 waves-effect right" type="submit">Guardar</button>
                 </form>
             </div>
         </div>
