@@ -171,13 +171,18 @@ class MemberController extends Controller
                    ->leftJoin('addresses', 'members.id', '=', 'addresses.member_id')
                    ->leftJoin('cities', 'addresses.city_id', '=', 'cities.id')
                    ->leftJoin('delegations', 'delegations.id', '=', 'members.delegation_id')
-                   ->leftJoin('document_member', 'document_member.member_id', '=', 'members.id')
-                   ->leftJoin('documents', 'document_member.document_id', '=', 'documents.id')
                    ->select('members.name', 'members.lastname', 'members.id', 'members.nationality', 'members.civil_status', 'members.email',
                     'members.birthdate', 'members.gender', 'members.status', 'telephones.telephone', 'addresses.address', 'cities.city',
-                    'delegations.delegation', 'documents.document')
+                    'delegations.delegation')
                     ->where('members.id', '=', ''.$id)
                    ->get();
+
+        $document = DB::table('members')
+                    ->leftJoin('document_member', 'document_member.member_id', '=', 'members.id')
+                    ->join('documents', 'documents.id', '=', 'document_member.document_id')
+                    ->select('documents.document')
+                    ->where('members.id', '=', ''.$id)
+                    ->get();
 
         $member = $members[0];
 
@@ -197,27 +202,28 @@ class MemberController extends Controller
                    ->leftJoin('addresses', 'members.id', '=', 'addresses.member_id')
                    ->leftJoin('cities', 'addresses.city_id', '=', 'cities.id')
                    ->leftJoin('delegations', 'delegations.id', '=', 'members.delegation_id')
-                   ->leftJoin('document_member', 'document_member.member_id', '=', 'members.id')
-                   ->leftJoin('documents', 'document_member.document_id', '=', 'documents.id')
                    ->select('members.name', 'members.lastname', 'members.id', 'members.nationality', 'members.civil_status', 'members.email',
                     'members.birthdate', 'members.gender', 'members.status','telephones.telephone', 'addresses.address',
-                    'addresses.city_id', 'members.delegation_id', 'document_member.document_id')
+                    'addresses.city_id', 'members.delegation_id')
                     ->where('members.id', '=', ''.$id)
+                   ->get();
+
+        $document = DB::table('members')
+                   ->leftJoin('document_member', 'document_member.member_id', '=', 'members.id')
+                   ->join('documents', 'documents.id', '=', 'document_member.document_id')
+                   ->select('documents.id')
+                   ->where('members.id', '=', ''.$id)
                    ->get();
 
         $member = $members[0];
 
         $cities = City::all();
 
-        $document_member = Member::find($id);
-
         $delegations = Delegation::all();
 
         $documents = Document::all();
 
-        // dd($member);
-
-        return view('member.edit', compact('member', 'cities', 'delegations', 'documents', 'document_member'));
+        return view('member.edit', compact('member', 'cities', 'delegations', 'documents', 'document'));
     }
 
     /**
@@ -309,17 +315,7 @@ class MemberController extends Controller
         $address->address = $request->input('address');
         $address->city_id = $request->input('city');
 
-        foreach($documentId as $documentsId)
-        {
-            $member->document()->sync(array($documentsId => array('confirmed' => true)));
-        }
-
-        // $e = count($documentId);
-        //
-        // for($i = 1 ; $i = $e ; $i++)
-        // {
-        //     $member->document()->sync(array($documentId[$i] => array('confirmed' => true)));
-        // }
+        $member->document()->sync($documentId);
 
         if( $member->save() )
         {

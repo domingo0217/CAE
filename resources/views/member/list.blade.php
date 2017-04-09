@@ -17,7 +17,7 @@
                         </div>
                     </form>
                 </div>
-                <table class="highlight responsive">
+                <table class="highlight responsive-table">
                     <thead>
                         <tr>
                             <th data-field="id">C&eacute;dula</th>

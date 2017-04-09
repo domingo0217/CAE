@@ -34,10 +34,9 @@ $(document).ready(function(){
     $('select').material_select();
 
     //activating checkboxes when validation fails and when editing member
-    $('#document_member').each(function(){
-        var documents = $('#document_member').val();
-        // var selector = '#document['+ documents +']';
-        var documentSelected = $('#document\\['+ documents +'\\]').val();
+    $("input[name='document_member']").each(function(){
+        var documents = $(this).val();
+        var documentSelected = $('#document\\['+documents+'\\]').val();
         if(documents == documentSelected)
         {
             $('#document\\['+ documents +'\\]').attr('checked', true);

@@ -123,8 +123,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    @foreach($document_member->document as $document)
-                        <input type="text" name="" value="{{ $document->pivot->document_id }}" id="document_member" hidden>
+                    @foreach($document->all() as $documentss)
+                        <input type="checkbox" name="document_member" value="{{ $documentss->id }}" id="document_member[]" hidden>
                     @endforeach
                     @foreach($documents as $document)
                         <div class="col s12 m6">
@@ -135,9 +135,10 @@
                         </div>
                     @endforeach
                 </div>
+                <div class="divider"></div>
+                <p class="red-text">Los campos marcados con * son de caracter obligatorio.</p>
                 <a href="/member" class="btn-flat waves-effect waves-red red-text text-darken-3">Atr&aacute;s</a>
                 <button class="btn yellow darken-3 waves-effect right pulse" type="submit" name="submit">Editar</button>
-                <p class="red-text">Los campos marcados con * son de caracter obligatorio.</p>
             </form>
         </div>
     </div>

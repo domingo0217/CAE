@@ -22,7 +22,11 @@
                     <p class="centered"><strong>Dirección: </strong>{{ $member->address.'. '.$member->city.'.' }}</p>
                     <p class="centered"><strong>Delegación: </strong>{{ $member->delegation }}</p>
                     <p class="centered"><strong>Estado: </strong>{{ $member->status }}</p>
-                    <p class="centered"><strong>Documentos presentados: </strong>{{ $member->document }}</p>
+                    <p class="centered"><strong>Documentos presentados: </strong>
+                        @foreach($document->all() as $documents)
+                            {{ $documents->document.' | ' }}
+                        @endforeach
+                    </p>
                 </div>
                 <a href="/member" class="btn-flat waves-effect waves-red red-text text-darken-3">Atr&aacute;s</a>
                 <form method="post" action="/member/{{ $member->id }}" id="delete" class="right">
