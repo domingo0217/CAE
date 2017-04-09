@@ -48,15 +48,14 @@
                         <label for="birthdate">Fecha de Nacimiento*</label>
                     </div>
                     <div class="input-field col s12 m6">
-                        <input type="text" name="" id="oldCivilStatus" value="{{ $member->civil_status or old('civil_status') }}" hidden>
                         <select name="civil_status" id="civil_status" required>
-                            <option name="civil_status"  disabled selected>Elija una opci&oacute;n</option>
+                            <option name="civil_status"  disabled selected>Estado civil*</option>
                             <option name="civil_status" value="soltero">Soltero</option>
                             <option name="civil_status" value="casado">Casado</option>
                             <option name="civil_status" value="divorciado">Divorciado</option>
                             <option name="civil_status" value="viudo">Viudo</option>
                         </select>
-                        <label for="civil_status">Estado civil*</label>
+                        <input type="text" name="" id="oldCivilStatus" value="{{ $member->civil_status or old('civil_status') }}" hidden>
                     </div>
                 </div>
                 <div class="row">
@@ -67,11 +66,10 @@
                     <div class="input-field col s12 m6">
                         <input type="text" name="" id="oldGender" value="{{ $member->gender or old('gender') }}" hidden>
                         <select name="gender" id="gender" required>
-                            <option name="gender" disabled selected>Elija un género</option>
+                            <option name="gender" disabled selected>Género*</option>
                             <option name="gender" value="M">M</option>
                             <option name="gender" value="F">F</option>
                         </select>
-                        <label for="gender">Género*</label>
                     </div>
                 </div>
                 <div class="row">
@@ -90,50 +88,66 @@
                     <div class="col s12 m6 input-field">
                         <input type="text" id="oldCity" value="{{ $member->city_id or old('city') }}" hidden>
                         <select name="city" id="city" required>
-                            <option name="city" value="null" disabled selected>Elija una ciudad</option>
+                            <option name="city" value="null" disabled selected>Ciudad*</option>
                             @foreach($cities as $city)
                                 <option name="city" value="{{ $city->id }}">{{ $city->city }}</option>
                             @endforeach
                         </select>
-                        <label for="city">Ciudad*</label>
                     </div>
                     <div class="col s12 m6 input-field">
                         <input type="text" id="oldDelegation" value="{{ $member->delegation_id or old('delegation') }}" hidden>
                         <select name="delegation" id="delegation" required>
-                            <option name="delegation" value="null" disabled selected>Elija una delegaci&oacute;n</option>
+                            <option name="delegation" value="null" disabled selected>Delegaci&oacute;n*</option>
                             @foreach($delegations as $delegation)
                                 <option name="delegation" value="{{ $delegation->id }}">{{ $delegation->delegation }}</option>
                             @endforeach
                         </select>
-                        <label for="delegation">Delegaci&oacute;n*</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m6">
                         <input type="text" id="oldStatus" value="{{ $member->status or old('status') }}" hidden>
                         <select id="status" name="status" required>
-                            <option name="status" value="null" disabled selected>Elija un estado</option>
+                            <option name="status" value="null" disabled selected>Estado</option>
                             <option name="status" value="aspirante">Aspirante</option>
                             <option name="status" value="pasivo">Pasivo</option>
                             <option name="status" value="activo">Activo</option>
                             <option name="status" value="colaborador">Colaborador</option>
                             <option name="status" value="honor">Honor</option>
                         </select>
-                        <label for="status">Estado</label>
                     </div>
                 </div>
+                <div class="divider"></div>
                 <div class="row">
-                    @foreach($document->all() as $documentss)
-                        <input type="checkbox" name="document_member" value="{{ $documentss->id }}" id="document_member[]" hidden>
-                    @endforeach
-                    @foreach($documents as $document)
-                        <div class="col s12 m6">
-                            <p>
-                                <input type="checkbox" class="filled-in" name="document[{{ $document->id }}]" id="document[{{ $document->id }}]" value="{{ $document->id or old('document[$document->id]') }}"/>
-                                <label for="document[{{ $document->id }}]">{{ $document->document }}</label>
-                            </p>
-                        </div>
-                    @endforeach
+                    <div class="col s12">
+                        <p><strong> Métodos de pago* </strong></p>
+                        <input type="text" id="pagos" value="{{ $member->payment or old('payment') }}" hidden>
+                        <input name="payment" type="radio" value="mensual" id="payment1">
+                        <label for="payment1">Mensual</label>
+                        <input name="payment" type="radio" value="trimestral" id="payment2">
+                        <label for="payment2">Trimestral</label>
+                        <input name="payment" type="radio" value="semestral" id="payment3">
+                        <label for="payment3">Semestral</label>
+                        <input name="payment" type="radio" value="anual" id="payment4" >
+                        <label for="payment4">Anual</label>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="row">
+                    <div class="col s12">
+                        <p><strong>Documentos presentados</strong></p>
+                        @foreach($document->all() as $documentss)
+                            <input type="checkbox" name="document_member" value="{{ $documentss->id }}" id="document_member[]" hidden>
+                        @endforeach
+                        @foreach($documents as $document)
+                            <div class="col s12 m6">
+                                <p>
+                                    <input type="checkbox" class="filled-in" name="document[{{ $document->id }}]" id="document[{{ $document->id }}]" value="{{ $document->id or old('document[$document->id]') }}"/>
+                                    <label for="document[{{ $document->id }}]">{{ $document->document }}</label>
+                                </p>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
                 <div class="divider"></div>
                 <p class="red-text">Los campos marcados con * son de caracter obligatorio.</p>

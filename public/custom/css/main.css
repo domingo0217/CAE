@@ -107,3 +107,21 @@ td, th{
   /* Support for IE. */
   font-feature-settings: 'liga';
 }
+
+/*inputs styles*/
+.input-field{
+    margin-top: 0rem;
+}
+
+@media only screen and (min-width:1200px) {
+    html{
+        font-size: 12px;
+    }
+}
+
+@media only screen  and (min-width: 993px)
+{
+    .container{
+        width: 95%;
+    }
+}

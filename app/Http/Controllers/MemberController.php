@@ -71,7 +71,8 @@ class MemberController extends Controller
             'civil_status' => 'bail|required|alpha|max:10|min:5',
             'birthdate' => 'bail|required|date|',
             'status'=> 'bail|alpha|max:11|min:5',
-            'delegation' => 'bail|required'
+            'delegation' => 'bail|required',
+            'payment' => 'bail|required|alpha'
         ];
 
         $message = [
@@ -105,10 +106,13 @@ class MemberController extends Controller
             'civil_status.min' => 'La dirección debe tener un minimo de 5 caracteres.',
             'birthdate.required' => 'Debe ingresar una fecha de nacimiento.',
             'birthdate.date' => 'La fecha de nacimiento debe ser una fecha válida.',
-            'status.required' => 'Debe ingresar un estado.',
+            'status.required' => 'Debe seleccionar un estado.',
             'status.max' => 'El estado debe tener un maximo de 11 caracteres.',
             'status.min' => 'El estado debe tener un minimo de 5 caracteres.',
+            'payment.required' => 'Debe seleccionar un método de pago.'
         ];
+
+        // dd($request->all());
 
         $validator = Validator::make( $request->all(), $rules, $message);
         if( $validator->fails() )
@@ -129,7 +133,8 @@ class MemberController extends Controller
             'email' => request('email'),
             'status' => request('status'),
             'gender' => request('gender'),
-            'delegation_id' => request('delegation')
+            'delegation_id' => request('delegation'),
+            'payment' => request('payment')
         ]);
 
         $telephone = Telephone::create([
@@ -172,7 +177,7 @@ class MemberController extends Controller
                    ->leftJoin('cities', 'addresses.city_id', '=', 'cities.id')
                    ->leftJoin('delegations', 'delegations.id', '=', 'members.delegation_id')
                    ->select('members.name', 'members.lastname', 'members.id', 'members.nationality', 'members.civil_status', 'members.email',
-                    'members.birthdate', 'members.gender', 'members.status', 'telephones.telephone', 'addresses.address', 'cities.city',
+                    'members.birthdate', 'members.gender', 'members.status', 'members.payment', 'telephones.telephone', 'addresses.address', 'cities.city',
                     'delegations.delegation')
                     ->where('members.id', '=', ''.$id)
                    ->get();
@@ -203,7 +208,7 @@ class MemberController extends Controller
                    ->leftJoin('cities', 'addresses.city_id', '=', 'cities.id')
                    ->leftJoin('delegations', 'delegations.id', '=', 'members.delegation_id')
                    ->select('members.name', 'members.lastname', 'members.id', 'members.nationality', 'members.civil_status', 'members.email',
-                    'members.birthdate', 'members.gender', 'members.status','telephones.telephone', 'addresses.address',
+                    'members.birthdate', 'members.gender', 'members.status','members.payment','telephones.telephone', 'addresses.address',
                     'addresses.city_id', 'members.delegation_id')
                     ->where('members.id', '=', ''.$id)
                    ->get();
@@ -247,7 +252,8 @@ class MemberController extends Controller
             'birthdate' => 'bail|required|date|',
             'status'=> 'bail|alpha|max:11|min:5',
             'delegation' => 'bail|required',
-            'gender' => 'bail|required|max:1'
+            'gender' => 'bail|required|max:1',
+            'payment' => 'bail|required|alpha'
         ];
 
         $message = [
@@ -283,7 +289,8 @@ class MemberController extends Controller
             'status.required' => 'Debe ingresar un estado.',
             'status.max' => 'El estado debe tener un maximo de 11 caracteres.',
             'status.min' => 'El estado debe tener un minimo de 6 caracteres.',
-            'gender.required' => 'Debe ingresar un género.'
+            'gender.required' => 'Debe ingresar un género.',
+            'payment.required' => 'Debe seleccionar un método de pago.'
         ];
 
         $validator = Validator::make( $request->all(), $rules, $message);
@@ -307,6 +314,7 @@ class MemberController extends Controller
         $member->delegation_id = $request->input('delegation');
         $member->status = $request->input('status');
         $member->gender = $request->input('gender');
+        $member->payment = $request->input('payment');
 
         $telephone = Telephone::where('member_id', $id);
         $telephone->telephone = $request->input('telephone');

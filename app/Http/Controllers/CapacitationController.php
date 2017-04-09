@@ -39,21 +39,28 @@ class CapacitationController extends Controller
     public function store(Request $request)
     {
         $message = [
-            'capacitation.required' => 'Debe introducir una capacitación',
+            'capacitation.required' => 'Debe introducir una capacitación.',
             'capacitation.max' => 'La capacitación debe tener un maximo de 70 caracteres.',
             'capacitation.unique' => 'Ya se ha registrado esta capacitación.',
             'capacitation.min' => 'La capacitación debe tener un minimo de 3 caracteres.',
-            'imparting.required' => 'Debe introducir un impartidor',
+            'imparting.required' => 'Debe introducir un impartidor.',
             'imparting.max' => 'El impartidor debe tener un maximo de 70 caracteres.',
             'imparting.min' => 'El impartidor debe tener un minimo de 3 caracteres.',
-            'imparted_date.required' => 'Debe introducir una fecha',
-            'imparted_date' => 'Introduzca una fecha válida'
+            'imparted_date.required' => 'Debe introducir una fecha.',
+            'imparted_date' => 'Introduzca una fecha válida.',
+            'hours.required' => 'Debe introducir la cantidad de horas de la capacitación.',
+            'hours.numeric' => 'Solo se permiten números en el campo duración.',
+            'place.required' => 'Debe introducir un lugar.',
+            'place.max' => 'El maximo de caracteres permitido en lugar es de 50.',
+            'place.min' => 'El minimo de caracteres permitido en lugar es de 3.'
         ];
 
         $rules = [
             'capacitation' => 'bail|required|max:70|min:3|unique:capacitations',
             'imparting' => 'bail|required|max:70|min:3',
-            'imparted_date' => 'bail|required|date'
+            'imparted_date' => 'bail|required|date',
+            'hours' => 'bail|required|numeric',
+            'place' => 'bail|required|max:50|min:3'
         ];
 
         $validator = Validator::make($request->all(), $rules, $message);
@@ -111,14 +118,21 @@ class CapacitationController extends Controller
             'imparted_date.required' => 'Debe introducir una fecha de inicio.',
             'imparted_date.date' => 'Introduzca una fecha válida de inicio.',
             'finalized_date.required' => 'Debe introducir una fecha de finalización.',
-            'finalized_date.date' => 'Introduzca una fecha válida de finalización.'
+            'finalized_date.date' => 'Introduzca una fecha válida de finalización.',
+            'hours.required' => 'Debe introducir la cantidad de horas de la capacitación.',
+            'hours.numeric' => 'Solo se permiten números en el campo duración.',
+            'place.required' => 'Debe introducir un lugar.',
+            'place.max' => 'El maximo de caracteres permitido en lugar es de 50.',
+            'place.min' => 'El minimo de caracteres permitido en lugar es de 3.'
         ];
 
         $rules = [
             'capacitation' => 'bail|required|max:70|min:3',
             'imparting' => 'bail|required|max:70|min:3',
             'imparted_date' => 'bail|required|date',
-            'finalized_date' => 'bail|required|date'
+            'finalized_date' => 'bail|required|date',
+            'hours' => 'bail|required|numeric',
+            'place' => 'bail|required|max:50|min:3'
         ];
 
         $validator = Validator::make($request->all(), $rules, $message);
@@ -133,6 +147,8 @@ class CapacitationController extends Controller
         $capacitation->imparting = $request->input('imparting');
         $capacitation->imparted_date = $request->input('imparted_date');
         $capacitation->finalized_date = $request->input('finalized_date');
+        $capacitation->hours = $request->input('hours');
+        $capacitation->place = $request->input('place');
 
         if($capacitation->save())
         {

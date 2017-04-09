@@ -35,7 +35,7 @@
                 <div class="row">
                     <div class="col s12 m6 input-field">
                         <input type="text" name="id" id="id" class="validate" required value="{{ old('id')}}" data-length="11" maxlength="11" minlength="11">
-                        <label data-error="incorrecto" data-success="correcto" for="id">C&eacute;dula*</label>
+                        <label data-error="incorrecto" data-success="correcto" for="id">Documento de identificación*</label>
                     </div>
                     <div class="col s12 m6 input-field">
                         <input type="text" name="nationality" id="nationality" class="validate" required value="{{ old('nationality')}}" data-length="20" maxlength="20" minlength="4">
@@ -49,29 +49,27 @@
                     </div>
                     <div class="input-field col s12 m6">
                         <select name="civil_status" id="civil_status" required>
-                            <option name="civil_status" disabled selected>Elija una opci&oacute;n</option>
+                            <option name="civil_status" disabled selected>Estado civil*</option>
                             <option name="civil_status" value="soltero">Soltero</option>
                             <option name="civil_status" value="casado">Casado</option>
                             <option name="civil_status" value="divorciado">Divorciado</option>
                             <option name="civil_status" value="viudo">Viudo</option>
                         </select>
-                        <label for="civil_status">Estado civil*</label>
                         <input type="text" name="" id="oldCivilStatus" value="{{ old('civil_status') }}" hidden>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s12 m6 input-field">
-                        <input type="tel" name="telephone" id="telephone" class="validate" required value="{{ old('telephone')}}" data-length="12" maxlength="12" minlength="12">
+                        <input type="tel" name="telephone" id="telephone" onkeypress="return isNumberKey(event);" class="validate" required value="{{ old('telephone')}}" data-length="12" maxlength="12" minlength="12">
                         <label data-error="incorrecto" data-success="correcto" for="telephone">Telef&oacute;no*</label>
                     </div>
                     <div class="input-field col s12 m6">
                         <input type="text" name="" id="oldGender" value="{{ old('gender') }}" hidden>
                         <select name="gender" id="gender" required>
-                            <option name="gender" disabled selected>Elija un género</option>
+                            <option name="gender" disabled selected>Género*</option>
                             <option name="gender" value="M">M</option>
                             <option name="gender" value="F">F</option>
                         </select>
-                        <label for="gender">Género*</label>
                     </div>
                 </div>
                 <div class="row">
@@ -90,51 +88,68 @@
                     <div class="col s12 m6 input-field">
                         <input type="text" id="oldCity" value="{{ old('city') }}" hidden>
                         <select name="city" id="city" required>
-                            <option name="city" value="null" disabled selected>Elija una ciudad</option>
+                            <option name="city" value="null" disabled selected>Ciudad*</option>
                             @foreach($cities as $city)
                                 <option name="city" value="{{ $city->id }}">{{ $city->city }}</option>
                             @endforeach
                         </select>
-                        <label for="city">Ciudad*</label>
                     </div>
                     <div class="col s12 m6 input-field">
                         <input type="text" id="oldDelegation" value="{{ old('delegation') }}" hidden>
                         <select name="delegation" id="delegation" required>
-                            <option name="delegation" value="null" disabled selected>Elija una delegaci&oacute;n</option>
+                            <option name="delegation" value="null" disabled selected>Delegaci&oacute;n*</option>
                             @foreach($delegations as $delegation)
                                 <option name="delegation" value="{{ $delegation->id }}">{{ $delegation->delegation }}</option>
                             @endforeach
                         </select>
-                        <label for="delegation">Delegaci&oacute;n*</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m6">
                         <input type="text" id="oldStatus" value="{{ old('status') }}" hidden>
                         <select id="status" name="status" required>
-                            <option name="status" value="null" disabled selected>Elija un estado</option>
+                            <option name="status" value="null" disabled selected>Estado</option>
                             <option name="status" value="aspirante">Aspirante</option>
                             <option name="status" value="pasivo">Pasivo</option>
                             <option name="status" value="activo">Activo</option>
                             <option name="status" value="colaborador">Colaborador</option>
                             <option name="status" value="honor">Honor</option>
                         </select>
-                        <label for="status">Estado*</label>
                     </div>
                 </div>
+                <div class="divider"></div>
                 <div class="row">
-                    @foreach($documents as $document)
-                        <div class="col s12 m6">
-                            <p>
-                                <input type="checkbox" class="filled-in" name="document[{{ $document->id }}]" id="document[{{ $document->id }}]" value="{{ $document->id or old('document[$document->id]') }}"/>
-                                <label for="document[{{ $document->id }}]">{{ $document->document }}</label>
-                            </p>
-                        </div>
-                    @endforeach
+                    <div class="col s12">
+                        <p><strong> Métodos de pago* </strong></p>
+                        <input type="text" id="pagos" value="{{ old('payment') }}" hidden>
+                        <input name="payment" type="radio" value="mensual" id="payment1">
+                        <label for="payment1">Mensual</label>
+                        <input name="payment" type="radio" value="trimestral" id="payment2">
+                        <label for="payment2">Trimestral</label>
+                        <input name="payment" type="radio" value="semestral" id="payment3">
+                        <label for="payment3">Semestral</label>
+                        <input name="payment" type="radio" value="anual" id="payment4" >
+                        <label for="payment4">Anual</label>
+                    </div>
                 </div>
+                <div class="divider"></div>
+                <div class="row">
+                    <div class="col s12">
+                        <p><strong>Documentos presentados</strong></p>
+                        @foreach($documents as $document)
+                            <div class="col s12 m6">
+                                <p>
+                                    <input type="checkbox" class="filled-in" name="document[{{ $document->id }}]" id="document[{{ $document->id }}]" value="{{ $document->id or old('document[$document->id]') }}"/>
+                                    <label for="document[{{ $document->id }}]">{{ $document->document }}</label>
+                                </p>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <p class="red-text">Los campos marcados con * son de caracter obligatorio.</p>
                 <a href="/member" class="btn-flat waves-effect waves-red red-text text-darken-3">Atr&aacute;s</a>
                 <button class="btn yellow darken-3 waves-effect right pulse" type="submit" name="submit">Agregar</button>
-                <p class="red-text">Los campos marcados con * son de caracter obligatorio.</p>
             </form>
         </div>
     </div>

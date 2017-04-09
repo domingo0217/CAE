@@ -12,7 +12,7 @@
             <div class="padding white z-depth-1">
                 <div class="card-panel deep-orange lighten-3">
                     <h5>{{ $member->name.' '.$member->lastname }}</h5>
-                    <p class="centered"><strong>Cédula: </strong>{{ $member->id }}</p>
+                    <p class="centered"><strong>Documento de identificación: </strong>{{ $member->id }}</p>
                     <p class="centered"><strong>Género: </strong>{{ $member->gender }}</p>
                     <p class="centered"><strong>Nacionalidad: </strong>{{ $member->nationality }}</p>
                     <p class="centered"><strong>Fecha de nacimiento: </strong>{{ $member->birthdate }}</p>
@@ -22,6 +22,7 @@
                     <p class="centered"><strong>Dirección: </strong>{{ $member->address.'. '.$member->city.'.' }}</p>
                     <p class="centered"><strong>Delegación: </strong>{{ $member->delegation }}</p>
                     <p class="centered"><strong>Estado: </strong>{{ $member->status }}</p>
+                    <p class="centered"><strong>Plan de cuotas: </strong>{{ $member->payment }}</p>
                     <p class="centered"><strong>Documentos presentados: </strong>
                         @foreach($document->all() as $documents)
                             {{ $documents->document.' | ' }}
