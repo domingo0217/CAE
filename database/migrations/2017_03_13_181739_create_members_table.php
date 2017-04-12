@@ -15,7 +15,7 @@ class CreateMembersTable extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->bigInteger('id')->unsigned();
+            $table->string('id',11);
             $table->primary('id');
             $table->string('name', 30);
             $table->string('lastname', 30);

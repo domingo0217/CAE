@@ -36,6 +36,6 @@ class Member extends Model
 
     public function capacitation()
     {
-        return $this->belongsToMany(Capacitation::class);
+        return $this->belongsToMany(Capacitation::class)->withTimestamps();
     }
 }

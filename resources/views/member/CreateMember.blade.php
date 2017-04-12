@@ -19,35 +19,33 @@
             </div>
         @endif
         <div class="row">
-            <form class="col s8 offset-s2" action="/member" method="post">
+            <form class="col s10 offset-s1" action="/member" method="post">
 
                 {{ csrf_field() }}
                 <div class="row">
-                    <div class="col s12 m6 input-field">
+                    <div class="col s12 m4 input-field">
                         <input type="text" name="name" id="name" class="validate" required value="{{ old('name')}}" data-length="30" maxlength="30" minlength="3">
                         <label data-error="incorrecto" data-success="correcto" for="name">Nombre*</label>
                     </div>
-                    <div class="col s12 m6 input-field">
+                    <div class="col s12 m4 input-field">
                         <input type="text" name="lastname" id="lastname" class="validate" required value="{{ old('lastname')}}" data-length="30" maxlength="30" minlength="3">
                         <label data-error="incorrecto" data-success="correcto" for="lastname">Apellido*</label>
                     </div>
+                    <div class="col s12 m4 input-field">
+                        <input type="text" name="id" id="id" class="validate" required value="{{ old('id')}}" data-length="11" maxlength="11" minlength="9">
+                        <label data-error="incorrecto" data-success="correcto" for="id">Cédula o Pasaporte* </label>
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="col s12 m6 input-field">
-                        <input type="text" name="id" id="id" class="validate" required value="{{ old('id')}}" data-length="11" maxlength="11" minlength="11">
-                        <label data-error="incorrecto" data-success="correcto" for="id">Documento de identificación*</label>
-                    </div>
-                    <div class="col s12 m6 input-field">
+                    <div class="col s12 m4 input-field">
                         <input type="text" name="nationality" id="nationality" class="validate" required value="{{ old('nationality')}}" data-length="20" maxlength="20" minlength="4">
                         <label data-error="incorrecto" data-success="correcto" for="nationality">Nacionalidad*</label>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 m6 input-field">
+                    <div class="col s12 m4 input-field">
                         <input type="date" name="birthdate" id="birthdate" class="datepicker" required value="{{ old('birthdate')}}">
                         <label for="birthdate">Fecha de Nacimiento*</label>
                     </div>
-                    <div class="input-field col s12 m6">
+                    <div class="input-field col s12 m4">
                         <select name="civil_status" id="civil_status" required>
                             <option name="civil_status" disabled selected>Estado civil*</option>
                             <option name="civil_status" value="soltero">Soltero</option>
@@ -59,11 +57,11 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col s12 m6 input-field">
+                    <div class="col s12 m4 input-field">
                         <input type="tel" name="telephone" id="telephone" onkeypress="return isNumberKey(event);" class="validate" required value="{{ old('telephone')}}" data-length="12" maxlength="12" minlength="12">
                         <label data-error="incorrecto" data-success="correcto" for="telephone">Telef&oacute;no*</label>
                     </div>
-                    <div class="input-field col s12 m6">
+                    <div class="input-field col s12 m4">
                         <input type="text" name="" id="oldGender" value="{{ old('gender') }}" hidden>
                         <select name="gender" id="gender" required>
                             <option name="gender" disabled selected>Género*</option>
@@ -71,9 +69,7 @@
                             <option name="gender" value="F">F</option>
                         </select>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 input-field">
+                    <div class="col s12 m4 input-field">
                         <input type="email" name="email" id="email" class="validate" required value="{{ old('email')}}" data-length="50" maxlength="50" minlength="11">
                         <label data-error="incorrecto" data-success="correcto" for="email">Correo Electr&oacute;nico*</label>
                     </div>
@@ -85,7 +81,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col s12 m6 input-field">
+                    <div class="col s12 m4 input-field">
                         <input type="text" id="oldCity" value="{{ old('city') }}" hidden>
                         <select name="city" id="city" required>
                             <option name="city" value="null" disabled selected>Ciudad*</option>
@@ -94,7 +90,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col s12 m6 input-field">
+                    <div class="col s12 m4 input-field">
                         <input type="text" id="oldDelegation" value="{{ old('delegation') }}" hidden>
                         <select name="delegation" id="delegation" required>
                             <option name="delegation" value="null" disabled selected>Delegaci&oacute;n*</option>
@@ -103,9 +99,7 @@
                             @endforeach
                         </select>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12 m6">
+                    <div class="input-field col s12 m4">
                         <input type="text" id="oldStatus" value="{{ old('status') }}" hidden>
                         <select id="status" name="status" required>
                             <option name="status" value="null" disabled selected>Estado</option>
@@ -119,8 +113,8 @@
                 </div>
                 <div class="divider"></div>
                 <div class="row">
-                    <div class="col s12">
-                        <p><strong> Métodos de pago* </strong></p>
+                    <div class="col s12 m6">
+                        <p><strong> Frecuencia de pago* </strong></p>
                         <input type="text" id="pagos" value="{{ old('payment') }}" hidden>
                         <input name="payment" type="radio" value="mensual" id="payment1">
                         <label for="payment1">Mensual</label>
@@ -131,10 +125,7 @@
                         <input name="payment" type="radio" value="anual" id="payment4" >
                         <label for="payment4">Anual</label>
                     </div>
-                </div>
-                <div class="divider"></div>
-                <div class="row">
-                    <div class="col s12">
+                    <div class="col s12 m6">
                         <p><strong>Documentos presentados</strong></p>
                         @foreach($documents as $document)
                             <div class="col s12 m6">
@@ -149,7 +140,7 @@
                 <div class="divider"></div>
                 <p class="red-text">Los campos marcados con * son de caracter obligatorio.</p>
                 <a href="/member" class="btn-flat waves-effect waves-red red-text text-darken-3">Atr&aacute;s</a>
-                <button class="btn yellow darken-3 waves-effect right pulse" type="submit" name="submit">Agregar</button>
+                <button class="btn yellow darken-3 waves-effect right" type="submit" name="submit">Agregar</button>
             </form>
         </div>
     </div>

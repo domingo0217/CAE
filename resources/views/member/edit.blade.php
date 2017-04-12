@@ -19,7 +19,7 @@
             </div>
         @endif
         <div class="row">
-            <form class="col s8 offset-s2" action="/member/{{ $member->id }}" method="post">
+            <form class="col s10 offset-s1" action="/member/{{ $member->id }}" method="post">
                 {{ method_field('PUT') }}
                 {{ csrf_field() }}
                 <div class="row">
@@ -34,8 +34,8 @@
                 </div>
                 <div class="row">
                     <div class="col s12 m6 input-field">
-                        <input type="text" name="id" id="id" class="validate" required value="{{ $member->id or old('id')}}" data-length="11" maxlength="11" minlength="11" hidden>
-                        <label data-error="incorrecto" data-success="correcto" for="id" hidden>C&eacute;dula*</label>
+                        <input type="text" name="id" id="id" class="validate" required value="{{ $member->id or old('id')}}" data-length="11" maxlength="11" minlength="9" hidden>
+                        <label data-error="incorrecto" data-success="correcto" for="id" hidden>Cédula o Pasaporte*</label>
                     </div>
                     <div class="col s12  input-field">
                         <input type="text" name="nationality" id="nationality" class="validate" required value="{{ $member->nationality or old('nationality')}}" data-length="20" maxlength="20" minlength="4">
@@ -152,7 +152,7 @@
                 <div class="divider"></div>
                 <p class="red-text">Los campos marcados con * son de caracter obligatorio.</p>
                 <a href="/member" class="btn-flat waves-effect waves-red red-text text-darken-3">Atr&aacute;s</a>
-                <button class="btn yellow darken-3 waves-effect right pulse" type="submit" name="submit">Editar</button>
+                <button class="btn yellow darken-3 waves-effect right" type="submit" name="submit">Editar</button>
             </form>
         </div>
     </div>

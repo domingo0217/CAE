@@ -5,6 +5,7 @@ namespace cae\Http\Controllers;
 use Illuminate\Http\Request;
 use cae\Capacitation;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class CapacitationController extends Controller
 {
@@ -83,7 +84,41 @@ class CapacitationController extends Controller
      */
     public function show($id)
     {
-        //
+        $capacitation = Capacitation::find($id);
+
+        $members = DB::table('members')
+                       ->rightJoin('capacitation_member', 'capacitation_member.member_id', '=', 'members.id')
+                       ->select('members.id' , 'members.name', 'members.lastname')
+                       ->where('capacitation_member.capacitation_id', $id)
+                       ->paginate(10);
+
+        // dd($members);
+        return view('capacitation.show', compact('capacitation', 'members'));
+    }
+
+    public function addMembers($id)
+    {
+        $capacitation = Capacitation::find($id);
+
+        $members = DB::table('members')
+                    ->leftJoin('capacitation_member', 'capacitation_member.member_id', '=', 'members.id')
+                    ->select('members.id' , 'members.name', 'members.lastname')
+                    ->where('members.id', '<>', 'capacitation_member.member_id')
+                    ->paginate(10);
+        // dd($members);
+        return view('capacitation.addMembers', compact('members', 'capacitation'));
+    }
+
+    public function storeMembers(Request $request)
+    {
+        // dd($request->input('members'));
+        $capacitation = Capacitation::find($id);
+        $members = $request->input('members');
+
+        $capacitation->member()->attach($members);
+
+        return redirect('addMembers',compact('capacitation'))->with('status', 'Miembros Agregados exitosamente!');
+
     }
 
     /**

@@ -41,6 +41,9 @@
                                 <td>{{ $capacitations->imparted_date }}</td>
                                 <td>{{ $capacitations->finalized_date }}</td>
                                 <td>
+                                    <a href="/capacitation/{{ $capacitations->id }}" class="btn-floating btn-flat waves-effect tooltipped" data-position="top" data-delay="50" data-tooltip="Ver">
+                                        <i class="material-icons yellow-text text-darken-3">visibility</i>
+                                    </a>
                                     <a href="/capacitation/{{ $capacitations->id }}/edit" class="btn-floating btn-flat waves-effect waves-dark tooltipped" data-position="top" data-delay="50" data-tooltip="Editar">
                                         <i class="material-icons yellow-text text-darken-3">edit</i>
                                     </a>

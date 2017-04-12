@@ -16,7 +16,7 @@ class CreateTelephonesTable extends Migration
         Schema::create('telephones', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
-            $table->bigInteger('member_id')->unsigned()->index();
+            $table->string('member_id',11)->index();
             $table->string('telephone', 12);
             $table->timestamps();
         });

@@ -15,9 +15,9 @@ class DocumentMember extends Migration
     {
         Schema::create('document_member', function(Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->primary('document_id', 'member_id');
+            $table->bigIncrements('id');
             $table->bigInteger('document_id')->unsigned()->index();
-            $table->bigInteger('member_id')->unsigned()->index();
+            $table->string('member_id',11)->index();
             $table->boolean('confirmed')->default(false);
             $table->timestamps();
         });
