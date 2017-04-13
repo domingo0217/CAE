@@ -84,6 +84,8 @@ Route::post('searchDelegation', 'DelegationController@search');
 
 Route::post('searchCapacitation', 'CapacitationController@search');
 
+Route::post('search2Capacitation/{id}', 'CapacitationController@search2');
+
 Route::post('searchCapacitationMember/{id}', 'Capacitation_MemberController@search');
 
 Route::post('search2CapacitationMember/{id}', 'Capacitation_MemberController@search2');

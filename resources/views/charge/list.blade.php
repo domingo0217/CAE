@@ -7,6 +7,7 @@
         <div class="row">
             <div class="section white z-depth-1">
                 @include('layouts.status')
+                @include('layouts.statusNeg')
                 <table class="stripped responsive centered">
                     <thead>
                         <tr>

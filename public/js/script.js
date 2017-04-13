@@ -5,7 +5,7 @@ $(document).ready(setTimeout(function(){
     setTimeout(function() {
         $('#message').hide();
     },400);
-},3000));
+},6000));
 
 //validating telephone input
 function isNumberKey(evt)

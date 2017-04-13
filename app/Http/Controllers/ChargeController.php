@@ -65,9 +65,17 @@ class ChargeController extends Controller
     public function destroy($id)
     {
         $charge = Charge::find($id);
-        $charge->delete();
+        $h = $charge->member();
+        if($h->count() == 0)
+        {
+            $charge->delete();
+            return redirect()->back()->with('status', 'Cargo Eliminado!');
+        }
+        else
+        {
+            return redirect()->back()->with('statusNeg', 'Existe un miembro con este cargo, favor eliminar el miembro y luego proceda a eliminar el cargo!');
+        }
 
-        return redirect()->back()->with('status', 'Cargo Eliminado!');
     }
 
     public function edit($id)

@@ -7,6 +7,7 @@
         <div class="row">
             <div class="section white z-depth-1">
                 @include('layouts.status')
+                @include('layouts.statusNeg')
                 <div class="">
                     <form action="searchCity" method="post">
                         {{ csrf_field() }}

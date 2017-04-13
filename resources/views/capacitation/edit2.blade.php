@@ -15,8 +15,8 @@
                 <strong>Fecha de finalizacion: </strong>{{ $capacitation->finalized_date }}
             </p>
             <div class="divider"></div> --}}
-            @include('layouts.status')
-            <div class="col s12 m4">
+            @include('layouts.statusNeg')
+            {{-- <div class="col s12 m4">
                 <form action="/search2CapacitationMember/{{ $capacitation->id }}" method="post">
                     {{ csrf_field() }}
                     <div class="input-field">
@@ -25,7 +25,7 @@
                         <i class="material-icons">close</i>
                     </div>
                 </form>
-            </div>
+            </div> --}}
             <form action="/update2CapacitationMember/{{ $capacitation->id }}" method="post">
                     {{ csrf_field() }}
                     {{ method_field('PATCH') }}
@@ -44,7 +44,7 @@
                         <h5 class="grey-text center">Actualmente no hay miembros!</h5>
                     @endif
                     <a href="/capacitation/{{ $capacitation->id }}" class="btn btn-flat waves-effect">Atras</a>
-                    <button type="submit" class="btn yellow darken-3 hoverable waves-effect right" name="button">Eliminar de Capacitacion</button>
+                    <button type="submit" class="btn red darken-1 hoverable waves-effect right" name="button">Eliminar de Capacitacion</button>
             </form>
         </div>
     @endsection

@@ -25,7 +25,7 @@
             </p>
             <div class="row">
                 <div class="col s12 m4">
-                    <form action="searchCapacitation" method="post">
+                    <form action="/search2Capacitation/{{ $capacitation->id }}" method="post">
                         {{ csrf_field() }}
                         <div class="input-field">
                             <input id="search" type="search" name="search" required class="tooltipped" data-position="right" data-delay="50" data-tooltip="Buscar">

@@ -127,8 +127,16 @@ class DocumentController extends Controller
     public function destroy($id)
     {
         $document = Document::find($id);
-        $document->delete();
+        $h = $document->member();
+        if($h->count() == 0)
+        {
+            $document->delete();
+            return redirect()->back()->with('status', 'Documento Eliminado!');
+        }
+        else
+        {
+            return redirect()->back()->with('statusNeg', 'Debe eliminar los miembros relacionados con este documento antes de borrarlo!');            
+        }
 
-        return redirect()->back()->with('status', 'Documento Eliminado!');
     }
 }

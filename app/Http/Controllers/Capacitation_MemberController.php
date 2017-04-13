@@ -60,12 +60,14 @@ class Capacitation_MemberController extends Controller
     {
         $capacitation = Capacitation::find($id);
 
-        $members = DB::table('members')
-                    ->leftJoin('capacitation_member', 'capacitation_member.member_id', '=', 'members.id')
-                    ->select('members.id' , 'members.name', 'members.lastname')
-                    ->whereNull('capacitation_member.member_id')
-                    ->orWhere('capacitation_member.capacitation_id', '<>', $id)
-                    ->paginate(10);
+        $query = DB::table('capacitation_member')->select('member_id')
+                                                 ->where('Capacitation_id', '=', $id);
+
+
+        $members = DB::table('members')->select('name', 'id', 'lastname')
+                                       ->whereNotIn('id',$query)
+                                       ->get();
+
         // dd($members);
         return view('capacitation.addMembers', compact('members', 'capacitation'));
     }
@@ -127,9 +129,17 @@ class Capacitation_MemberController extends Controller
         $capacitation = Capacitation::find($id);
         $members = $request->input('members');
 
-        $capacitation->member()->attach($members);
+        if(!empty($members))
+        {
+            $capacitation->member()->attach($members);
 
-        return redirect()->back()->with('status', 'Miembros Agregados exitosamente!');
+            return redirect()->back()->with('status', 'Miembros Agregados exitosamente!');
+        }
+        else
+        {
+            return redirect()->back()->with('statusNeg', 'Seleccione un miembro.');
+        }
+
     }
 
     public function update2(Request $request, $id)
@@ -138,9 +148,17 @@ class Capacitation_MemberController extends Controller
         $capacitation = Capacitation::find($id);
         $members = $request->input('members');
 
-        $capacitation->member()->detach($members);
+        if(!empty($members))
+        {
+            $capacitation->member()->detach($members);
 
-        return redirect()->back()->with('status', 'Miembros Eliminados exitosamente!');
+            return redirect()->back()->with('status', 'Miembros Eliminados exitosamente!');
+        }
+        else
+        {
+            return redirect()->back()->with('statusNeg', 'Seleccione un miembro.');
+        }
+
     }
 
     /**

@@ -200,9 +200,18 @@ class CapacitationController extends Controller
     public function destroy($id)
     {
         $capacitation = Capacitation::find($id);
-        $capacitation->delete();
+        $h = $capacitation->member();
 
-        return redirect()->back()->with('status', 'Capacitación Eliminada!');
+        if($h->count() == 0)
+        {
+            $capacitation->delete();
+            return redirect()->back()->with('status', 'Capacitación Eliminada!');
+        }
+        else
+        {
+            return redirect()->back()->with('statusNeg', 'La Capacitación tiene miembros, por favor elimine los miembros antes de eliminar la capacitación.');
+        }
+
     }
 
     public function search(Request $request)
@@ -210,5 +219,20 @@ class CapacitationController extends Controller
         $search = $request->input('search');
         $capacitation = Capacitation::where('capacitation', 'like', '%'.$search.'%')->orwhere('imparting', 'like','%'.$search.'%')->orwhere('imparted_date', 'like','%'.$search.'%')->paginate(6);
         return view('/capacitation.list', compact('capacitation'));
+    }
+
+    public function search2(Request $request, $id)
+    {
+        // dd($request->all());
+        $search = $request->input('search');
+        $capacitation = Capacitation::find($id);
+        $members = DB::table('members')
+                       ->rightJoin('capacitation_member', 'capacitation_member.member_id', '=', 'members.id')
+                       ->select('members.id' , 'members.name', 'members.lastname')
+                       ->where('capacitation_member.capacitation_id', $id)
+                       ->where('members.name', 'like', '%'.$search.'%')
+                       ->paginate(10);
+
+        return view('capacitation.show',compact('members', 'capacitation'));
     }
 }
