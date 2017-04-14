@@ -70,6 +70,10 @@ Route::resource('delegation', 'DelegationController');
 
 Route::resource('charge', 'ChargeController');
 
+Route::get('create2Charge/{id}', 'ChargeController@create2');
+
+Route::post('store2Charge/{id}', 'ChargeController@store2');
+
 Route::resource('capacitation', 'CapacitationController');
 
 Route::resource('capacitation_member', 'Capacitation_MemberController');

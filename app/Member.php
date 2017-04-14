@@ -31,7 +31,7 @@ class Member extends Model
 
     public function charge()
     {
-        return $this->hasOne(Charge::Class);
+        return $this->belongsToMany(Charge::Class)->withTimestamps();
     }
 
     public function capacitation()

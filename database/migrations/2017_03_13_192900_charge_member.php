@@ -18,6 +18,8 @@ class ChargeMember extends Migration
             $table->bigIncrements('id');
             $table->integer('charge_id')->unsigned()->index();
             $table->string('member_id',11)->index();
+            $table->date('starting_date');
+            $table->date('ending_date');
             $table->timestamps();
         });
     }

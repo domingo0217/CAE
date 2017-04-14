@@ -4,6 +4,7 @@ namespace cae\Http\Controllers;
 
 use Illuminate\Http\Request;
 use cae\Charge;
+use cae\Member;
 use Illuminate\Support\Facades\Validator;
 
 class ChargeController extends Controller
@@ -28,6 +29,14 @@ class ChargeController extends Controller
     public function create()
     {
         return view('charge.addCharge');
+    }
+
+    public function create2($id)
+    {
+        $charge = Charge::find($id);
+        $members = Member::all();
+
+        return view('charge.addChargeMember', compact('charge','members'));
     }
 
     /**
@@ -59,6 +68,51 @@ class ChargeController extends Controller
         Charge::create($request->all());
 
         return redirect('/charge')->with('status', 'Cargo agregado!');
+    }
+
+    public function store2(Request $request, $id)
+    {
+        $rules = [
+            'member' => 'required',
+            'starting_date' => 'bail|required|date',
+            'ending_date' => 'bail|required|date'
+        ];
+
+        $message = [
+            'member.required' => 'Debe seleccionar un miembro.',
+            'starting_date.required' => 'Debe introducir una fecha de inicio.',
+            'starting_date.date' => 'Debe introducir una fecha Valida.',
+            'ending_date.required' => 'Debe introducir una fecha de finalizacion.',
+            'ending_date.date' => 'Debe introducir una fecha Valida.'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $message);
+
+        if($validator->fails())
+        {
+            return redirect()->back()->withInput($request->all())->withErrors($validator->errors());
+        }
+        else
+        {
+            $member = $request->input('member');
+            $charge = Charge::find($id);
+            $starting_date = $request->input('starting_date');
+            $ending_date = $request->input('ending_date');
+
+            $charge->member()->attach([$member => ['starting_date' => $starting_date, 'ending_date' => $ending_date] ] );
+
+            return redirect('/charge/{'.$id.'}')->with('status', 'El miembro ha sido agregado!');
+        }
+    }
+
+    public function show($id)
+    {
+        $charge = Charge::find($id);
+        $charges = Charge::find($id);
+
+        // dd($charges->member);
+
+        return view('charge.show', compact('charge', 'charges'));
     }
 
 

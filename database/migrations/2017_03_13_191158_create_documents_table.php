@@ -18,6 +18,7 @@ class CreateDocumentsTable extends Migration
             $table->bigIncrements('id');
             $table->string('document', 50);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
