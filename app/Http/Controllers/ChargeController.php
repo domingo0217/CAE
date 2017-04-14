@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use cae\Charge;
 use cae\Member;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class ChargeController extends Controller
 {
@@ -34,7 +35,12 @@ class ChargeController extends Controller
     public function create2($id)
     {
         $charge = Charge::find($id);
-        $members = Member::all();
+        $query = DB::table('charge_member')->select('member_id')
+                                           ->where('charge_id', $id);
+
+        $members = DB::table('members')->select('id', 'name', 'lastname')
+                                       ->whereNotIn('id', $query)
+                                       ->get();
 
         return view('charge.addChargeMember', compact('charge','members'));
     }
@@ -101,18 +107,17 @@ class ChargeController extends Controller
 
             $charge->member()->attach([$member => ['starting_date' => $starting_date, 'ending_date' => $ending_date] ] );
 
-            return redirect('/charge/{'.$id.'}')->with('status', 'El miembro ha sido agregado!');
+            return redirect('/charge/'.$id)->with('status', 'Se ha asignado el cargo al miembro!');
         }
     }
 
     public function show($id)
     {
         $charge = Charge::find($id);
-        $charges = Charge::find($id);
 
         // dd($charges->member);
 
-        return view('charge.show', compact('charge', 'charges'));
+        return view('charge.show', compact('charge'));
     }
 
 
@@ -136,6 +141,19 @@ class ChargeController extends Controller
     {
         $charge = Charge::find($id);
         return view('charge.edit', compact('charge'));
+    }
+
+    public function edit2($idM, $idC)
+    {
+        $charge = DB::table('members')
+                      ->rightJoin('charge_member', 'charge_member.member_id', '=', 'members.id')
+                      ->select('members.id', 'members.name', 'members.lastname', 'charge_member.starting_date', 'charge_member.ending_date', 'charge_member.charge_id')
+                      ->where('charge_id', $idC)
+                      ->get();
+
+        // dd($charge[0]);
+
+        return view('charge.editMember', compact('charge'));
     }
 
     public function update(Request $request)
@@ -164,6 +182,37 @@ class ChargeController extends Controller
         if($charge->save())
         {
             return redirect('/charge')->with('status', 'Cargo Actualizado!');
+        }
+    }
+
+    public function update2(Request $request, $idM, $idC)
+    {
+        $rules = [
+            'starting_date' => 'bail|required|date',
+            'ending_date' => 'bail|required|date'
+        ];
+
+        $message = [
+            'starting_date.required' => 'Debe introducir una fecha de inicio.',
+            'starting_date.date' => 'Debe introducir una fecha Valida.',
+            'ending_date.required' => 'Debe introducir una fecha de finalizacion.',
+            'ending_date.date' => 'Debe introducir una fecha Valida.'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $message);
+
+        if($validator->fails())
+        {
+            return redirect()->back()->withInput($request->all())->withErrors($validator->errors());
+        }
+        else
+        {
+            $starting_date = $request->input('starting_date');
+            $ending_date = $request->input('ending_date');
+            $attributes = array('starting_date' => $starting_date, 'ending_date' => $ending_date);
+            Member::find($idM)->charge()->updateExistingPivot($idC, $attributes);
+
+            return redirect('/charge/'.$idC)->with('status', 'Miembro Editado');
         }
     }
 }

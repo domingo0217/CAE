@@ -74,6 +74,10 @@ Route::get('create2Charge/{id}', 'ChargeController@create2');
 
 Route::post('store2Charge/{id}', 'ChargeController@store2');
 
+Route::get('edit2Charge/{idM}/{idC}', 'ChargeController@edit2');
+
+Route::patch('update2Charge/{idM}/{idC}', 'ChargeController@update2');
+
 Route::resource('capacitation', 'CapacitationController');
 
 Route::resource('capacitation_member', 'Capacitation_MemberController');

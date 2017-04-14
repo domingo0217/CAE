@@ -10,6 +10,7 @@ class Charge extends Model
 
     public function member()
     {
-        return $this->belongsToMany(Member::class)->withPivot('starting_date', 'ending_date');
+        return $this->belongsToMany(Member::class)->withPivot('starting_date', 'ending_date')->withTimestamps();
     }
+
 }

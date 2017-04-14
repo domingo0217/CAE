@@ -22,14 +22,6 @@ class MemberController extends Controller
      */
     public function index()
     {
-        // $member = DB::table('members')
-        //             ->leftJoin('telephones', 'members.id', '=', 'telephones.member_id')
-        //             ->leftJoin('addresses', 'members.id', '=', 'addresses.member_id')
-        //             ->leftJoin('cities', 'addresses.city_id', '=', 'cities.id')
-        //             ->LeftJoin('delegations', 'delegations.id', '=', 'members.delegation_id')
-        //             ->select('members.name', 'members.lastname', 'members.id', 'members.nationality', 'members.civil_status', 'members.email', 'members.birthdate', 'members.gender', 'members.status', 'telephones.telephone', 'addresses.address', 'cities.city', 'delegations.delegation')
-        //             ->get();
-
         $member = DB::table('members')
                     ->leftJoin('telephones', 'members.id', '=', 'telephones.member_id')
                     ->select('members.name', 'members.lastname', 'members.id', 'telephones.telephone')

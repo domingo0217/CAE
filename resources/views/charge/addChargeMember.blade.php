@@ -12,10 +12,14 @@
                 <div class="input-field col s12 m6">
                     <input type="text" id="member" value="{{ old('member') }}" hidden>
                     <select class="browser-default" name="member">
-                        <option name="member" disabled selected>Elija un miembro</option>
-                        @foreach($members as $member)
-                            <option name="member" value="{{ $member->id }}">{{ $member->id.' - '.$member->name.' '.$member->lastname }}</option>
-                        @endforeach
+                        @if($members->count() > 0 )
+                            <option name="member" disabled selected>Elija un miembro</option>
+                            @foreach($members as $member)
+                                <option name="member" value="{{ $member->id }}">{{ $member->id.' - '.$member->name.' '.$member->lastname }}</option>
+                            @endforeach
+                        @else
+                            <option disabled>No hay miembros</option>
+                        @endif
                     </select>
                 </div>
                 <div class="input-field col s12 m3">

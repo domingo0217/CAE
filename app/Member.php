@@ -31,7 +31,7 @@ class Member extends Model
 
     public function charge()
     {
-        return $this->belongsToMany(Charge::Class)->withTimestamps();
+        return $this->belongsToMany(Charge::Class)->withPivot('starting_date', 'ending_date')->withTimestamps();
     }
 
     public function capacitation()
