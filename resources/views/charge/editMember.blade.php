@@ -7,6 +7,7 @@
     @section('content')
         <div class="row card-panel white">
             @include('layouts.errors')
+            @include('layouts.statusNeg')
             <form action="/update2Charge/{{ $charge[0]->id }}/{{ $charge[0]->charge_id }}" method="post">
                 {{ csrf_field() }}
                 {{ method_field('PATCH') }}

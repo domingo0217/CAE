@@ -31,10 +31,6 @@
                         <input type="text" name="lastname" id="lastname" class="validate" required value="{{ old('lastname')}}" data-length="30" maxlength="30" minlength="3">
                         <label data-error="incorrecto" data-success="correcto" for="lastname">Apellido*</label>
                     </div>
-                    <div class="col s12 m4 input-field">
-                        <input type="text" name="id" id="id" class="validate" required value="{{ old('id')}}" data-length="11" maxlength="11" minlength="9">
-                        <label data-error="incorrecto" data-success="correcto" for="id">Cédula o Pasaporte* </label>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col s12 m4 input-field">
@@ -75,9 +71,20 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col s12 input-field">
+                    <div class="col s12 l6 input-field">
                         <input type="text" name="address" id="address" class="validate" required value="{{ old('address')}}" data-length="70" maxlength="70" minlength="6">
                         <label data-error="incorrecto" data-success="correcto" for="address">Direcci&oacute;n*</label>
+                    </div>
+                    <div class="col s12 m4 l3 input-field">
+                        <input type="text" id="idoc" value="{{ old('idoc') }}" hidden>
+                        <input name="idoc" type="radio" value="0" id="idoc1" checked>
+                        <label for="idoc1">Cédula</label>
+                        <input name="idoc" type="radio" value="1" id="idoc2">
+                        <label for="idoc2">Pasaporte</label>
+                    </div>
+                    <div class="col s12 m8 l3 input-field">
+                        <input type="text" name="id" id="id" class="validate" required value="{{ old('id')}}" data-length="11" maxlength="11" minlength="11">
+                        <label data-error="incorrecto" data-success="correcto" for="id">Cédula o Pasaporte* </label>
                     </div>
                 </div>
                 <div class="row">
@@ -116,7 +123,7 @@
                     <div class="col s12 m6">
                         <p><strong> Frecuencia de pago* </strong></p>
                         <input type="text" id="pagos" value="{{ old('payment') }}" hidden>
-                        <input name="payment" type="radio" value="mensual" id="payment1">
+                        <input name="payment" type="radio" value="mensual" id="payment1" checked>
                         <label for="payment1">Mensual</label>
                         <input name="payment" type="radio" value="trimestral" id="payment2">
                         <label for="payment2">Trimestral</label>

@@ -7,6 +7,7 @@ use cae\Charge;
 use cae\Member;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ChargeController extends Controller
 {
@@ -102,12 +103,21 @@ class ChargeController extends Controller
         {
             $member = $request->input('member');
             $charge = Charge::find($id);
-            $starting_date = $request->input('starting_date');
-            $ending_date = $request->input('ending_date');
+            $starting_date = Carbon::parse($request->input('starting_date'));
+            $ending_date = Carbon::parse($request->input('ending_date'));
 
-            $charge->member()->attach([$member => ['starting_date' => $starting_date, 'ending_date' => $ending_date] ] );
+            if($ending_date->gt($starting_date))
+            {
+                $charge->member()->attach([$member => ['starting_date' => $starting_date, 'ending_date' => $ending_date] ] );
 
-            return redirect('/charge/'.$id)->with('status', 'Se ha asignado el cargo al miembro!');
+                return redirect('/charge/'.$id)->with('status', 'Se ha asignado el cargo al miembro!');
+            }
+            else
+            {
+                return redirect()->back()->withInput($request->all())->withErrors($validator->errors())
+                                 ->with('statusNeg', 'La fecha de finalizacion no debe ser igual o menor que la fecha de inicio.');;
+            }
+
         }
     }
 
@@ -207,12 +217,20 @@ class ChargeController extends Controller
         }
         else
         {
-            $starting_date = $request->input('starting_date');
-            $ending_date = $request->input('ending_date');
-            $attributes = array('starting_date' => $starting_date, 'ending_date' => $ending_date);
-            Member::find($idM)->charge()->updateExistingPivot($idC, $attributes);
+            $starting_date = Carbon::parse($request->input('starting_date'));
+            $ending_date = Carbon::parse($request->input('ending_date'));
+            if($ending_date->gt($starting_date))
+            {
+                $attributes = array('starting_date' => $starting_date, 'ending_date' => $ending_date);
+                Member::find($idM)->charge()->updateExistingPivot($idC, $attributes);
+                return redirect('/charge/'.$idC)->with('status', 'Miembro Editado');
+            }
+            else
+            {
+                return redirect()->back()->withInput($request->all())->withErrors($validator->errors())
+                                 ->with('statusNeg', 'La fecha de finalizacion no debe ser igual o menor que la fecha de inicio.');
+            }
 
-            return redirect('/charge/'.$idC)->with('status', 'Miembro Editado');
         }
     }
 }

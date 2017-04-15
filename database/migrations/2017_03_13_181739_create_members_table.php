@@ -26,7 +26,7 @@ class CreateMembersTable extends Migration
             $table->string('email', 50)->unique();
             $table->integer('delegation_id')->unsigned()->index();
             $table->enum('gender', array('M', 'F'));
-            $table->enum('payment', array('mensual', 'trimestral', 'Semestral', 'anual'));
+            $table->enum('payment', array('mensual', 'trimestral', 'semestral', 'anual'));
             $table->timestamps();
         });
     }

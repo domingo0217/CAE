@@ -41,6 +41,10 @@ $(document).ready(function(){
     var status = $('#oldStatus').val();
     $('#status').val(status);
 
+    //charge_member
+    var charge_member = $('#oldMember').val();
+    $('#members').val(charge_member);
+
     //Initialize select
     $('select').material_select();
 
@@ -63,5 +67,41 @@ $(document).ready(function(){
         }
     });
 
+    //activating radius button when validating and when editing id
+    $("input[name='idoc']").each(function(){
+        var id = $('#idoc').val();
+        if(id == $(this).val())
+        {
+            $(this).attr('checked', true);
+        }
+    });
 
+});
+
+//------------------------------------------------------------------------
+
+//activating validation in id depending on radius button
+if( $('#idoc1').is(':checked') == true )
+{
+    $('#id').attr('data-length', 11);
+    $('#id').attr('maxlength', 11);
+    $('#id').attr('minlength', 11);
+}
+if( $('#idoc2').is(':checked') == true )
+{
+    $('#id').attr('data-length', 9);
+    $('#id').attr('maxlength', 9);
+    $('#id').attr('minlength', 9);
+}
+
+$('#idoc1').on('click', function(){
+    $('#id').attr('data-length', 11);
+    $('#id').attr('maxlength', 11);
+    $('#id').attr('minlength', 11);
+});
+
+$('#idoc2').on('click', function(){
+    $('#id').attr('data-length', 9);
+    $('#id').attr('maxlength', 9);
+    $('#id').attr('minlength', 9);
 });

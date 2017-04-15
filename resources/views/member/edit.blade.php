@@ -23,31 +23,29 @@
                 {{ method_field('PUT') }}
                 {{ csrf_field() }}
                 <div class="row">
-                    <div class="col s12 m6 input-field">
+                    <div class="col s12 l4 input-field">
                         <input type="text" name="name" id="name" class="validate" required value="{{ $member->name or old('name')}}" data-length="30" maxlength="30" minlength="3">
                         <label data-error="incorrecto" data-success="correcto" for="name">Nombre*</label>
                     </div>
-                    <div class="col s12 m6 input-field">
+                    <div class="col s12 l4 input-field">
                         <input type="text" name="lastname" id="lastname" class="validate" required value="{{ $member->lastname or old('lastname')}}" data-length="30" maxlength="30" minlength="3">
                         <label data-error="incorrecto" data-success="correcto" for="lastname">Apellido*</label>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 m6 input-field">
+                    <div class="col s12 l4 input-field">
                         <input type="text" name="id" id="id" class="validate" required value="{{ $member->id or old('id')}}" data-length="11" maxlength="11" minlength="9" hidden>
                         <label data-error="incorrecto" data-success="correcto" for="id" hidden>Cédula o Pasaporte*</label>
                     </div>
-                    <div class="col s12  input-field">
+                    <div class="col s12 l4 input-field">
                         <input type="text" name="nationality" id="nationality" class="validate" required value="{{ $member->nationality or old('nationality')}}" data-length="20" maxlength="20" minlength="4">
                         <label data-error="incorrecto" data-success="correcto" for="nationality">Nacionalidad*</label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col s12 m6 input-field">
+                    <div class="col s12 m4 input-field">
                         <input type="date" name="birthdate" id="birthdate" class="datepicker" required value="{{ $member->birthdate or old('birthdate')}}">
                         <label for="birthdate">Fecha de Nacimiento*</label>
                     </div>
-                    <div class="input-field col s12 m6">
+                    <div class="input-field col s12 m4">
                         <select name="civil_status" id="civil_status" required>
                             <option name="civil_status"  disabled selected>Estado civil*</option>
                             <option name="civil_status" value="soltero">Soltero</option>
@@ -57,12 +55,12 @@
                         </select>
                         <input type="text" name="" id="oldCivilStatus" value="{{ $member->civil_status or old('civil_status') }}" hidden>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 m6 input-field">
+                    <div class="col s12 m4 input-field">
                         <input type="tel" name="telephone" id="telephone" class="validate" required value="{{ $member->telephone or old('telephone')}}" data-length="12" maxlength="12" minlength="12">
                         <label data-error="incorrecto" data-success="correcto" for="telephone">Telef&oacute;no*</label>
                     </div>
+                </div>
+                <div class="row">
                     <div class="input-field col s12 m6">
                         <input type="text" name="" id="oldGender" value="{{ $member->gender or old('gender') }}" hidden>
                         <select name="gender" id="gender" required>
@@ -71,9 +69,7 @@
                             <option name="gender" value="F">F</option>
                         </select>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 input-field">
+                    <div class="col s12 m6 input-field">
                         <input type="email" name="email" id="email" class="validate" required value="{{ $member->email or old('email')}}" data-length="50" maxlength="50" minlength="11">
                         <label data-error="incorrecto" data-success="correcto" for="email">Correo Electr&oacute;nico*</label>
                     </div>
@@ -85,7 +81,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col s12 m6 input-field">
+                    <div class="col s12 m4 input-field">
                         <input type="text" id="oldCity" value="{{ $member->city_id or old('city') }}" hidden>
                         <select name="city" id="city" required>
                             <option name="city" value="null" disabled selected>Ciudad*</option>
@@ -94,7 +90,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col s12 m6 input-field">
+                    <div class="col s12 m4 input-field">
                         <input type="text" id="oldDelegation" value="{{ $member->delegation_id or old('delegation') }}" hidden>
                         <select name="delegation" id="delegation" required>
                             <option name="delegation" value="null" disabled selected>Delegaci&oacute;n*</option>
@@ -103,9 +99,7 @@
                             @endforeach
                         </select>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12 m6">
+                    <div class="input-field col s12 m4">
                         <input type="text" id="oldStatus" value="{{ $member->status or old('status') }}" hidden>
                         <select id="status" name="status" required>
                             <option name="status" value="null" disabled selected>Estado</option>
@@ -119,7 +113,7 @@
                 </div>
                 <div class="divider"></div>
                 <div class="row">
-                    <div class="col s12">
+                    <div class="col s12 m6">
                         <p><strong> Métodos de pago* </strong></p>
                         <input type="text" id="pagos" value="{{ $member->payment or old('payment') }}" hidden>
                         <input name="payment" type="radio" value="mensual" id="payment1">
@@ -131,10 +125,7 @@
                         <input name="payment" type="radio" value="anual" id="payment4" >
                         <label for="payment4">Anual</label>
                     </div>
-                </div>
-                <div class="divider"></div>
-                <div class="row">
-                    <div class="col s12">
+                    <div class="col s12 m6">
                         <p><strong>Documentos presentados</strong></p>
                         @foreach($document->all() as $documentss)
                             <input type="checkbox" name="document_member" value="{{ $documentss->id }}" id="document_member[]" hidden>
@@ -152,7 +143,7 @@
                 <div class="divider"></div>
                 <p class="red-text">Los campos marcados con * son de caracter obligatorio.</p>
                 <a href="/member" class="btn-flat waves-effect waves-red red-text text-darken-3">Atr&aacute;s</a>
-                <button class="btn yellow darken-3 waves-effect right" type="submit" name="submit">Editar</button>
+                <button class="btn yellow darken-3 waves-effect right" type="submit" name="submit">Guardar</button>
             </form>
         </div>
     </div>
