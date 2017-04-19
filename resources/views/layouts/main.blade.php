@@ -10,6 +10,7 @@
 		<link rel="stylesheet" href="/materialize-css/css/materialize.css">
 		<link rel="stylesheet" type="text/css" href="/custom/css/main.css">
 		<link rel="shortcut icon" type="image/png" href="img/logo.png"/>
+		@yield('quillCss')
 	</head>
 	<body class="grey lighten-3">
 

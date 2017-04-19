@@ -38,4 +38,14 @@ class Member extends Model
     {
         return $this->belongsToMany(Capacitation::class)->withTimestamps();
     }
+
+    public function assembly()
+    {
+        return $this->belongsToMany(Assembly::class)->withTimestamps();
+    }
+
+    public function topic()
+    {
+        return $this->belongsToMany(Topic::class)->withPivot('vote')->withTimestamps();
+    }
 }

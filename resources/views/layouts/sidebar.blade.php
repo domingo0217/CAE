@@ -41,7 +41,7 @@
                 <a class="collapsible-header waves-effect waves-red bold">Administraci&oacute;n 	<i class="material-icons">arrow_drop_down</i></a>
                 <div class="collapsible-body">
                     <ul>
-                        <li><a href="#" class="waves-effect waves-yellow center">Asamblea</a></li>
+                        <li><a href="/assembly" class="waves-effect waves-yellow center">Asamblea</a></li>
                         <li><a href="/capacitation" class="waves-effect waves-yellow center">Capacitaciones</a></li>
                         <li><a href="/charge" class="waves-effect waves-yellow center">Cargos</a></li>
                         <li><a href="/city" class="waves-effect waves-yellow center">Ciudades</a></li>
