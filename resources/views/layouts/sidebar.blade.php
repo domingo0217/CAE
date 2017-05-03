@@ -53,8 +53,15 @@
             </li>
         </ul>
     </li>
-    <li class="divider"></li>
-    <li><a href="#" class="waves-effect waves-red bold"><i class="material-icons">power_settings_new</i>Cerrar sesi&oacute;n</a></li>
+     <li class="divider"></li>
+     <li><a href="{{ url('/logout') }}" onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();" class="waves-effect waves-red bold"><i class="material-icons">power_settings_new</i>Cerrar sesi&oacute;n</a></li>
     <li><a href="#" class="waves-effect waves-red bold"><i class="material-icons">settings</i>Ajustes</a></li>
     <li><a href="#" class="waves-effect waves-red bold"><i class="material-icons">live_help</i>Ayuda</a></li>
 </ul>
+
+                                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                       </li>
+
