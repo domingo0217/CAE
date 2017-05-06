@@ -47,7 +47,7 @@
                         <li><a href="/city" class="waves-effect waves-yellow center">Ciudades</a></li>
                         <li><a href="/delegation" class="waves-effect waves-yellow center">Delegaciones</a></li>
                         <li><a href="#" class="waves-effect waves-yellow center">Pagos</a></li>
-                        <li><a href="#" class="waves-effect waves-yellow center">Reportes</a></li>
+                        <li><a href="{{ url("/reportes") }}" class="waves-effect waves-yellow center">Reportes</a></li>
                     </ul>
                 </div>
             </li>

@@ -100,7 +100,7 @@
 					</div>
 					<div class="col s12 input-field">
 						<i class="material-icons prefix">account_circle</i>
-						<input type="text" name="" class="validate" id="">
+						<input type="" name="" class="validate" id="">
 						<label for="">Nombre de Usuario</label>
 					</div>
 					<div class="col s12 input-field">

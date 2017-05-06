@@ -80,3 +80,12 @@ Route::post('searchCity', 'CityController@search');
 Route::post('searchDelegation', 'DelegationController@search');
 
 Route::post('searchCapacitation', 'CapacitationController@search');
+Route::get('/home', 'HomeController@index')->name('dashboard');
+
+Auth::routes();
+
+
+
+Auth::routes();
+
+
