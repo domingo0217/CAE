@@ -43,6 +43,24 @@ class PdfController extends Controller
      return $this->crearPDF($member, $vistaurl,$tipo);
       }
 
+       public function crear_reporte_usuario_pasivo($tipo){
+
+     $vistaurl="pdf.reporte_por_miembros_pasivos";
+    $member = DB::table('members')->where([
+    ['state', '=', 'pasivo'], ])->get();
+     
+     return $this->crearPDF($member, $vistaurl,$tipo);
+      }
+
+
+       public function crear_reporte_todos($tipo){
+
+     $vistaurl="pdf.reporte_por_todos";
+    $member = DB::table('members')->get();
+     
+     return $this->crearPDF($member, $vistaurl,$tipo);
+      }
+
 
 
 

@@ -17,8 +17,8 @@ Route::get('/', function (){
 
 Route::get('reportes', 'PdfController@index');
 Route::get('crear_reporte_por_miembros_activos/{tipo}', 'PdfController@crear_reporte_usuario_activo');
-
-
+Route::get('crear_reporte_por_miembros_pasivos/{tipo}', 'PdfController@crear_reporte_usuario_pasivo');
+Route::get('crear_reporte_por_todos/{tipo}', 'PdfController@crear_reporte_todos');
 Route::get('login', function () {
     return redirect('login');
 });

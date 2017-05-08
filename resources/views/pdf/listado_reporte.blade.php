@@ -35,7 +35,9 @@
                     </tr></thead>
                     <tbody>
                     <tr>
-                      <td>1</td>
+                      <td>1
+                      2</td>
+
                       <td>Reporte de Usuarios activos en la asosiacion CAE</td>
                       <td><a href="crear_reporte_por_miembros_activos/1" target="_blank" ><i class="material-icons yellow-text text-darken-3">visibility</i></a></td>
                       <td><a href="crear_reporte_por_miembros_activos/2" target="_blank" ><i class="material-icons yellow-text text-darken-3">system_update_alt</i></a></td>
