@@ -63,12 +63,18 @@ class CityController extends Controller
 
     public function destroy($id)
     {
-        // dd($id);
-
         $city = City::find($id);
-        $city->delete();
+        $h = $city->address();
+        if($h->count() == 0)
+        {
+            $city->delete();
 
-        return redirect()->back()->with('status', 'Ciudad Eliminada!');
+            return redirect()->back()->with('status', 'Ciudad Eliminada!');
+        }
+        else
+        {
+            return redirect()->back()->with('statusNeg', 'Existe un miembro en esta ciudad, por favor elimine el miembro y luego proceda a eliminar la cuidad!');
+        }
     }
 
     public function search(Request $request)

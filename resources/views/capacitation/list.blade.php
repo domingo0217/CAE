@@ -1,12 +1,13 @@
 @extends('layouts.main')
     @section('title')
-        Lista de Capacitaciónes
+        Lista de Capacitaciones
     @endsection
 
     @section('content')
         <div class="row">
             <div class="section white z-depth-1">
                 @include('layouts.status')
+                @include('layouts.statusNeg')
                 <div class="">
                     <form action="searchCapacitation" method="post">
                         {{ csrf_field() }}
@@ -21,9 +22,10 @@
                     <thead>
                         <tr>
                             <th data-field="id">C&oacute;digo</th>
-                            <th data-field="capacitation">Capacitaciónes</th>
+                            <th data-field="capacitation">Capacitaciones</th>
                             <th data-field="imparting">Impartidor</th>
-                            <th data-field="imparted_date">Fecha impartida</th>
+                            <th data-field="imparted_date">Fecha de inicio</th>
+                            <th data-field="finalized_date">Fecha de finalización</th>
                             <th data-field="">
                                 <a class="btn-floating tooltipped btn-large waves-effect waves-light yellow darken-3 hoverable center" href="/capacitation/create" data-position="top" data-delay="50" data-tooltip="Agregar">
                                     <i class="material-icons">add</i>
@@ -38,15 +40,19 @@
                                 <td>{{ $capacitations->capacitation }}</td>
                                 <td>{{ $capacitations->imparting }}</td>
                                 <td>{{ $capacitations->imparted_date }}</td>
+                                <td>{{ $capacitations->finalized_date }}</td>
                                 <td>
-                                    <a href="/capacitation/{{ $capacitations->id }}/edit" class="btn-floating btn-flat waves-effect waves-dark white tooltipped" data-position="right" data-delay="50" data-tooltip="Editar">
+                                    <a href="/capacitation/{{ $capacitations->id }}" class="btn-floating btn-flat waves-effect tooltipped" data-position="top" data-delay="50" data-tooltip="Ver">
+                                        <i class="material-icons yellow-text text-darken-3">visibility</i>
+                                    </a>
+                                    <a href="/capacitation/{{ $capacitations->id }}/edit" class="btn-floating btn-flat waves-effect waves-dark tooltipped" data-position="top" data-delay="50" data-tooltip="Editar">
                                         <i class="material-icons yellow-text text-darken-3">edit</i>
                                     </a>
-                                    <form method="post" action="/capacitation/{{$capacitations->id}}">
+                                    <form method="post" action="/capacitation/{{$capacitations->id}}" style="display:inline;">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
-                                        <button type="submit" name="submit" class="btn-floating btn-flat waves-effect waves-dark white tooltipped" data-position="right" data-delay="50" data-tooltip="Eliminar">
-                                            <i class="material-icons yellow-text text-darken-3">delete</i>
+                                        <button type="submit" name="submit" class="btn-floating btn-flat waves-effect waves-dark tooltipped" data-position="top" data-delay="50" data-tooltip="Eliminar">
+                                            <i class="material-icons red-text text-darken-3">delete</i>
                                         </button>
                                     </form>
                                 </td>

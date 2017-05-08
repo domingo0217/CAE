@@ -15,10 +15,10 @@ class CreateDocumentsTable extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('document', 50);
-            $table->boolean('confirmed')->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

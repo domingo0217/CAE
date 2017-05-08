@@ -65,10 +65,17 @@ class DelegationController extends Controller
     public function destroy($id)
     {
         $delegation = Delegation::find($id);
+        $h = $delegation->member();
 
-        $delegation->delete();
-
-        return redirect()->back()->with('status', 'Delegaci&oacute;n eliminada!');
+        if($h->count() == 0)
+        {
+            $delegation->delete();
+            return redirect()->back()->with('status', 'Delegaci&oacute;n eliminada!');
+        }
+        else
+        {
+            return redirect()->back()->with('statusNeg', 'Esta delegacion tiene miembros, favor eliminar los miembros antes de eliminar la delegacion!');
+        }
     }
 
     public function search(Request $request)

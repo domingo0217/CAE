@@ -18,7 +18,10 @@ class CreateCapacitationsTable extends Migration
             $table->increments('id');
             $table->string('capacitation',70)->unique();
             $table->string('imparting',70);
+            $table->integer('hours');
+            $table->string('place',50);
             $table->date('imparted_date');
+            $table->date('finalized_date');
             $table->timestamps();
         });
     }

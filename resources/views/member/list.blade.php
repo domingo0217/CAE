@@ -7,6 +7,7 @@
         <div class="row">
             <div class="col s12 section white z-depth-1">
                 @include('layouts.status')
+                @include('layouts.statusNeg')
                 <div class="">
                     <form action="searchMember" method="post">
                         {{ csrf_field() }}
@@ -17,7 +18,7 @@
                         </div>
                     </form>
                 </div>
-                <table class="highlight responsive">
+                <table class="highlight responsive-table">
                     <thead>
                         <tr>
                             <th data-field="id">C&eacute;dula</th>
@@ -30,7 +31,7 @@
                             {{-- <th data-field="email">Correo Electr&oacute;nico</th> --}}
                             {{-- <th data-field="address">Direcci&oacute;n</th> --}}
                             {{-- <th data-field="city">Ciudad</th> --}}
-                            {{-- <th data-field="delegation">Delegaci&oacute;n</th> --}}
+                            <th data-field="delegation">Delegaci&oacute;n</th>
                             <th data-field="">
                                 <a class="btn-floating tooltipped btn-large waves-effect waves-light yellow darken-3 hoverable center" href="/member/create" data-position="top" data-delay="50" data-tooltip="Agregar">
                                     <i class="material-icons">add</i>
@@ -44,14 +45,16 @@
                                 <td>{{ $members->id }}</td>
                                 <td>{{ $members->name }}</td>
                                 <td>{{ $members->lastname }}</td>
-                                {{-- <td>{{ $members->nationality }}</td> --}}
-                                {{-- <td>{{ $members->birthdate }}</td> --}}
-                                {{-- <td>{{ $members->civil_status }}</td> --}}
                                 <td>{{ $members->telephone }}</td>
-                                {{-- <td>{{ $members->email }}</td> --}}
-                                {{-- <td>{{ $members->address }}</td> --}}
-                                {{-- <td>{{ $members->city }}</td> --}}
-                                {{-- <td>{{ $members->delegation }}</td> --}}
+                                <td>{{ $members->delegation }}</td>
+                                <td>
+                                    <a href="member/{{ $members->id }}" class="btn-floating btn-flat waves-effect waves-dark tooltipped" data-position="top" data-delay="50" data-tooltip="Ver">
+                                        <i class="material-icons yellow-text text-darken-3">visibility</i>
+                                    </a>
+                                    <a href="member/{{ $members->id }}/edit" class="btn-floating btn-flat waves-effect waves-dark tooltipped" data-position="top" data-delay="50" data-tooltip="Editar">
+                                        <i class="material-icons yellow-text text-darken-3">edit</i>
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

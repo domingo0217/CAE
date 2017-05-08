@@ -4,7 +4,10 @@ namespace cae\Http\Controllers;
 
 use Illuminate\Http\Request;
 use cae\Charge;
+use cae\Member;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ChargeController extends Controller
 {
@@ -28,6 +31,19 @@ class ChargeController extends Controller
     public function create()
     {
         return view('charge.addCharge');
+    }
+
+    public function create2($id)
+    {
+        $charge = Charge::find($id);
+        $query = DB::table('charge_member')->select('member_id')
+                                           ->where('charge_id', $id);
+
+        $members = DB::table('members')->select('id', 'name', 'lastname')
+                                       ->whereNotIn('id', $query)
+                                       ->get();
+
+        return view('charge.addChargeMember', compact('charge','members'));
     }
 
     /**
@@ -61,19 +77,114 @@ class ChargeController extends Controller
         return redirect('/charge')->with('status', 'Cargo agregado!');
     }
 
+    public function store2(Request $request, $id)
+    {
+        $rules = [
+            'member' => 'required',
+            'starting_date' => 'bail|required|date',
+            'ending_date' => 'bail|required|date'
+        ];
+
+        $message = [
+            'member.required' => 'Debe seleccionar un miembro.',
+            'starting_date.required' => 'Debe introducir una fecha de inicio.',
+            'starting_date.date' => 'Debe introducir una fecha Valida.',
+            'ending_date.required' => 'Debe introducir una fecha de finalizacion.',
+            'ending_date.date' => 'Debe introducir una fecha Valida.'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $message);
+
+        if($validator->fails())
+        {
+            return redirect()->back()->withInput($request->all())->withErrors($validator->errors());
+        }
+        else
+        {
+            $member = $request->input('member');
+            $charge = Charge::find($id);
+            $starting_date = Carbon::parse($request->input('starting_date'));
+            $ending_date = Carbon::parse($request->input('ending_date'));
+
+            $q = DB::table('charge_member')->select(DB::raw('count(ending_date) as count, ending_date'))
+                                           ->where([
+                                               ['member_id', $member],
+                                               ['ending_date', '=', $starting_date]
+                                           ])
+                                           ->groupBy('ending_date')
+                                           ->get();
+                                           dd($q);
+
+            $prevEndingDate = Carbon::parse($q[0]->ending_date);
+
+            if($q[0]->count == 0 && $starting_date->gt($prevEndingDate))
+            {
+                if($ending_date->gt($starting_date))
+                {
+                    $charge->member()->attach([$member => ['starting_date' => $starting_date, 'ending_date' => $ending_date] ] );
+
+                    return redirect('/charge/'.$id)->with('status', 'Se ha asignado el cargo al miembro!');
+                }
+                else
+                {
+                    return redirect()->back()->withInput($request->all())->withErrors($validator->errors())
+                    ->with('statusNeg', 'La fecha de finalizacion no debe ser igual o menor que la fecha de inicio.');
+                }
+            }
+            else
+            {
+                return redirect()->back()->withInput($request->all())->withErrors($validator->errors())
+                ->with('statusNeg', 'Ya existe un miembro en este cargo con la fecha de inicio ingresada.');
+            }
+
+
+
+        }
+    }
+
+    public function show($id)
+    {
+        $charge = Charge::find($id);
+
+        // dd($charges->member);
+
+        return view('charge.show', compact('charge'));
+    }
+
 
     public function destroy($id)
     {
         $charge = Charge::find($id);
-        $charge->delete();
+        $h = $charge->member();
+        if($h->count() == 0)
+        {
+            $charge->delete();
+            return redirect()->back()->with('status', 'Cargo Eliminado!');
+        }
+        else
+        {
+            return redirect()->back()->with('statusNeg', 'Existe un miembro con este cargo, favor eliminar el miembro y luego proceda a eliminar el cargo!');
+        }
 
-        return redirect()->back()->with('status', 'Cargo Eliminado!');
     }
 
     public function edit($id)
     {
         $charge = Charge::find($id);
         return view('charge.edit', compact('charge'));
+    }
+
+    public function edit2($idM, $idC)
+    {
+        $charge = DB::table('members')
+                      ->rightJoin('charge_member', 'charge_member.member_id', '=', 'members.id')
+                      ->select('members.id', 'members.name', 'members.lastname', 'charge_member.starting_date', 'charge_member.ending_date', 'charge_member.charge_id')
+                      ->where('charge_id', $idC)
+                      ->get();
+
+        // dd($charge[0]);
+
+        return view('charge.editMember', compact('charge'));
     }
 
     public function update(Request $request)
@@ -102,6 +213,45 @@ class ChargeController extends Controller
         if($charge->save())
         {
             return redirect('/charge')->with('status', 'Cargo Actualizado!');
+        }
+    }
+
+    public function update2(Request $request, $idM, $idC)
+    {
+        $rules = [
+            'starting_date' => 'bail|required|date',
+            'ending_date' => 'bail|required|date'
+        ];
+
+        $message = [
+            'starting_date.required' => 'Debe introducir una fecha de inicio.',
+            'starting_date.date' => 'Debe introducir una fecha Valida.',
+            'ending_date.required' => 'Debe introducir una fecha de finalizacion.',
+            'ending_date.date' => 'Debe introducir una fecha Valida.'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $message);
+
+        if($validator->fails())
+        {
+            return redirect()->back()->withInput($request->all())->withErrors($validator->errors());
+        }
+        else
+        {
+            $starting_date = Carbon::parse($request->input('starting_date'));
+            $ending_date = Carbon::parse($request->input('ending_date'));
+            if($ending_date->gt($starting_date))
+            {
+                $attributes = array('starting_date' => $starting_date, 'ending_date' => $ending_date);
+                Member::find($idM)->charge()->updateExistingPivot($idC, $attributes);
+                return redirect('/charge/'.$idC)->with('status', 'Miembro Editado');
+            }
+            else
+            {
+                return redirect()->back()->withInput($request->all())->withErrors($validator->errors())
+                                 ->with('statusNeg', 'La fecha de finalizacion no debe ser igual o menor que la fecha de inicio.');
+            }
+
         }
     }
 }

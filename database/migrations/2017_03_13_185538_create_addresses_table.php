@@ -17,8 +17,8 @@ class CreateAddressesTable extends Migration
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
             $table->string('address', 70);
-            $table->bigInteger('city_id');
-            $table->bigInteger('member_id');
+            $table->bigInteger('city_id')->unsigned()->index();
+            $table->string('member_id',11)->index();
             $table->timestamps();
         });
     }

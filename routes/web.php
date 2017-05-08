@@ -64,24 +64,25 @@ Route::get('dashboard', function()
 });
 
 Route::resource('member', 'MemberController');
+Route::post('searchMember', 'MemberController@search');
 
 Route::resource('Pagos', 'PagosController');
 
 Route::resource('city', 'CityController');
-
-Route::resource('delegation', 'DelegationController');
-
-Route::resource('charge', 'ChargeController');
-
-Route::resource('capacitation', 'CapacitationController');
-
-Route::post('searchMember', 'MemberController@search');
-
 Route::post('searchCity', 'CityController@search');
 
+Route::resource('delegation', 'DelegationController');
 Route::post('searchDelegation', 'DelegationController@search');
 
+Route::resource('charge', 'ChargeController');
+Route::get('create2Charge/{id}', 'ChargeController@create2');
+Route::post('store2Charge/{id}', 'ChargeController@store2');
+Route::get('edit2Charge/{idM}/{idC}', 'ChargeController@edit2');
+Route::patch('update2Charge/{idM}/{idC}', 'ChargeController@update2');
+
+Route::resource('capacitation', 'CapacitationController');
 Route::post('searchCapacitation', 'CapacitationController@search');
+
 Route::get('/home', 'HomeController@index')->name('dashboard');
 
 Auth::routes();
@@ -89,5 +90,26 @@ Auth::routes();
 
 
 Auth::routes();
+
+Route::resource('capacitation_member', 'Capacitation_MemberController');
+Route::post('search2Capacitation/{id}', 'CapacitationController@search2');
+Route::post('searchCapacitationMember/{id}', 'Capacitation_MemberController@search');
+Route::post('search2CapacitationMember/{id}', 'Capacitation_MemberController@search2');
+Route::get('edit2CapacitationMember/{id}', 'Capacitation_MemberController@edit2');
+Route::PATCH('update2CapacitationMember/{id}', 'Capacitation_MemberController@update2');
+
+Route::resource('document', 'DocumentController');
+
+Route::resource('assembly', 'AssemblyController');
+Route::get('attendance/{assembly}', 'AssemblyController@attendance');
+Route::get('addAttendance/{assembly}', 'AssemblyController@addAttendance');
+Route::get('editAttendance/{assembly}', 'AssemblyController@editAttendance');
+Route::post('storeAttendance/{assembly}', 'AssemblyController@storeAttendance');
+Route::patch('updateAttendance/{assembly}', 'AssemblyController@updateAttendance');
+
+Route::resource('topic', 'TopicController');
+Route::get('listTopic/{assembly}', 'TopicController@list');
+Route::get('topic/create/{assembly}', 'TopicController@create');
+
 
 

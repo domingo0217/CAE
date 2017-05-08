@@ -14,9 +14,10 @@ class CreateMembersCapacitationTable extends Migration
     public function up()
     {
         Schema::create('capacitation_member', function (Blueprint $table) {
-            $table->primary('capacitation_id', 'member_id');
+            $table->engine = 'InnoDB';
+            $table->bigIncrements('id');
             $table->integer('capacitation_id')->unsigned()->index();
-            $table->integer('member_id')->unsigned()->index();           
+            $table->string('member_id',11)->index();
             $table->timestamps();
         });
     }

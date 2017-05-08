@@ -163,9 +163,11 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Skydiver\LaravelMaterializeCSS\MaterializeCSSServiceProvider::class,
+
 Caffeinated\Shinobi\ShinobiServiceProvider::class,
 
 Barryvdh\DomPDF\ServiceProvider::class,
+
 
 
         /*
