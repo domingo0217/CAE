@@ -15,9 +15,10 @@ Route::get('/', function (){
     return view('welcome');
 });
 
-
-
-
+Route::get('reportes', 'PdfController@index');
+Route::get('crear_reporte_por_miembros_activos/{tipo}', 'PdfController@crear_reporte_usuario_activo');
+Route::get('crear_reporte_por_miembros_pasivos/{tipo}', 'PdfController@crear_reporte_usuario_pasivo');
+Route::get('crear_reporte_por_todos/{tipo}', 'PdfController@crear_reporte_todos');
 Route::get('login', function () {
     return redirect('login');
 });
@@ -64,6 +65,8 @@ Route::get('dashboard', function()
 
 Route::resource('member', 'MemberController');
 
+Route::resource('Pagos', 'PagosController');
+
 Route::resource('city', 'CityController');
 
 Route::resource('delegation', 'DelegationController');
@@ -79,3 +82,12 @@ Route::post('searchCity', 'CityController@search');
 Route::post('searchDelegation', 'DelegationController@search');
 
 Route::post('searchCapacitation', 'CapacitationController@search');
+Route::get('/home', 'HomeController@index')->name('dashboard');
+
+Auth::routes();
+
+
+
+Auth::routes();
+
+
