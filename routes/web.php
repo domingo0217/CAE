@@ -65,6 +65,8 @@ Route::get('dashboard', function()
 
 Route::resource('member', 'MemberController');
 
+Route::resource('Pagos', 'PagosController');
+
 Route::resource('city', 'CityController');
 
 Route::resource('delegation', 'DelegationController');
