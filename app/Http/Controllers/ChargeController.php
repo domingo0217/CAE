@@ -106,17 +106,38 @@ class ChargeController extends Controller
             $starting_date = Carbon::parse($request->input('starting_date'));
             $ending_date = Carbon::parse($request->input('ending_date'));
 
-            if($ending_date->gt($starting_date))
-            {
-                $charge->member()->attach([$member => ['starting_date' => $starting_date, 'ending_date' => $ending_date] ] );
+            $q = DB::table('charge_member')->select(DB::raw('count(ending_date) as count, ending_date'))
+                                           ->where([
+                                               ['member_id', $member],
+                                               ['ending_date', '=', $starting_date]
+                                           ])
+                                           ->groupBy('ending_date')
+                                           ->get();
+                                           dd($q);
 
-                return redirect('/charge/'.$id)->with('status', 'Se ha asignado el cargo al miembro!');
+            $prevEndingDate = Carbon::parse($q[0]->ending_date);
+
+            if($q[0]->count == 0 && $starting_date->gt($prevEndingDate))
+            {
+                if($ending_date->gt($starting_date))
+                {
+                    $charge->member()->attach([$member => ['starting_date' => $starting_date, 'ending_date' => $ending_date] ] );
+
+                    return redirect('/charge/'.$id)->with('status', 'Se ha asignado el cargo al miembro!');
+                }
+                else
+                {
+                    return redirect()->back()->withInput($request->all())->withErrors($validator->errors())
+                    ->with('statusNeg', 'La fecha de finalizacion no debe ser igual o menor que la fecha de inicio.');
+                }
             }
             else
             {
                 return redirect()->back()->withInput($request->all())->withErrors($validator->errors())
-                                 ->with('statusNeg', 'La fecha de finalizacion no debe ser igual o menor que la fecha de inicio.');;
+                ->with('statusNeg', 'Ya existe un miembro en este cargo con la fecha de inicio ingresada.');
             }
+
+
 
         }
     }

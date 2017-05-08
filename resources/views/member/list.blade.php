@@ -31,7 +31,7 @@
                             {{-- <th data-field="email">Correo Electr&oacute;nico</th> --}}
                             {{-- <th data-field="address">Direcci&oacute;n</th> --}}
                             {{-- <th data-field="city">Ciudad</th> --}}
-                            {{-- <th data-field="delegation">Delegaci&oacute;n</th> --}}
+                            <th data-field="delegation">Delegaci&oacute;n</th>
                             <th data-field="">
                                 <a class="btn-floating tooltipped btn-large waves-effect waves-light yellow darken-3 hoverable center" href="/member/create" data-position="top" data-delay="50" data-tooltip="Agregar">
                                     <i class="material-icons">add</i>
@@ -46,6 +46,7 @@
                                 <td>{{ $members->name }}</td>
                                 <td>{{ $members->lastname }}</td>
                                 <td>{{ $members->telephone }}</td>
+                                <td>{{ $members->delegation }}</td>
                                 <td>
                                     <a href="member/{{ $members->id }}" class="btn-floating btn-flat waves-effect waves-dark tooltipped" data-position="top" data-delay="50" data-tooltip="Ver">
                                         <i class="material-icons yellow-text text-darken-3">visibility</i>

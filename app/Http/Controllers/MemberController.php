@@ -24,7 +24,8 @@ class MemberController extends Controller
     {
         $member = DB::table('members')
                     ->leftJoin('telephones', 'members.id', '=', 'telephones.member_id')
-                    ->select('members.name', 'members.lastname', 'members.id', 'telephones.telephone')
+                    ->leftJoin('delegations', 'delegations.id', '=', 'members.delegation_id')
+                    ->select('members.name', 'members.lastname', 'members.id', 'telephones.telephone', 'delegations.delegation')
                     ->paginate(7);
 
         return view('member.list', compact('member'));

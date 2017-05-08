@@ -36,7 +36,7 @@
                 </tbody>
             </table>
             @if($charge->member->count() == 0)
-                <h5 class="center grey-text text-lighten-1 card-panel z-depth-0">No hay presidente actualmente!</h5>
+                <h5 class="center grey-text text-lighten-1 card-panel z-depth-0">No hay {{ $charge->charge }} actualmente!</h5>
             @endif
             <div class="divider"></div>
             <a href="/charge" class="btn btn-flat">Atras</a>

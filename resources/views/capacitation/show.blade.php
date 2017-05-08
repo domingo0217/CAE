@@ -13,15 +13,6 @@
                 <strong>Lugar: </strong>{{ $capacitation->place }} &nbsp;
                 <strong>Fecha de Inicio: </strong>{{ $capacitation->imparted_date }} &nbsp;
                 <strong>Fecha de finalizacion: </strong>{{ $capacitation->finalized_date }}
-                <div class="fixed-action-btn">
-                    <a class="btn-floating btn-large red pulse">
-                      <i class="large material-icons">add</i>
-                    </a>
-                    <ul>
-                      <li><a href="/capacitation_member/{{ $capacitation->id }}/edit" class="btn-floating yellow darken-3 hoverable tooltipped" data-position="left" data-delay="50" data-tooltip="Agregar Miembros a la capacitacion"><i class="material-icons">group_add</i></a></li>
-                      <li><a href="/edit2CapacitationMember/{{ $capacitation->id }}"class="btn-floating deep-orange hoverable tooltipped" data-position="left" data-delay="50" data-tooltip="Editar Miembros de la capacitacion"><i class="material-icons">edit</i></a></li>
-                    </ul>
-                </div>
             </p>
             <div class="row">
                 <div class="col s12 m4">
@@ -50,5 +41,15 @@
                     <h5 class="grey-text center">Actualmente no hay miembros!</h5>
                 @endif
             <a href="/capacitation" class="btn btn-flat waves-effect waves-red">Atras</a>
+
+            <div class="fixed-action-btn">
+                <a class="btn-floating btn-large red pulse">
+                  <i class="large material-icons">add</i>
+                </a>
+                <ul>
+                  <li><a href="/capacitation_member/{{ $capacitation->id }}/edit" class="btn-floating yellow darken-3 hoverable tooltipped" data-position="left" data-delay="50" data-tooltip="Agregar Miembros a la capacitacion"><i class="material-icons">group_add</i></a></li>
+                  <li><a href="/edit2CapacitationMember/{{ $capacitation->id }}"class="btn-floating deep-orange hoverable tooltipped" data-position="left" data-delay="50" data-tooltip="Editar Miembros de la capacitacion"><i class="material-icons">edit</i></a></li>
+                </ul>
+            </div>
         </div>
     @endsection

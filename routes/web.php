@@ -91,6 +91,10 @@ Route::resource('document', 'DocumentController');
 
 Route::resource('assembly', 'AssemblyController');
 Route::get('attendance/{assembly}', 'AssemblyController@attendance');
+Route::get('addAttendance/{assembly}', 'AssemblyController@addAttendance');
+Route::get('editAttendance/{assembly}', 'AssemblyController@editAttendance');
+Route::post('storeAttendance/{assembly}', 'AssemblyController@storeAttendance');
+Route::patch('updateAttendance/{assembly}', 'AssemblyController@updateAttendance');
 
 Route::resource('topic', 'TopicController');
 Route::get('listTopic/{assembly}', 'TopicController@list');

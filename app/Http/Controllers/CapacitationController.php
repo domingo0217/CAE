@@ -228,9 +228,13 @@ class CapacitationController extends Controller
         $capacitation = Capacitation::find($id);
         $members = DB::table('members')
                        ->rightJoin('capacitation_member', 'capacitation_member.member_id', '=', 'members.id')
+                       ->leftJoin('delegations', 'delegations.id', '=', 'members.delegation_id')
                        ->select('members.id' , 'members.name', 'members.lastname')
                        ->where('capacitation_member.capacitation_id', $id)
                        ->where('members.name', 'like', '%'.$search.'%')
+                       ->orWhere('members.lastname', 'like', '%'.$search.'%')
+                       ->orWhere('members.id', 'like', '%'.$search.'%')
+                       ->orWhere('delegations.delegation', 'like', '%'.$search.'%')
                        ->paginate(10);
 
         return view('capacitation.show',compact('members', 'capacitation'));

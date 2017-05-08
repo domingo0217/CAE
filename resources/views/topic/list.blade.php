@@ -35,7 +35,7 @@
             <div class="divider"></div>
             <a href="/assembly/{{ $assembly->id }}" class="btn-flat waves-effect">Atras</a>
             <div class="fixed-action-btn">
-                <a href="/topic/create/{{ $assembly->id }}" class="btn-floating btn-large red">
+                <a href="/topic/create/{{ $assembly->id }}" class="btn-floating btn-large red tooltipped" data-position="left" data-delay="50" data-tooltip="Agregar tema">
                     <i class="large material-icons">add</i>
                 </a>
             </div>

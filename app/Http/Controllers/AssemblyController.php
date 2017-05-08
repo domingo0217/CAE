@@ -3,6 +3,7 @@
 namespace cae\Http\Controllers;
 
 use cae\Assembly;
+use cae\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -139,6 +140,29 @@ class AssemblyController extends Controller
 
     public function attendance(Assembly $assembly)
     {
-        return view('assembly.attendance');
+        $members = Member::all();
+        return view('assembly.attendance', compact('assembly', 'members'));
+    }
+
+    public function addAttendance(Assembly $assembly)
+    {
+        $members = Member::all();
+        return view('assembly.addAttendance', compact('assembly', 'members'));
+    }
+
+    public function storeAttendance(Request $request, Assembly $assembly)
+    {
+        dd($request->all());
+    }
+
+    public function editAttendance(Assembly $assembly)
+    {
+        $members = Member::all();
+        return view('assembly.editAttendance', compact('assembly', 'members'));
+    }
+
+    public function updateAttendance(Request $request, Assembly $assembly)
+    {
+        dd($request->all());
     }
 }
