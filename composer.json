@@ -9,8 +9,12 @@
         "caffeinated/shinobi": "^3.0",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "skydiver/laravel-materialize-css": "dev-master"
-    },
+
+        "skydiver/laravel-materialize-css": "dev-master",
+
+"barryvdh/laravel-dompdf": "0.7.*"
+},
+
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",

@@ -15,9 +15,10 @@ Route::get('/', function (){
     return view('welcome');
 });
 
-
-
-
+Route::get('reportes', 'PdfController@index');
+Route::get('crear_reporte_por_miembros_activos/{tipo}', 'PdfController@crear_reporte_usuario_activo');
+Route::get('crear_reporte_por_miembros_pasivos/{tipo}', 'PdfController@crear_reporte_usuario_pasivo');
+Route::get('crear_reporte_por_todos/{tipo}', 'PdfController@crear_reporte_todos');
 Route::get('login', function () {
     return redirect('login');
 });
@@ -65,6 +66,8 @@ Route::get('dashboard', function()
 Route::resource('member', 'MemberController');
 Route::post('searchMember', 'MemberController@search');
 
+Route::resource('Pagos', 'PagosController');
+
 Route::resource('city', 'CityController');
 Route::post('searchCity', 'CityController@search');
 
@@ -79,6 +82,14 @@ Route::patch('update2Charge/{idM}/{idC}', 'ChargeController@update2');
 
 Route::resource('capacitation', 'CapacitationController');
 Route::post('searchCapacitation', 'CapacitationController@search');
+
+Route::get('/home', 'HomeController@index')->name('dashboard');
+
+Auth::routes();
+
+
+
+Auth::routes();
 
 Route::resource('capacitation_member', 'Capacitation_MemberController');
 Route::post('search2Capacitation/{id}', 'CapacitationController@search2');
@@ -99,3 +110,6 @@ Route::patch('updateAttendance/{assembly}', 'AssemblyController@updateAttendance
 Route::resource('topic', 'TopicController');
 Route::get('listTopic/{assembly}', 'TopicController@list');
 Route::get('topic/create/{assembly}', 'TopicController@create');
+
+
+

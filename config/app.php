@@ -163,7 +163,11 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Skydiver\LaravelMaterializeCSS\MaterializeCSSServiceProvider::class,
-        Caffeinated\Shinobi\ShinobiServiceProvider::class,
+
+Caffeinated\Shinobi\ShinobiServiceProvider::class,
+
+Barryvdh\DomPDF\ServiceProvider::class,
+
 
 
         /*
@@ -229,6 +233,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'MaterializeCSS' => Skydiver\LaravelMaterializeCSS\MaterializeCSS::class,
+
+'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 
