@@ -13,13 +13,13 @@ class Pagos extends Migration
      */
     public function up()
     {
-        
+
         Schema::create('Pagos', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->string('id', 11);
             $table->double('Monto');
             $table->date('fecha_pago');
-            $table->integer('member_id')->unsigned()->index();
+            $table->string('member_id', 11)->index();
             $table->primary('id');
             $table->timestamps();
         });

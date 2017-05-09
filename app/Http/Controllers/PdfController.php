@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class PdfController extends Controller
 {
-    
+
      /**
      * Display a listing of the resource.
      *
@@ -28,7 +28,7 @@ class PdfController extends Controller
         $view =  \View::make($vistaurl, compact('data', 'date'))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
-        
+
         if($tipo==1){return $pdf->stream('reporte');}
         if($tipo==2){return $pdf->download('reporte.pdf'); }
     }
@@ -38,8 +38,8 @@ class PdfController extends Controller
 
      $vistaurl="pdf.reporte_por_miembros_activos";
     $member = DB::table('members')->where([
-    ['state', '=', 'activo'], ])->get();
-     
+    ['status', '=', 'activo'], ])->get();
+
      return $this->crearPDF($member, $vistaurl,$tipo);
       }
 
@@ -47,8 +47,8 @@ class PdfController extends Controller
 
      $vistaurl="pdf.reporte_por_miembros_pasivos";
     $member = DB::table('members')->where([
-    ['state', '=', 'pasivo'], ])->get();
-     
+    ['status', '=', 'pasivo'], ])->get();
+
      return $this->crearPDF($member, $vistaurl,$tipo);
       }
 
@@ -57,7 +57,7 @@ class PdfController extends Controller
 
      $vistaurl="pdf.reporte_por_todos";
     $member = DB::table('members')->get();
-     
+
      return $this->crearPDF($member, $vistaurl,$tipo);
       }
 
@@ -73,7 +73,7 @@ class PdfController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**

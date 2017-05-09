@@ -4,10 +4,10 @@
 	<meta charset="UTF-8">
 	<title>Reporte Por Miembros Activos</title>
 <style>
- 
+
  .col-md-12 {
     width: 100%;
-} 
+}
 
 .box {
     position: relative;
@@ -100,52 +100,51 @@ table {
 }
 
 
+
+
 </style>
-	  
+
+<link rel="stylesheet" href="/materialize-css/css/materialize.css">
+<link rel="stylesheet" type="text/css" href="/custom/css/main.css">
+<link rel="shortcut icon" type="image/png" href="img/logo.png"/>
+
 </head>
 <body>
 
 <div class="col-md-12">
               <div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Reporte Miembros Activos en CAE - <?=  $date; ?></h3>
+                  <h3 class="box-title">Reporte Miembros Activos en CAE - {{ $date }}</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <table class="table table-bordered">
-                  <thead>
-                     <tr>
-                      <th>id</th>
-                      <th>Nombre</th>
-                      <th >Apellido</th>
-                      <th >Email</th>
-
-                    </tr>
-                  </thead>
-                    <tbody>
-                  <?php foreach($data as $member){ ?>
-                 
-                    <tr>
-                       <td style="width: 10px" ><?= $member->id; ?></td>
-                      <td><?= $member->name; ?></td>
-                        <td><?= $member->lastname; ?></td>
-                      <td><?= $member->email; ?></td>
-                    </tr>
-                    
-                    <?php  } ?>
-                    
-                  </tbody>
-
-                  </table>
+                <table class="centered bordered">
+                	<thead>
+                		<tr>
+                			<th>id</th>
+                			<th>Nombre</th>
+                			<th>Apellido</th>
+                			<th>Correo Electrónico</th>
+                		</tr>
+                	</thead>
+					<tbody>
+						@foreach($data as $member)
+							<td>{{ $member->id }}</td>
+							<td>{{ $member->name }}</td>
+							<td>{{ $member->lastname }}</td>
+							<td>{{ $member->email }}</td>
+						@endforeach
+					</tbody>
+                </table>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
-                  
+
                 </div>
               </div><!-- /.box -->
 
-              
+
             </div>
 
 
-	
+
 </body>
 </html>

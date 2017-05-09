@@ -22,7 +22,7 @@
             <form class="col s8 offset-s2" action="/Pagos" method="post">
 
                 {{ csrf_field() }}
-                
+
                         <div class="row">
                     <div class="col s12 m6 input-field">
                         <select name="city" required value="{{ old('id')}}">
@@ -31,7 +31,7 @@
                                 <option value="{{ $member->id }}">{{ $member->id }}</option>
                             @endforeach
                         </select>
-                        
+
                     </div>
                 <div class="row">
                     <div class="col s12 m6 input-field">
@@ -42,7 +42,7 @@
                         <input type="text" name="lastname" id="lastname" class="validate" required value="{{ old('lastname')}}" data-length="30" maxlength="30" minlength="3">
                         <label data-error="incorrecto" data-success="correcto" for="lastname">Apellido*</label>
                     </div>
-                           
+
                     <div class="col s12 m6 input-field">
                         <input type="text" name="monto" id="monto" class="validate" required value="{{ old('monto')}}" data-length="20" maxlength="20" minlength="4">
                         <label data-error="incorrecto" data-success="correcto" for="monto">Monto a pagar*</label>
@@ -53,9 +53,9 @@
                         <input type="date" name="fecha_pago" id="fecha_pago" class="datepicker" required value="{{ old('fecha_pago')}}">
                         <label for="fecha_pago">Fecha de Pago*</label>
                     </div>
-                   
-             
-                <button class="btn yellow darken-3 waves-effect right pulse" type="submit" name="submit">Generar pago</button>
+
+
+                <button class="btn yellow darken-3 waves-effect right " type="submit" name="submit">Generar pago</button>
             </form>
         </div>
     </div>

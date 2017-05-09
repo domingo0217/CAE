@@ -66,7 +66,7 @@ Route::get('dashboard', function()
 Route::resource('member', 'MemberController');
 Route::post('searchMember', 'MemberController@search');
 
-Route::resource('Pagos', 'PagosController');
+Route::resource('pagos', 'PagosController');
 
 Route::resource('city', 'CityController');
 Route::post('searchCity', 'CityController@search');
@@ -110,6 +110,3 @@ Route::patch('updateAttendance/{assembly}', 'AssemblyController@updateAttendance
 Route::resource('topic', 'TopicController');
 Route::get('listTopic/{assembly}', 'TopicController@list');
 Route::get('topic/create/{assembly}', 'TopicController@create');
-
-
-
