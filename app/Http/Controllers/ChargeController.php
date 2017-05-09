@@ -36,12 +36,15 @@ class ChargeController extends Controller
     public function create2($id)
     {
         $charge = Charge::find($id);
-        $query = DB::table('charge_member')->select('member_id')
-                                           ->where('charge_id', $id);
+        // $query = DB::table('charge_member')->select('member_id')
+        //                                    ->where('charge_id', $id);
+        //
+        // $members = DB::table('members')->select('id', 'name', 'lastname')
+        //                                ->whereNotIn('id', $query)
+        //                                ->get();
 
-        $members = DB::table('members')->select('id', 'name', 'lastname')
-                                       ->whereNotIn('id', $query)
-                                       ->get();
+        $members = Member::all();
+        // dd($members);
 
         return view('charge.addChargeMember', compact('charge','members'));
     }
@@ -106,21 +109,21 @@ class ChargeController extends Controller
             $starting_date = Carbon::parse($request->input('starting_date'));
             $ending_date = Carbon::parse($request->input('ending_date'));
 
-            $q = DB::table('charge_member')->select(DB::raw('count(ending_date) as count, ending_date'))
-                                           ->where([
-                                               ['member_id', $member],
-                                               ['ending_date', '=', $starting_date]
-                                           ])
-                                           ->groupBy('ending_date')
-                                           ->get();
-                                           dd($q);
 
-            $prevEndingDate = Carbon::parse($q[0]->ending_date);
+            // $prevEndingDate = Carbon::parse($q[0]->ending_date);
 
-            if($q[0]->count == 0 && $starting_date->gt($prevEndingDate))
+            if($ending_date->gt($starting_date))
             {
-                if($ending_date->gt($starting_date))
+                $q = DB::table('charge_member')->select(DB::raw('count(ending_date) as count, ending_date'))
+                                               ->where([
+                                                   ['charge_id', $id],
+                                                   ['ending_date', '>=', $starting_date]
+                                               ])
+                                               ->groupBy('ending_date')
+                                               ->get();
+                if(!isset($q[0]))
                 {
+                    // dd($q, $request->all(), $id);
                     $charge->member()->attach([$member => ['starting_date' => $starting_date, 'ending_date' => $ending_date] ] );
 
                     return redirect('/charge/'.$id)->with('status', 'Se ha asignado el cargo al miembro!');
@@ -128,13 +131,13 @@ class ChargeController extends Controller
                 else
                 {
                     return redirect()->back()->withInput($request->all())->withErrors($validator->errors())
-                    ->with('statusNeg', 'La fecha de finalizacion no debe ser igual o menor que la fecha de inicio.');
+                    ->with('statusNeg', 'El cargo ya ha sido asignado a otro miembro o el miembro ya posee otro cargo en la fecha ingresada.');
                 }
             }
             else
             {
                 return redirect()->back()->withInput($request->all())->withErrors($validator->errors())
-                ->with('statusNeg', 'Ya existe un miembro en este cargo con la fecha de inicio ingresada.');
+                ->with('statusNeg', 'La fecha de finalizacion no debe ser igual o menor que la fecha de inicio.');
             }
 
 
