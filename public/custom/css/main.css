@@ -142,7 +142,4 @@ td, th{
 
 .card-action:hover{
     background: #fbc02d;
-    .anchor{
-        color: black;
-    }
 }

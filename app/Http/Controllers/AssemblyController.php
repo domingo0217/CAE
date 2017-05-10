@@ -158,6 +158,7 @@ class AssemblyController extends Controller
 
         $members = DB::table('members')->select('name', 'id', 'lastname')
                        ->whereNotIn('id',$query)
+                       ->where('status', '=', 'activo')
                        ->get();
 
         return view('assembly.addAttendance', compact('assembly', 'members'));

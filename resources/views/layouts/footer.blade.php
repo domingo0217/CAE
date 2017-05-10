@@ -19,3 +19,12 @@
     //Initialize tooltip
     $('.tooltipped').tooltip({delay: 50});
 </script>
+<script src="/tinymce/js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript">
+    tinyMCE.init({
+        selector : "#textarea",
+        plugins: "lists advlist print",
+        toolbar: ["undo redo | fontselect fontsizeselect | bold italic underline | alignleft aligncenter alignjustify alignright | bullist numlist | indent outdent"],
+        height: 300
+    });
+</script>

@@ -21,7 +21,7 @@
                             <tr>
                                 <td>{{ $topics->topic }}</td>
                                 <td>
-                                    <a href="/topic/{{ $assembly->id }}" class="btn-floating btn-flat waves-effect"><i class="material-icons yellow-text text-darken-3">visibility</i></a>
+                                    {{-- <a href="/topic/{{ $assembly->id }}" class="btn-floating btn-flat waves-effect"><i class="material-icons yellow-text text-darken-3">visibility</i></a> --}}
                                     <a href="/topic/{{ $topics->id }}/edit" class="btn-floating btn-flat waves-effect"><i class="material-icons yellow-text text-darken-3">edit</i></a>
                                 </td>
                             </tr>
