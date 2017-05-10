@@ -106,6 +106,10 @@ Route::get('addAttendance/{assembly}', 'AssemblyController@addAttendance');
 Route::get('editAttendance/{assembly}', 'AssemblyController@editAttendance');
 Route::post('storeAttendance/{assembly}', 'AssemblyController@storeAttendance');
 Route::patch('updateAttendance/{assembly}', 'AssemblyController@updateAttendance');
+Route::post('searchAssembly', 'AssemblyController@searchAssembly');
+Route::post('search2Assembly/{assembly}', 'AssemblyController@search2Assembly');
+Route::post('searchAssemblyMember/{assembly}', 'AssemblyController@searchAssemblyMember');
+Route::post('search2AssemblyMember/{assembly}', 'AssemblyController@search2AssemblyMember');
 
 Route::resource('topic', 'TopicController');
 Route::get('listTopic/{assembly}', 'TopicController@list');

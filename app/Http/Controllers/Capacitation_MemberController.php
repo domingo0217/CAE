@@ -61,7 +61,7 @@ class Capacitation_MemberController extends Controller
         $capacitation = Capacitation::find($id);
 
         $query = DB::table('capacitation_member')->select('member_id')
-                                                 ->where('Capacitation_id', '=', $id);
+                                                 ->where('capacitation_id', '=', $id);
 
 
         $members = DB::table('members')->select('name', 'id', 'lastname')

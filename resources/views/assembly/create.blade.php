@@ -11,7 +11,7 @@
                 {{ csrf_field() }}
                 <div class="col s12 m6 input-field">
                     <?php $nombre = 'Asamblea General'; ?>
-                    <input type="text" name="" value="{{ old('assembly') or $nombre }}"required class="validate" minlength="8">
+                    <input type="text" name="" value="{{ $nombre or old('assembly') }}"required class="validate" minlength="8">
                     <label for="assembly" data-success="correcto" data-error="incorrecto">Asamblea</label>
                 </div>
                 <div class="col s12 m6 input-field">

@@ -6,6 +6,18 @@
 
     @section('content')
         <div class="row card-panel white">
+            @include('layouts.status')
+            @include('layouts.statusNeg')
+            <div >
+                <form action="/searchAssemblyMember/{{ $assembly->id }}" method="post">
+                    {{ csrf_field() }}
+                    <div class="input-field">
+                        <input id="search" type="search" name="search" required class="tooltipped" data-position="top" data-delay="50" data-tooltip="Buscar">
+                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                        <i class="material-icons">close</i>
+                    </div>
+                </form>
+            </div>
             <p>
                 <strong> {{ $assembly->assembly }} </strong> &nbsp;
                 <strong>Fecha: </strong>{{ $assembly->date }} &nbsp;
@@ -14,12 +26,14 @@
             <form action="/storeAttendance/{{ $assembly->id }}" method="post">
                     {{ csrf_field() }}
                     @if(!empty($members[0]))
+                        <input type="text" name="id" value="{{ $assembly->id }}" hidden>
                         <div class="collection">
                             <?php $i = 0; ?>
                             @foreach($members as $member)
                                 <a class="collection-item">
                                     <input type="checkbox" name="members[]" id="{{ $i }}" value="{{ $member->id }}">
-                                    <label class="black-text" for="{{ $i }}">{{ $member->id.' &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp; '.$member->name.' '.$member->lastname }}</label>
+                                    <label class="black-text" for="{{ $i }}">{{ $member->id.' &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp; '.$member->name.' '.$member->lastname .
+                                        '&nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;' }}</label>
                                 </a>
                                 <?php $i++; ?>
                         @endforeach

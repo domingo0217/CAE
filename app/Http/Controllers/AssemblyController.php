@@ -6,6 +6,7 @@ use cae\Assembly;
 use cae\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class AssemblyController extends Controller
 {
@@ -140,29 +141,138 @@ class AssemblyController extends Controller
 
     public function attendance(Assembly $assembly)
     {
-        $members = Member::all();
+        $members = DB::table('assembly_member')
+                       ->leftJoin('members', 'members.id', 'assembly_member.member_id')
+                       ->leftJoin('delegations', 'delegations.id', 'members.delegation_id')
+                       ->select('members.id', 'members.name', 'members.lastname', 'delegations.delegation')
+                       ->where('assembly_member.assembly_id', $assembly->id)
+                       ->get();
+
         return view('assembly.attendance', compact('assembly', 'members'));
     }
 
     public function addAttendance(Assembly $assembly)
     {
-        $members = Member::all();
+        $query = DB::table('assembly_member')->select('member_id')
+                                             ->where('assembly_id', $assembly->id);
+
+        $members = DB::table('members')->select('name', 'id', 'lastname')
+                       ->whereNotIn('id',$query)
+                       ->get();
+
         return view('assembly.addAttendance', compact('assembly', 'members'));
     }
 
     public function storeAttendance(Request $request, Assembly $assembly)
     {
-        dd($request->all());
+        // dd($request->all());
+
+        $members = $request->input('members');
+
+
+        if(!empty($members))
+        {
+            $assembly->member()->attach($members);
+
+            return redirect()->back()->with('status', 'Asistencia pasada exitosamente!');
+        }
+        else
+        {
+            return redirect()->back()->with('statusNeg', 'Seleccione un miembro.');
+        }
     }
 
     public function editAttendance(Assembly $assembly)
     {
-        $members = Member::all();
+        $members = DB::table('members')
+                       ->leftJoin('assembly_member', 'assembly_member.member_id', 'members.id')
+                       ->select('members.id' , 'members.name', 'members.lastname')
+                       ->where('assembly_member.assembly_id', $assembly->id)
+                       ->get();
+
         return view('assembly.editAttendance', compact('assembly', 'members'));
     }
 
     public function updateAttendance(Request $request, Assembly $assembly)
     {
-        dd($request->all());
+        // dd($request->all());
+
+        $members = $request->input('members');
+
+        if(!empty($members))
+        {
+            $assembly->member()->detach($members);
+
+            return redirect()->back()->with('status', 'Miembros Eliminados exitosamente!');
+        }
+        else
+        {
+            return redirect()->back()->with('statusNeg', 'Seleccione un miembro.');
+        }
+    }
+
+    public function searchAssembly(Request $request)
+    {
+        $search = $request->input('search');
+        $assembly = Assembly::where('assembly', 'like', '%'.$search.'%')->orWhere('date', 'like', '%'.$search.'%')->get();
+
+        return view('assembly.list', compact('assembly'));
+    }
+
+    public function search2Assembly(Request $request, $id)
+    {
+        // dd($request->all());
+        $search = $request->input('search');
+        $assembly = Assembly::find($id);
+        $members = DB::table('members')
+                       ->rightJoin('assembly_member', 'assembly_member.member_id', '=', 'members.id')
+                       ->leftJoin('delegations', 'delegations.id', '=', 'members.delegation_id')
+                       ->select('members.id' , 'members.name', 'members.lastname')
+                       ->where('assembly_member.assembly_id', $id)
+                       ->where('members.name', 'like', '%'.$search.'%')
+                       ->orWhere('members.lastname', 'like', '%'.$search.'%')
+                       ->orWhere('members.id', 'like', '%'.$search.'%')
+                       ->orWhere('delegations.delegation', 'like', '%'.$search.'%')
+                       ->paginate(10);
+
+        return view('assembly.attendance',compact('members', 'assembly'));
+    }
+
+    public function searchAssemblyMember(Request $request, $id)
+    {
+        // dd($request->all());
+        $search = $request->input('search');
+        $assembly = Assembly::find($id);
+        $members = DB::table('members')
+                    ->leftJoin('assembly_member', 'assembly_member.member_id', '=', 'members.id')
+                    ->leftJoin('delegations', 'delegations.id', '=', 'members.delegation_id')
+                    ->select('members.id' , 'members.name', 'members.lastname')
+                    ->whereNull('assembly_member.member_id')
+                    ->where('members.name', 'like', '%'.$search.'%')
+                    ->orWhere('members.lastname', 'like', '%'.$search.'%')
+                    ->orWhere('members.id', 'like', '%'.$search.'%')
+                    ->orWhere('delegations.delegation', 'like', '%'.$search.'%')
+                    ->paginate(10);
+
+        return view('assembly.addAttendance',compact('members', 'assembly'));
+    }
+
+    public function search2AssemblyMember(Request $request, $id)
+    {
+        // dd($request->all());
+        $search = $request->input('search');
+        $assembly = Assembly::find($id);
+        $members = DB::table('members')
+                       ->rightJoin('assembly_member', 'assembly_member.member_id', '=', 'members.id')
+                       ->leftJoin('delegations', 'delegations.id', '=', 'members.delegation_id')
+                       ->select('members.id' , 'members.name', 'members.lastname')
+                       ->where('assembly_member.assembly_id', $id)
+                       ->where('members.name', 'like', '%'.$search.'%')
+                       ->orWhere('members.lastname', 'like', '%'.$search.'%')
+                       ->orWhere('members.id', 'like', '%'.$search.'%')
+                       ->orWhere('delegations.delegation', 'like', '%'.$search.'%')
+                       ->paginate(10);
+
+        return view('assembly.editAttendance',compact('members', 'assembly'));
     }
 }
