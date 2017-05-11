@@ -55,13 +55,7 @@
                         </select>
                         <input type="text" name="" id="oldCivilStatus" value="{{ $member->civil_status or old('civil_status') }}" hidden>
                     </div>
-                    <div class="col s12 m4 input-field">
-                        <input type="tel" name="telephone" id="telephone" class="validate" required value="{{ $member->telephone or old('telephone')}}" data-length="12" maxlength="12" minlength="12">
-                        <label data-error="incorrecto" data-success="correcto" for="telephone">Telef&oacute;no*</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12 m6">
+                    <div class="input-field col s12 m4">
                         <input type="text" name="" id="oldGender" value="{{ $member->gender or old('gender') }}" hidden>
                         <select name="gender" id="gender" required>
                             <option name="gender" disabled selected>Género*</option>
@@ -69,7 +63,17 @@
                             <option name="gender" value="F">F</option>
                         </select>
                     </div>
-                    <div class="col s12 m6 input-field">
+                </div>
+                <div class="row">
+                    <div class="col s12 m4 input-field">
+                        <input type="tel" name="telephone" id="telephone" onkeypress="return isNumberKey(event);" class="validate" required value="{{ $member->telephone or old('telephone')}}" data-length="12" maxlength="12" minlength="12">
+                        <label data-error="incorrecto" data-success="correcto" for="telephone">Telef&oacute;no*</label>
+                    </div>
+                    <div class="col s12 m4 input-field">
+                        <input type="tel" name="cellphone" id="cellphone" onkeypress="return isNumberKey(event);" class="validate" value="{{ $member->cellphone or old('cellphone') }}" data-length="12" maxlength="12" minlength="12">
+                        <label data-error="incorrecto" data-success="correcto" for="cellphone">Celular</label>
+                    </div>
+                    <div class="col s12 m4 input-field">
                         <input type="email" name="email" id="email" class="validate" required value="{{ $member->email or old('email')}}" data-length="50" maxlength="50" minlength="11">
                         <label data-error="incorrecto" data-success="correcto" for="email">Correo Electr&oacute;nico*</label>
                     </div>

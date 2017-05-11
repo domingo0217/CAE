@@ -31,12 +31,12 @@
                         <input type="text" name="lastname" id="lastname" class="validate" required value="{{ old('lastname')}}" data-length="30" maxlength="30" minlength="3">
                         <label data-error="incorrecto" data-success="correcto" for="lastname">Apellido*</label>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col s12 m4 input-field">
                         <input type="text" name="nationality" id="nationality" class="validate" required value="{{ old('nationality')}}" data-length="20" maxlength="20" minlength="4">
                         <label data-error="incorrecto" data-success="correcto" for="nationality">Nacionalidad*</label>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col s12 m4 input-field">
                         <input type="date" name="birthdate" id="birthdate" class="datepicker" required value="{{ old('birthdate')}}">
                         <label for="birthdate">Fecha de Nacimiento*</label>
@@ -51,12 +51,6 @@
                         </select>
                         <input type="text" name="" id="oldCivilStatus" value="{{ old('civil_status') }}" hidden>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 m4 input-field">
-                        <input type="tel" name="telephone" id="telephone" onkeypress="return isNumberKey(event);" class="validate" required value="{{ old('telephone')}}" data-length="12" maxlength="12" minlength="12">
-                        <label data-error="incorrecto" data-success="correcto" for="telephone">Telef&oacute;no*</label>
-                    </div>
                     <div class="input-field col s12 m4">
                         <input type="text" name="" id="oldGender" value="{{ old('gender') }}" hidden>
                         <select name="gender" id="gender" required>
@@ -64,6 +58,16 @@
                             <option name="gender" value="M">M</option>
                             <option name="gender" value="F">F</option>
                         </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 m4 input-field">
+                        <input type="tel" name="telephone" id="telephone" onkeypress="return isNumberKey(event);" class="validate" required value="{{ old('telephone')}}" data-length="12" maxlength="12" minlength="12">
+                        <label data-error="incorrecto" data-success="correcto" for="telephone">Telef&oacute;no*</label>
+                    </div>
+                    <div class="col s12 m4 input-field">
+                        <input type="tel" name="cellphone" id="cellphone" onkeypress="return isNumberKey(event);" class="validate" value="{{ old('cellphone') }}" data-length="12" maxlength="12" minlength="12">
+                        <label data-error="incorrecto" data-success="correcto" for="cellphone">Celular</label>
                     </div>
                     <div class="col s12 m4 input-field">
                         <input type="email" name="email" id="email" class="validate" required value="{{ old('email')}}" data-length="50" maxlength="50" minlength="11">
@@ -133,7 +137,7 @@
                         <label for="payment4">Anual</label>
                     </div>
                     <div class="col s12 m6">
-                        <p><strong>Documentos presentados</strong></p>
+                        <p><strong>Documentos presentados*</strong></p>
                         @foreach($documents as $document)
                             <div class="col s12 m6">
                                 <p>
