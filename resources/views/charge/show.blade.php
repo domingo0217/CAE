@@ -24,7 +24,7 @@
                             <tr>
                                 <td>{{ $member->id }}</td>
                                 <td>{{ $member->name.' '.$member->lastname }}</td>
-                                <td>{{ $member->charge[0]->charge }}</td>
+                                <td>{{ $charge->charge }}</td>
                                 <td>{{ $member->pivot->starting_date }}</td>
                                 <td>{{ $member->pivot->ending_date }}</td>
                                 <td>

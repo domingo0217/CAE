@@ -14,6 +14,11 @@ class Member extends Model
         return $this->hasMany(Telephone::class);
     }
 
+    public function cellphone()
+    {
+        return $this->hasMany(Cellphone::class);
+    }
+
     public function address()
     {
         return $this->hasOne(Address::class);

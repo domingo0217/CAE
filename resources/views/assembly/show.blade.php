@@ -6,10 +6,19 @@
 
     @section('content')
         <div class="row card-panel white">
+            {{-- <script src="/tinymce/js/tinymce/tinymce.min.js"></script>
+            <script type="text/javascript">
+                tinyMCE.init({
+                    selector : "#textarea",
+                    plugins: "lists advlist print",
+                    toolbar: ["undo redo | fontselect fontsizeselect | bold italic underline | alignleft aligncenter alignjustify alignright | bullist numlist | indent outdent"],
+                    height: 300
+                });
+            </script> --}}
             <h4>{{ $assembly->assembly }}</h4>
             <h6><strong>Fecha: </strong>{{ $assembly->date }}</h6>
             <div class="divider"></div>
-            <textarea class="materialize-textarea" readonly>{{ $assembly->record }}</textarea>
+            <textarea class="materialize-textarea" id="textarea" readonly>{{ $assembly->record }}</textarea>
             <a href="/assembly" class="btn-flat waves-effect">Atras</a>
             <div class="fixed-action-btn">
                 <a  class="btn-floating btn-large red pulse">

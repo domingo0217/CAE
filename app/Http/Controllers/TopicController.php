@@ -83,7 +83,7 @@ class TopicController extends Controller
      */
     public function show(Topic $topic)
     {
-        //
+        return view('topic.show', compact('topic'));
     }
 
     /**

@@ -5,6 +5,7 @@ namespace cae\Http\Controllers;
 use Illuminate\Http\Request;
 use cae\Member;
 use cae\Telephone;
+use cae\Cellphone;
 use cae\Address;
 use cae\Delegation;
 use cae\City;
@@ -53,13 +54,15 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $rules = [
             'name' => 'bail|required|string|max:30|min:3',
             'lastname' => 'bail|required|string|max:30|min:3',
             'id' => 'bail|required|alpha_num|max:11|min:9|unique:members',
             'nationality' => 'bail|required|alpha|max:20|min:4',
-            'email' => 'bail|required|email|max:50|min:11',
+            'email' => 'bail|required|email|max:50|min:11|unique:members',
             'telephone' => 'bail|required|alpha_dash|max:12|min:12',
+            'cellphone' => 'bail|alpha_dash|max:12|min:12',
             'address' => 'bail|required|string|max:70|min:10',
             'civil_status' => 'bail|required|alpha|max:10|min:5',
             'birthdate' => 'bail|required|date|',
@@ -86,10 +89,15 @@ class MemberController extends Controller
             'email.max' => 'El correo electrónico debe tener un maximo de 50 caracteres.',
             'email.min' => 'El correo electrónico debe tener un mínimo de 11 caracteres.',
             'email.email' => 'Introduzca un correo electrónico',
+            'email' => 'Ya existe un miembro con este correo electronico.',
             'telephone.required' => 'Debe ingresar un número telefónico.',
             'telephone.max' => 'El número telefónico debe tener un maximo de 12 caracteres.',
             'telephone.min' => 'El número telefónico debe tener un mínimo de 12 caracteres.',
             'telephone.alpha_dash' => 'El número telefónico solo puede contener números y dos guiones.',
+            'cellphone.required' => 'Debe ingresar un número celular.',
+            'cellphone.max' => 'El número celular debe tener un maximo de 12 caracteres.',
+            'cellphone.min' => 'El número celular debe tener un mínimo de 12 caracteres.',
+            'cellphone.alpha_dash' => 'El número celular solo puede contener números y dos guiones.',
             'address.required' => 'Debe ingresar una dirección.',
             'address.max' => 'La dirección debe tener un maximo de 70 caracteres.',
             'address.min' => 'La dirección debe tener un minimo de 10 caracteres.',
@@ -105,16 +113,18 @@ class MemberController extends Controller
             'payment.required' => 'Debe seleccionar un método de pago.'
         ];
 
-        // dd($request->all());
+        // dd($request->all(), 'hola');
 
         $validator = Validator::make( $request->all(), $rules, $message);
         if( $validator->fails() )
         {
+            // dd($request->all(), 'hola2');
             return redirect('/member/create')->withInput($request->all())
                                       ->withErrors($validator->errors());
         }
-
+        // dd($request->all(), 'hola3');
         $documentId = $request->input('document');
+        // $telephone = $request->input('telephone');
 
         Member::create([
             'name' => request('name'),
@@ -135,11 +145,21 @@ class MemberController extends Controller
             'member_id' => request('id')
         ]);
 
+        $cel = $request->input('cellphone');
+        if(!empty($cel))
+        {
+            $cellphone = Cellphone::create([
+                'cellphone' => request('cellphone'),
+                'member_id' => request('id')
+            ]);
+        }
+
         $address = Address::create([
             'address' => request('address'),
             'member_id' => request('id'),
             'city_id' => request('city')
         ]);
+
 
 
 
@@ -166,11 +186,12 @@ class MemberController extends Controller
     {
         $members = DB::table('members')
                    ->leftJoin('telephones', 'members.id', '=', 'telephones.member_id')
+                   ->leftJoin('cellphones', 'members.id', '=', 'cellphones.member_id')
                    ->leftJoin('addresses', 'members.id', '=', 'addresses.member_id')
                    ->leftJoin('cities', 'addresses.city_id', '=', 'cities.id')
                    ->leftJoin('delegations', 'delegations.id', '=', 'members.delegation_id')
                    ->select('members.name', 'members.lastname', 'members.id', 'members.nationality', 'members.civil_status', 'members.email',
-                    'members.birthdate', 'members.gender', 'members.status', 'members.payment', 'telephones.telephone', 'addresses.address', 'cities.city',
+                    'members.birthdate', 'members.gender', 'members.status', 'members.payment', 'telephones.telephone', 'cellphones.cellphone', 'addresses.address', 'cities.city',
                     'delegations.delegation')
                     ->where('members.id', '=', ''.$id)
                    ->get();
@@ -197,11 +218,12 @@ class MemberController extends Controller
     {
         $members = DB::table('members')
                    ->leftJoin('telephones', 'members.id', '=', 'telephones.member_id')
+                   ->leftJoin('cellphones', 'members.id', '=', 'cellphones.member_id')
                    ->leftJoin('addresses', 'members.id', '=', 'addresses.member_id')
                    ->leftJoin('cities', 'addresses.city_id', '=', 'cities.id')
                    ->leftJoin('delegations', 'delegations.id', '=', 'members.delegation_id')
                    ->select('members.name', 'members.lastname', 'members.id', 'members.nationality', 'members.civil_status', 'members.email',
-                    'members.birthdate', 'members.gender', 'members.status','members.payment','telephones.telephone', 'addresses.address',
+                    'members.birthdate', 'members.gender', 'members.status','members.payment','telephones.telephone', 'cellphones.cellphone', 'addresses.address',
                     'addresses.city_id', 'members.delegation_id')
                     ->where('members.id', '=', ''.$id)
                    ->get();
@@ -240,6 +262,7 @@ class MemberController extends Controller
             'nationality' => 'bail|required|alpha|max:20|min:4',
             'email' => 'bail|required|email|max:50|min:11',
             'telephone' => 'bail|required|alpha_dash|max:12|min:12',
+            'cellphone' => 'bail|alpha_dash|max:12|min:12',
             'address' => 'bail|required|string|max:70|min:10',
             'civil_status' => 'bail|required|alpha|max:10|min:5',
             'birthdate' => 'bail|required|date|',
@@ -270,6 +293,10 @@ class MemberController extends Controller
             'telephone.max' => 'El número telefónico debe tener un maximo de 12 caracteres.',
             'telephone.min' => 'El número telefónico debe tener un mínimo de 12 caracteres.',
             'telephone.alpha_dash' => 'El número telefónico solo puede contener números y dos guiones.',
+            'cellphone.required' => 'Debe ingresar un número celular.',
+            'cellphone.max' => 'El número celular debe tener un maximo de 12 caracteres.',
+            'cellphone.min' => 'El número celular debe tener un mínimo de 12 caracteres.',
+            'cellphone.alpha_dash' => 'El número celular solo puede contener números y dos guiones.',
             'address.required' => 'Debe ingresar una dirección.',
             'address.max' => 'La dirección debe tener un maximo de 70 caracteres.',
             'address.min' => 'La dirección debe tener un minimo de 10 caracteres.',
@@ -309,12 +336,36 @@ class MemberController extends Controller
         $member->gender = $request->input('gender');
         $member->payment = $request->input('payment');
 
-        $telephone = Telephone::where('member_id', $id);
-        $telephone->telephone = $request->input('telephone');
+        Telephone::where('member_id', $id)->update([
+            'telephone' => $request->input('telephone')
+        ]);
 
-        $address = Address::where('member_id', $id);
-        $address->address = $request->input('address');
-        $address->city_id = $request->input('city');
+        $cellphone = DB::table('cellphones')->select('id', 'member_id')->where('member_id', $id)->get();
+
+        // dd($cellphone, 'hola1');
+        // $member_id = $cellphone[0]->member_id;
+        if(isset($cellphone[0]))
+        {
+            // dd($cellphone, 'hola2', $cellphone[0]->member_id, $request->input('cellphone'), $id);
+            Cellphone::where('member_id', $id)->update([
+                'cellphone' => $request->input('cellphone')
+            ]);
+
+        }
+        else
+        {
+            // dd($cellphone, 'hola3');
+            $cellphones = Cellphone::create([
+                'cellphone' => request('cellphone'),
+                'member_id' => request('id')
+            ]);
+            $member->cellphone()->save($cellphones);
+        }
+
+        Address::where('member_id', $id)->update([
+            'address' => $request->input('address'),
+            'city_id' => $request->input('city')
+        ]);
 
         $member->document()->sync($documentId);
 

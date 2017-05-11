@@ -6,6 +6,16 @@
 
     @section('content')
         <div class="row card-panel white">
+            <div >
+                <form action="/search2Assembly/{{ $assembly->id }}" method="post">
+                    {{ csrf_field() }}
+                    <div class="input-field">
+                        <input id="search" type="search" name="search" required class="tooltipped" data-position="top" data-delay="50" data-tooltip="Buscar">
+                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                        <i class="material-icons">close</i>
+                    </div>
+                </form>
+            </div>
             <p>
                 <strong> {{ $assembly->assembly }} </strong> &nbsp;
                 <strong>Fecha: </strong>{{ $assembly->date }} &nbsp;

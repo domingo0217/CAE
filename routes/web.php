@@ -28,8 +28,8 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/home', function () {
-    return redirect('dashboard');
-});
+        return redirect('dashboard');
+    });
     Route::get('/listado_usuarios', 'UsuariosController@listado_usuarios');
     Route::post('crear_usuario', 'UsuariosController@crear_usuario');
     Route::post('editar_usuario', 'UsuariosController@editar_usuario');
@@ -57,7 +57,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('borrar_rol/{idrol}', 'UsuariosController@borrar_rol');
 
 });
-
 Route::get('dashboard', function()
 {
     return view('dashboard');
@@ -106,6 +105,10 @@ Route::get('addAttendance/{assembly}', 'AssemblyController@addAttendance');
 Route::get('editAttendance/{assembly}', 'AssemblyController@editAttendance');
 Route::post('storeAttendance/{assembly}', 'AssemblyController@storeAttendance');
 Route::patch('updateAttendance/{assembly}', 'AssemblyController@updateAttendance');
+Route::post('searchAssembly', 'AssemblyController@searchAssembly');
+Route::post('search2Assembly/{assembly}', 'AssemblyController@search2Assembly');
+Route::post('searchAssemblyMember/{assembly}', 'AssemblyController@searchAssemblyMember');
+Route::post('search2AssemblyMember/{assembly}', 'AssemblyController@search2AssemblyMember');
 
 Route::resource('topic', 'TopicController');
 Route::get('listTopic/{assembly}', 'TopicController@list');

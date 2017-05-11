@@ -18,6 +18,7 @@
                     <p class="centered"><strong>Fecha de nacimiento: </strong>{{ $member->birthdate }}</p>
                     <p class="centered"><strong>Estado civil: </strong>{{ $member->civil_status }}</p>
                     <p class="centered"><strong>Telefóno: </strong>{{ $member->telephone }}</p>
+                    <p class="centered"><strong>Celular: </strong>{{ $member->cellphone }}</p>
                     <p class="centered"><strong>Correo Electrónico: </strong>{{ $member->email }}</p>
                     <p class="centered"><strong>Dirección: </strong>{{ $member->address.'. '.$member->city.'.' }}</p>
                     <p class="centered"><strong>Delegación: </strong>{{ $member->delegation }}</p>
@@ -30,14 +31,14 @@
                     </p>
                 </div>
                 <a href="/member" class="btn-flat waves-effect waves-red red-text text-darken-3">Atr&aacute;s</a>
-                <form method="post" action="/member/{{ $member->id }}" id="delete" class="right">
+                {{-- <form method="post" action="/member/{{ $member->id }}" id="delete" class="right">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
                     <button type="submit" name="submit" class="btn red waves-effect waves-dark tooltipped " data-position="right" data-delay="50" data-tooltip="Eliminar">
                         Eliminar
                     </button>
-                </form>
-                <a href="/member/{{ $member->id }}/edit" class="btn yellow darken-3 waves-effect right pulse">Editar</a>
+                </form> --}}
+                <a href="/member/{{ $member->id }}/edit" class="btn yellow darken-3 waves-effect right ">Editar</a>
             </div>
         </div>
 @endsection
