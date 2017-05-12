@@ -9,10 +9,11 @@
 {{-- Contenido de la pagina --}}
 @section('content')
 <section  >
-
+    @include('layouts.status')
+   @include('layouts.errors')
         <div class="section white z-depth-0">
         <div class="row">
-   
+
     <form class="col s8 offset-s2" action="" method="post">
 <div class="col-md-12">
 
@@ -37,10 +38,9 @@
 			<td>{{ $rol->description }}</td>
 			<td>
 
-			 <button type="submit"  name="submit" class="btn-floating btn-flat waves-effect waves-dark white tooltipped" data-position="right" data-delay="50" data-tooltip="Eliminar" onclick="borrar_rol({{  $rol->id }});"  > <i class="material-icons yellow-text text-darken-3">delete</i></button>
-			 </td>
-			
-			
+			             <td><a href="borrar_rol/{{ $rol->id }}"  class="btn-floating btn-flat waves-effect waves-dark white tooltipped" data-position="right" data-delay="50" data-tooltip="Eliminar"><i class="material-icons yellow-text text-darken-3">delete</i></a></td>
+
+
 		</tr>
 	    @endforeach
 
@@ -58,5 +58,3 @@
 </section>
 
 @endsection
-
-

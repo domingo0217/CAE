@@ -1,5 +1,5 @@
 <ul id="nav-mobile" class="side-nav fixed">
-    <li><a class="bold">Hector Canario</a></li>
+    <li><a class="bold">{{ Auth::user()->name }} {{ Auth::user()->lastname  }}</a></li>
     <li class="divider"></li>
     <li><a href="/dashboard" class="waves-effect waves-red bold"><i class="material-icons">dashboard</i>Dashboard</a></li>
     <li class="no-padding">
@@ -47,8 +47,7 @@
                         <li><a href="/city" class="waves-effect waves-yellow center">Ciudades</a></li>
                         <li><a href="/delegation" class="waves-effect waves-yellow center">Delegaciones</a></li>
                         <li><a href="/document" class="waves-effect waves-yellow center">Documentos</a></li>
-                        <li><a href="#" class="waves-effect waves-yellow center">Pagos</a></li>
-
+                    
 
                     </ul>
                 </div>
@@ -64,9 +63,9 @@
                         <li><a href="{{ url("/crear_reporte_por_miembros_activos/1") }}" class="waves-effect waves-yellow center">Miembros activos</a></li>
                         <li><a href="{{ url("/crear_reporte_por_miembros_pasivos/1") }}" class="waves-effect waves-yellow center">Miembros pasivos</a></li>
                         <li><a href="{{ url("/crear_reporte_por_todos/1") }}" class="waves-effect waves-yellow center">Todos los miembros</a></li>
-                        <li><a href="{{ url("/crear_reporte_por_miembros_delegacion/1") }}" class="waves-effect waves-yellow center">Miembros por delegacion</a></li>
+                        {{-- <li><a href="{{ url("/crear_reporte_por_miembros_delegacion/1") }}" class="waves-effect waves-yellow center">Miembros por delegacion</a></li>
 
-<li><a href="{{ url("/crear_reporte_capacitacion_miembro/1") }}" class="waves-effect waves-yellow center">Capacitaciones por miembros</a></li>
+<li><a href="{{ url("/crear_reporte_capacitacion_miembro/1") }}" class="waves-effect waves-yellow center">Capacitaciones por miembros</a></li> --}}
                     </ul>
                 </div>
             </li>

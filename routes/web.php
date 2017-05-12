@@ -15,10 +15,6 @@ Route::get('/', function (){
     return view('welcome');
 });
 
-Route::get('reportes', 'PdfController@index');
-Route::get('crear_reporte_por_miembros_activos/{tipo}', 'PdfController@crear_reporte_usuario_activo');
-Route::get('crear_reporte_por_miembros_pasivos/{tipo}', 'PdfController@crear_reporte_usuario_pasivo');
-Route::get('crear_reporte_por_todos/{tipo}', 'PdfController@crear_reporte_todos');
 Route::get('login', function () {
     return redirect('login');
 });
@@ -26,6 +22,10 @@ Route::get('login', function () {
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('reportes', 'PdfController@index');
+    Route::get('crear_reporte_por_miembros_activos/{tipo}', 'PdfController@crear_reporte_usuario_activo');
+    Route::get('crear_reporte_por_miembros_pasivos/{tipo}', 'PdfController@crear_reporte_usuario_pasivo');
+    Route::get('crear_reporte_por_todos/{tipo}', 'PdfController@crear_reporte_todos');
 
     Route::get('/home', function () {
         return redirect('dashboard');
@@ -56,7 +56,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('form_borrado_usuario/{idusu}', 'UsuariosController@form_borrado_usuario');
     Route::get('borrar_rol/{idrol}', 'UsuariosController@borrar_rol');
 
-});
+
 Route::get('dashboard', function()
 {
     return view('dashboard');
@@ -84,11 +84,7 @@ Route::post('searchCapacitation', 'CapacitationController@search');
 
 Route::get('/home', 'HomeController@index')->name('dashboard');
 
-Auth::routes();
 
-
-
-Auth::routes();
 
 Route::resource('capacitation_member', 'Capacitation_MemberController');
 Route::post('search2Capacitation/{id}', 'CapacitationController@search2');
@@ -113,3 +109,4 @@ Route::post('search2AssemblyMember/{assembly}', 'AssemblyController@search2Assem
 Route::resource('topic', 'TopicController');
 Route::get('listTopic/{assembly}', 'TopicController@list');
 Route::get('topic/create/{assembly}', 'TopicController@create');
+});

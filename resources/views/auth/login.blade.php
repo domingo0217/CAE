@@ -31,14 +31,17 @@
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
             <h1 class="text-center login-title">Bienbenidos a CAE</h1>
-            <div class="account-wall">
+            <div class="account-wall row">
 
-               <link rel="shortcut icon" type="image/png" href="img/logo.png"/>
-                <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+                <img class="profile-img" src="img/logo3.png" style="width:100px; height: 140px;"
                     alt="">
                 <form class="form-signin" action="{{ url('/login') }}" method="POST">
-                <input type="text" class="form-control" name="email" placeholder="Email" required autofocus>
-                <input type="password" class="form-control" name="password" placeholder="Password" required>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="email" placeholder="Email" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="password" placeholder="Password" required>
+                    </div>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
                     Entrar</button>
 
@@ -46,7 +49,7 @@
                                     Olvide mi contraseña?
                                 </a>
             </div>
- 
+
         </div>
     </div>
 </div>

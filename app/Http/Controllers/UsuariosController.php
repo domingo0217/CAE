@@ -10,7 +10,7 @@ use Caffeinated\Shinobi\Models\Permission;
 
 class UsuariosController extends Controller
 {
- 
+
 
 public function form_nuevo_usuario(){
     //carga el formulario para agregar un nuevo usuario
@@ -61,14 +61,14 @@ public function crear_usuario(Request $request){
 
 	$reglas=[  'password' => 'required|min:6',
 	             'email' => 'required|email|unique:users', ];
-	 
+
 	$mensajes=[  'password.min' => 'La contraseña debe tener al menos 6 caracteres',
 	             'email.unique' => 'El correo ya se encuentra registrado en la base de datos', ];
-	  
+
 	$validator = Validator::make( $request->all(),$reglas,$mensajes );
-	if( $validator->fails() ){ 
+	if( $validator->fails() ){
 	  	return redirect('form_nuevo_usuario')->withInput(
-    $request->except('password'))->with("msj","...Existen errores...")->withErrors($validator->errors());         
+    $request->except('password'))->with("msj","...Existen errores...")->withErrors($validator->errors());
 	}
 
 	$usuario=new User;
@@ -77,16 +77,16 @@ public function crear_usuario(Request $request){
     $usuario->lastname=strtoupper( $request->input("lastname") ) ;
   $usuario->telefhone=$request->input("telefhone");
 	$usuario->email=$request->input("email");
-	$usuario->password= bcrypt( $request->input("password") ); 
- 
-            
+	$usuario->password= bcrypt( $request->input("password") );
+
+
     if($usuario->save())
     {
 
-  
+
        return redirect('form_nuevo_usuario')->with('status', 'Usuario Agregado!');
     }
-   
+
 
 }
 
@@ -94,7 +94,7 @@ public function crear_usuario(Request $request){
 
 public function crear_rol(Request $request){
 
- 
+
    $rol=new Role;
    $rol->name=$request->input("rol_nombre") ;
    $rol->slug=$request->input("rol_slug") ;
@@ -114,8 +114,8 @@ public function crear_rol(Request $request){
 
 public function crear_permiso(Request $request){
 
-  
-   
+
+
 
 
 }
@@ -128,7 +128,7 @@ public function asignar_permiso(Request $request){
      $idper=$request->input("permiso_rol");
      $rol=Role::find($roleid);
      $rol->assignPermission($idper);
-    
+
     if($rol->save())
     {
         return redirect('form_nuevo_permiso')->with('status', 'Permiso  Agregado!');
@@ -148,30 +148,30 @@ public function form_editar_usuario($id){
     $usuario=User::find($id);
     $roles=Role::all();
     return view("formularios.form_editar_usuario")->with("usuario",$usuario)
-	                                              ->with("roles",$roles);                                 
+	                                              ->with("roles",$roles);
 }
 
 public function editar_usuario(Request $request){
-          
+
     $idusuario=$request->input("id_usuario");
     $usuario=User::find($idusuario);
     $usuario->name=strtoupper( $request->input("name") ) ;
-    $usuario->apellidos=strtoupper( $request->input("lastname") ) ;
-    $usuario->telefono=$request->input("telefhone");
-    
+    $usuario->lastname=strtoupper( $request->input("lastname") ) ;
+    $usuario->telefhone=$request->input("telefhone");
+
      if($request->has("rol")){
 	    $rol=$request->input("rol");
 	    $usuario->revokeAllRoles();
 	    $usuario->assignRole($rol);
      }
-	 
+
     if( $usuario->save()){
-		return view("mensajes.msj_usuario_actualizado")->with("msj","Usuario actualizado correctamente")
+		return redirect('/listado_usuarios')->with('status', 'Usuario Actualizado!')
 	                                                   ->with("idusuario",$idusuario) ;
     }
     else
     {
-		return view("mensajes.mensaje_error")->with("msj","..Hubo un error al agregar ; intentarlo nuevamente..");
+	return redirect('form_editar_usuario')->with('status', 'error al actualizar!');
     }
 }
 
@@ -187,10 +187,10 @@ public function buscar_usuario(Request $request){
 
 public function borrar_usuario(Request $request){
 
-   
+
         $idusuario=$request->input("id_usuario");
         $usuario=User::find($idusuario);
-    
+
         if($usuario->delete()){
              return view("mensajes.msj_usuario_borrado")->with("msj","Usuario borrado correctamente") ;
         }
@@ -198,17 +198,17 @@ public function borrar_usuario(Request $request){
         {
             return view("mensajes.mensaje_error")->with("msj","..Hubo un error al agregar ; intentarlo nuevamente..");
         }
-        
-     
+
+
 }
 
 public function editar_acceso(Request $request){
          $idusuario=$request->input("id_usuario");
          $usuario=User::find($idusuario);
          $usuario->email=$request->input("email");
-         $usuario->password= bcrypt( $request->input("password") ); 
+         $usuario->password= bcrypt( $request->input("password") );
           if( $usuario->save()){
-        return view("mensajes.msj_usuario_actualizado")->with("msj","Usuario actualizado correctamente")->with("idusuario",$idusuario) ;
+        return redirect('form_listado_usuario')->with('status', 'Usuario Actualizado!')->with("idusuario",$idusuario) ;
          }
           else
           {
@@ -225,7 +225,7 @@ public function asignar_rol($idusu,$idrol){
 
         $usuario=User::find($idusu);
         $rolesasignados=$usuario->getRoles();
-        
+
         return json_encode ($rolesasignados);
 
 
@@ -250,8 +250,8 @@ public function form_borrado_usuario($id){
 }
 
 
-public function quitar_permiso($idrole,$idper){ 
-    
+public function quitar_permiso($idrole,$idper){
+
     $role = Role::find($idrole);
     $role->revokePermission($idper);
     $role->save();
@@ -264,7 +264,7 @@ public function borrar_rol($idrole){
 
     $role = Role::find($idrole);
     $role->delete();
-    return "ok";
+    return redirect('/listado_roles')->with('status', 'Rol Eliminado!');
 }
 
 }

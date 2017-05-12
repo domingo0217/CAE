@@ -19,30 +19,21 @@
                 <div class="box-header">
                   <h3 class="box-title"></h3>
                   <div class="box-tools">
-                    
+                    <form class="col s10 offset-s1" action="{{ url("/crear_reporte_delegacion/1") }}"" method="post">
                       
                     </div>
                   </div>
                 </div><!-- /.box-header -->
-                <div class="box-body table-responsive no-padding">
-                  <table class="table table-hover">
-                   
-                    <thead><tr>
-                      <th>ID</th>
-                      <th>reporte</th>
-                      <th>ver</th>
-                      <th>descargar</th>
-                    </tr></thead>
-                    <tbody>
-                    <tr>
-                      <td>1
-                      2</td>
+                <    <div class="row">
+                    <div class="col s12 m4 input-field">
+                        <input type="text" name="delegation" id="delegation" class="validate" required value="{{ old('delegation')}}" data-length="30" maxlength="30" minlength="3">
+                        <label data-error="incorrecto" data-success="correcto" for="delegation">Nombre*</label>
+                    </div>
 
-                      <td>Reporte de Usuarios activos en la asosiacion CAE</td>
-                      <td><a href="crear_reporte_por_miembros_activos/1" target="_blank" ><i class="material-icons yellow-text text-darken-3">visibility</i></a></td>
-                      <td><a href="crear_reporte_por_miembros_activos/2" target="_blank" ><i class="material-icons yellow-text text-darken-3">system_update_alt</i></a></td>
                     
-                    </tr>
+                      <a href="crear_reporte_delegacion/1" target="_blank" ><i class="material-icons yellow-text text-darken-3">visibility</i></a>
+                                        
+                  </div></form>
                    
                   </tbody></table>
                 </div><!-- /.box-body -->

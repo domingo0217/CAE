@@ -62,7 +62,7 @@ class MemberController extends Controller
             'nationality' => 'bail|required|alpha|max:20|min:4',
             'email' => 'bail|required|email|max:50|min:11|unique:members',
             'telephone' => 'bail|required|alpha_dash|max:12|min:12',
-            'cellphone' => 'bail|alpha_dash|max:12|min:12',
+            'cellphone' => 'bail|max:12',
             'address' => 'bail|required|string|max:70|min:10',
             'civil_status' => 'bail|required|alpha|max:10|min:5',
             'birthdate' => 'bail|required|date|',
@@ -165,6 +165,7 @@ class MemberController extends Controller
 
         $member = Member::find(request('id'));
 
+        if(isset($documentId))
         foreach($documentId as $documentsId)
         {
             $member->document()->sync(array($documentsId => array('confirmed' => true)));

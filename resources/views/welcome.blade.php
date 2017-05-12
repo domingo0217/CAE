@@ -22,7 +22,7 @@
 							<!-- <li><a href="#first" class=" waves-effect waves-light">Portada</a></li> -->
 							<li><a href="#about" class=" waves-effect waves-light">Sobre Nosotros</a></li>
 							<li><a href="#footer" class=" waves-effect waves-light">Contactos</a></li>
-							<li><a href="#modal-IniciaSesion" class="waves-effect waves-light">Control de Miembros</a></li>
+							<li><a href="/login" class="waves-effect waves-light">Control de Miembros</a></li>
 						</ul>
 					</div>
 				</div>
